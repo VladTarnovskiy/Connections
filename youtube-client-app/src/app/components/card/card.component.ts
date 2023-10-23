@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Card } from 'src/app/models/card.model';
 
 @Component({
@@ -7,5 +7,5 @@ import { Card } from 'src/app/models/card.model';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  cart: Card[] = [];
+  @Input() card!: Card;
 }
