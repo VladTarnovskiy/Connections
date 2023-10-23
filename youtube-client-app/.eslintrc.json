@@ -1,6 +1,9 @@
 {
   "root": true,
   "ignorePatterns": ["projects/**/*"],
+  "parserOptions": {
+    "project": ["tsconfig.(app|spec).json"]
+  },
   "overrides": [
     {
       "files": ["*.ts"],
@@ -27,7 +30,13 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "import/no-unresolved": "off",
+        "import/prefer-default-export": "off",
+        "class-methods-use-this": "off",
+        "lines-between-class-members": "off",
+        "no-console": "off",
+        "@typescript-eslint/no-explicit-any": "error"
       }
     },
     {
