@@ -1,9 +1,40 @@
-<header class="header">
-  <div class="header__content bg-black">
-    <div class="header__logo">
-      <img src="../../../assets/youtube-svgrepo-com.svg" alt="youtube" />
+<header class="header mb-2">
+  <div class="header__content flex justify-between pt-4 items-center">
+    <div class="search flex justify-center items-center">
+      <div class="header__logo mr-4">
+        <img
+          src="../../../assets/youtube-svgrepo-com.svg"
+          alt="youtube"
+          class="w-16 h-20"
+        />
+      </div>
+      <input
+        type="text"
+        class="shadow-lg rounded h-10 w-72 p-4"
+        placeholder="What are you want to find out?"
+      />
+      <button
+        class="h-10 bg-red-500 rounded-md w-20 text-white text-md text-center ml-[1px] hover:shadow-lg hover:shadow-red-500/40"
+      >
+        search
+      </button>
+      <button
+        class="h-10 bg-red-500 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+      >
+        <img src="../../../assets/filter.svg" alt="youtube" class="w-10 h-10" />
+      </button>
     </div>
-    <div class="header__search"></div>
-    <div class="header__profile"></div>
+    <div class="header__profile flex justify-center items-center">
+      <div class="mr-2">Your name</div>
+      <button
+        class="h-10 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+      >
+        <img
+          src="../../../assets/Profile.svg"
+          alt="profile"
+          class="w-10 h-10"
+        />
+      </button>
+    </div>
   </div>
 </header>
