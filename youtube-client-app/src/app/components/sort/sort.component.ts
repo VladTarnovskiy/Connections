@@ -35,6 +35,6 @@ export class SortComponent {
   }
 
   filterByString() {
-    this.dataService.filterByString(this.filterString);
+    this.dataService.filterByString(this.filterString.toLowerCase());
   }
 }
