@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Card, CardItems } from 'src/app/models/card.model';
+import { SearchDataService } from 'src/app/services/search-data.service';
 import { data } from 'src/data/data';
 
 @Component({
@@ -8,6 +10,15 @@ import { data } from 'src/data/data';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent {
-  cardsInfo: CardItems = data;
-  cards: Card[] = data.items;
+  cards!: Card[];
+
+  constructor(private dataService: SearchDataService) {
+    this.dataService.sortData$.subscribe((data) => {
+      this.cards = data;
+    });
+  }
+
+  ngOnInit() {
+    this.dataService.setData();
+  }
 }

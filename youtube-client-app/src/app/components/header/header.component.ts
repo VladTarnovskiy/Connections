@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SearchDataService } from 'src/app/services/search-data.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,10 @@ export class HeaderComponent {
   @Output() sortBlock = new EventEmitter<boolean>();
   filterButton = false;
 
+  constructor(private dataService: SearchDataService) {}
+
   onSearch(data: boolean) {
+    this.dataService.setData();
     this.searchResult.emit(data);
   }
 

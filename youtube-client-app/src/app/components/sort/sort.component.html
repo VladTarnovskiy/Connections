@@ -4,13 +4,13 @@
     <div class="sort__criterias mr-4 flex justify-center">
       <button
         class="sort__date mr-4 hover:text-red-400 focus:text-red-400 border-b-[1px] border-red-400"
-        (click)="(sortByDate)"
+        (click)="sortByDate()"
       >
         date
       </button>
       <button
         class="sort__views hover:text-red-400 focus:text-red-400 border-b-[1px] border-red-400"
-        (click)="(sortByView)"
+        (click)="sortByView()"
       >
         count of views
       </button>
@@ -19,6 +19,7 @@
       <button
         for="filter"
         class="mr-2 hover:text-red-400 focus:text-red-400 border-b-[1px] border-red-400"
+        (click)="filterByString()"
       >
         by world or sentence
       </button>
@@ -26,6 +27,7 @@
         type="text"
         class="shadow-lg rounded h-8 w-36 p-4"
         placeholder="world"
+        [(ngModel)]="filterString"
       />
     </div>
   </div>
