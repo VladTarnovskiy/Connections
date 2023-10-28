@@ -14,6 +14,7 @@ import { MaterialModule } from './material/material.module';
 import { CardColorDirective } from './directives/card-color.directive';
 import { SearchDataService } from './services/search-data.service';
 import { ButtonComponent } from './components/button/button.component';
+import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ButtonComponent } from './components/button/button.component';
     SortComponent,
     CardComponent,
     CardColorDirective,
+    FilterPipe,
   ],
   providers: [SearchDataService],
   bootstrap: [AppComponent],
