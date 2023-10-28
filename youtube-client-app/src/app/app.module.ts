@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { CardColorDirective } from './directives/card-color.directive';
 import { SearchDataService } from './services/search-data.service';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,8 @@ import { SearchDataService } from './services/search-data.service';
     CardComponent,
     CardColorDirective,
   ],
+  providers: [SearchDataService],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,8 +34,7 @@ import { SearchDataService } from './services/search-data.service';
     MaterialModule,
     CommonModule,
     FormsModule,
+    ButtonComponent,
   ],
-  providers: [SearchDataService],
-  bootstrap: [AppComponent],
 })
 export class AppModule {}

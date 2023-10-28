@@ -8,30 +8,11 @@
       />
       <!-- <div class="text-5xl font-semibold absolute left-24">YouTube</div> -->
     </div>
-    <div class="search flex justify-center items-center">
-      <input
-        type="text"
-        class="shadow-lg rounded h-10 w-72 p-4"
-        placeholder="What are you want to find out?"
-      />
-      <button
-        class="h-10 bg-red-500 rounded-md w-20 text-white text-md text-center ml-[1px] hover:shadow-lg hover:shadow-red-500/40"
-        (click)="onSearch(true)"
-      >
-        search
-      </button>
-      <button
-        class="h-10 bg-red-500 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
-        (click)="turnSortBlock()"
-        [style.opacity]="filterButton ? 0.8 : 1"
-      >
-        <img
-          src="../../../assets/filter.svg"
-          alt="youtube"
-          class="w-8 h-8 m-auto"
-        />
-      </button>
-    </div>
+    <app-search
+      (sortBlock)="turnSortBlock($event)"
+      (searchResult)="onSearch($event)"
+    ></app-search
+    >>
     <div class="header__profile flex justify-center items-center">
       <div class="mr-2">Your name</div>
       <button
