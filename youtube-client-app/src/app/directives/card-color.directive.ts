@@ -1,10 +1,13 @@
-import { Directive, ElementRef, Input } from '@angular/core';
+import {
+  Directive, ElementRef, Input, OnInit,
+} from '@angular/core';
 
 @Directive({
   selector: '[appCardColor]',
 })
-export class CardColorDirective {
-  borderColor: string = '#f87171';
+export class CardColorDirective implements OnInit {
+  borderColor = '#f87171';
+
   @Input('appCardColor') date!: string;
 
   constructor(private el: ElementRef) {}

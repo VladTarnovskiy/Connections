@@ -7,6 +7,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() searchResult = new EventEmitter<boolean>();
+
   @Output() sortBlock = new EventEmitter<boolean>();
 
   onSearch(data: boolean) {

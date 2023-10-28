@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
+import { data } from 'src/data/data';
 import { SortData } from '../types/sort';
 import { Card } from '../models/card.model';
-import { data } from 'src/data/data';
+import {
+  sortByDateAsc,
+  sortByDateDesc,
+  sortByViewAsc,
+  sortByViewDesc,
+} from './sort';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchDataService {
   private sortDataSource = new Subject<Card[]>();
+
   sortData$ = this.sortDataSource.asObservable();
 
   setData() {
@@ -21,57 +28,21 @@ export class SearchDataService {
     let sortedData = [];
     if (sortBy === 'view') {
       if (direction === 'asc') {
-        sortedData = this.sortByViewAsc(cards);
+        sortedData = sortByViewAsc(cards);
       } else {
-        sortedData = this.sortByViewDesc(cards);
+        sortedData = sortByViewDesc(cards);
       }
+    } else if (direction === 'asc') {
+      sortedData = sortByDateAsc(cards);
     } else {
-      if (direction === 'asc') {
-        sortedData = this.sortByDateAsc(cards);
-      } else {
-        sortedData = this.sortByDateDesc(cards);
-      }
+      sortedData = sortByDateDesc(cards);
     }
     this.sortDataSource.next(sortedData);
   }
 
-  sortByViewAsc(cards: Card[]) {
-    const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) => {
-        return Number(a.statistics.viewCount) - Number(b.statistics.viewCount);
-      }
-    );
-    return sorted;
-  }
-
-  sortByViewDesc(cards: Card[]) {
-    const sorted = JSON.parse(
-      JSON.stringify(this.sortByViewAsc(cards).reverse())
-    );
-    return sorted;
-  }
-
-  sortByDateAsc(cards: Card[]) {
-    const sorted = JSON.parse(JSON.stringify(cards)).sort(function (
-      a: Card,
-      b: Card
-    ) {
-      return (
-        Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt)
-      );
-    });
-    return sorted;
-  }
-
-  sortByDateDesc(cards: Card[]) {
-    return JSON.parse(JSON.stringify(this.sortByDateAsc(cards).reverse()));
-  }
-
   filterByString(stringData: string) {
     const initCardsData: Card[] = JSON.parse(JSON.stringify(data.items));
-    const filteredCardsData = initCardsData.filter((item) =>
-      item.snippet.title.toLowerCase().includes(stringData.toLowerCase())
-    );
+    const filteredCardsData = initCardsData.filter((item) => item.snippet.title.toLowerCase().includes(stringData.toLowerCase()));
     this.sortDataSource.next(filteredCardsData);
   }
 }

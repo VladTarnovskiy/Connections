@@ -8,7 +8,9 @@ import { SortData } from './types/sort';
 })
 export class AppComponent {
   result = false;
+
   sortBlock = false;
+
   sortInfo!: SortData;
 
   showResult(result: boolean) {

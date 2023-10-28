@@ -8,7 +8,9 @@ import { SearchDataService } from 'src/app/services/search-data.service';
 })
 export class SearchComponent {
   @Output() searchResult = new EventEmitter<boolean>();
+
   @Output() sortBlock = new EventEmitter<boolean>();
+
   filterButton = false;
 
   constructor(private dataService: SearchDataService) {}

@@ -7,23 +7,30 @@ import { SearchDataService } from 'src/app/services/search-data.service';
   styleUrls: ['./sort.component.scss'],
 })
 export class SortComponent {
-  sortByDateDir: string = 'desc';
-  sortByViewDir: string = 'desc';
-  filterString: string = '';
+  sortByDateDir = 'desc';
+
+  sortByViewDir = 'desc';
+
+  filterString = '';
 
   constructor(private dataService: SearchDataService) {}
 
   sortByDate() {
-    this.sortByDateDir === 'desc'
-      ? (this.sortByDateDir = 'asc')
-      : (this.sortByDateDir = 'desc');
+    if (this.sortByDateDir === 'desc') {
+      this.sortByDateDir = 'asc';
+    } else {
+      this.sortByDateDir = 'desc';
+    }
     this.dataService.sort({ sortBy: 'date', direction: this.sortByDateDir });
   }
 
   sortByView() {
-    this.sortByViewDir === 'desc'
-      ? (this.sortByViewDir = 'asc')
-      : (this.sortByViewDir = 'desc');
+    if (this.sortByViewDir === 'desc') {
+      this.sortByViewDir = 'asc';
+    } else {
+      this.sortByViewDir = 'desc';
+    }
+
     this.dataService.sort({ sortBy: 'view', direction: this.sortByViewDir });
   }
 

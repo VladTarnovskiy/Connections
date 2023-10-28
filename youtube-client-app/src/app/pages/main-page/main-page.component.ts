@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Card, CardItems } from 'src/app/models/card.model';
+import { Component, OnInit } from '@angular/core';
+import { Card } from 'src/app/models/card.model';
 import { SearchDataService } from 'src/app/services/search-data.service';
-import { data } from 'src/data/data';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
 })
-export class MainPageComponent {
+export class MainPageComponent implements OnInit {
   cards!: Card[];
 
   constructor(private dataService: SearchDataService) {
