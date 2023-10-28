@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Card } from 'src/app/models/card.model';
+import { Card, CardItems } from 'src/app/models/card.model';
+import { data } from 'src/data/data';
 
 @Component({
   selector: 'app-main-page',
@@ -7,5 +8,6 @@ import { Card } from 'src/app/models/card.model';
   styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent {
-  cards: Card[] = [];
+  cardsInfo: CardItems = data;
+  cards: Card[] = data.items;
 }

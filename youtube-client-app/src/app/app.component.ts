@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SortData } from './types/sort';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'youtube-client-app';
+  result = false;
+  sortBlock = false;
+  sortInfo!: SortData;
+
+  showResult(result: boolean) {
+    this.result = result;
+  }
+
+  showSortBlock(sortBlock: boolean) {
+    this.sortBlock = sortBlock;
+  }
+
+  sortBy(sortData: SortData) {
+    this.sortInfo = sortData;
+  }
 }

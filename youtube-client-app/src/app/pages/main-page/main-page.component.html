@@ -1,2 +1,3 @@
-<app-sort></app-sort>
-<p>main-page works!</p>
+<div class="cards__container mt-14">
+  <app-card *ngFor="let card of cards; let i = index" [card]="card"></app-card>
+</div>

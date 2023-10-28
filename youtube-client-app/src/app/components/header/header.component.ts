@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,5 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  value = '';
+  @Output() searchResult = new EventEmitter<boolean>();
+  @Output() sortBlock = new EventEmitter<boolean>();
+  filterButton = false;
+
+  onSearch(data: boolean) {
+    this.searchResult.emit(data);
+  }
+
+  turnSortBlock() {
+    this.filterButton = !this.filterButton;
+    this.sortBlock.emit(this.filterButton);
+  }
 }

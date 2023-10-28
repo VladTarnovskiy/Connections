@@ -1,1 +1,56 @@
-<p>card works!</p>
+<div
+  [appCardColor]="card.snippet.publishedAt"
+  class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border mb-6 border-b-4 box-border"
+>
+  <div
+    class="relative h-56 mx-4 -mt-6 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
+  >
+    <img
+      [src]="card.snippet.thumbnails.high.url"
+      alt="img-blur-shadow"
+      class="hover:scale-105 ease-in mt-[-20px]"
+    />
+  </div>
+  <div class="p-6 pt-3">
+    <div class="activity flex justify-around items-center mb-2">
+      <div class="activity__item flex justify-center mr-2">
+        <img src="../../../assets/view.svg" alt="view" class="w-4 h-4 mr-1" />
+        <div class="activity__info">{{ card.statistics.viewCount }}</div>
+      </div>
+      <div class="activity__item flex justify-center mr-2">
+        <img src="../../../assets/liked.svg" alt="like" class="w-4 h-4 mr-1" />
+        <div class="activity__info">{{ card.statistics.likeCount }}</div>
+      </div>
+      <div class="activity__item flex justify-center mr-2">
+        <img
+          src="../../../assets/dislike.svg"
+          alt="dislike"
+          class="w-4 h-4 mr-1"
+        />
+        <div class="activity__info">{{ card.statistics.dislikeCount }}</div>
+      </div>
+      <div class="activity__item flex justify-center mr-2">
+        <img
+          src="../../../assets/comment.svg"
+          alt="comment"
+          class="w-4 h-4 mr-1"
+        />
+        <div class="activity__info">{{ card.statistics.commentCount }}</div>
+      </div>
+    </div>
+    <div
+      class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+    >
+      {{ card.snippet.title }}
+    </div>
+  </div>
+  <div class="p-6 pt-0">
+    <button
+      class="select-none rounded-lg bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+      type="button"
+      data-ripple-light="true"
+    >
+      More
+    </button>
+  </div>
+</div>

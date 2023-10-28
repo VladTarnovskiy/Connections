@@ -11,6 +11,7 @@ import { SortComponent } from './components/sort/sort.component';
 import { CardComponent } from './components/card/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
+import { CardColorDirective } from './directives/card-color.directive';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MaterialModule } from './material/material.module';
     SearchComponent,
     SortComponent,
     CardComponent,
+    CardColorDirective,
   ],
   imports: [
     BrowserModule,

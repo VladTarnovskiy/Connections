@@ -1,13 +1,14 @@
 <header class="header mb-2">
-  <div class="header__content flex justify-between pt-4 items-center">
+  <div class="header__content flex justify-between items-center">
+    <div class="header__logo w-20 h-24 mr-4 flex items-center relative">
+      <img
+        src="../../../assets/youtube-svgrepo-com.svg"
+        alt="youtube"
+        class="w-20 h-24"
+      />
+      <!-- <div class="text-5xl font-semibold absolute left-24">YouTube</div> -->
+    </div>
     <div class="search flex justify-center items-center">
-      <div class="header__logo mr-4">
-        <img
-          src="../../../assets/youtube-svgrepo-com.svg"
-          alt="youtube"
-          class="w-16 h-20"
-        />
-      </div>
       <input
         type="text"
         class="shadow-lg rounded h-10 w-72 p-4"
@@ -15,13 +16,20 @@
       />
       <button
         class="h-10 bg-red-500 rounded-md w-20 text-white text-md text-center ml-[1px] hover:shadow-lg hover:shadow-red-500/40"
+        (click)="onSearch(true)"
       >
         search
       </button>
       <button
         class="h-10 bg-red-500 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+        (click)="turnSortBlock()"
+        [style.opacity]="filterButton ? 0.8 : 1"
       >
-        <img src="../../../assets/filter.svg" alt="youtube" class="w-10 h-10" />
+        <img
+          src="../../../assets/filter.svg"
+          alt="youtube"
+          class="w-8 h-8 m-auto"
+        />
       </button>
     </div>
     <div class="header__profile flex justify-center items-center">
