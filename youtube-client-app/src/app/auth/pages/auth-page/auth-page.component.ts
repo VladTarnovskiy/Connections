@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth-page',
@@ -11,9 +13,15 @@ export class AuthPageComponent {
     login: ['', Validators.required],
     password: ['', Validators.required],
   });
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    public router: Router
+  ) {}
 
   onSubmit() {
-    console.warn(this.loginForm.value);
+    this.authService.login(this.loginForm.getRawValue()).subscribe(() => {
+      this.router.navigate(['/youtube']);
+    });
   }
 }

@@ -4,15 +4,18 @@ import { YouTubePageComponent } from '../youtube/pages/youtube/youtube-page.comp
 import { NotfoundPageComponent } from '../youtube/pages/notfound/notfound-page.component';
 import { AuthPageComponent } from '../auth/pages/auth-page/auth-page.component';
 import { DetailsPageComponent } from '../youtube/pages/details/details-page.component';
+import { authGuard } from '../core/guards/auth/auth.guard';
 
 const routes: Routes = [
   {
     path: 'youtube',
     component: YouTubePageComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'details/:id',
     component: DetailsPageComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'login',

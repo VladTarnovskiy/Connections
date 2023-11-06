@@ -1,7 +1,7 @@
 <form
   [formGroup]="loginForm"
   (ngSubmit)="onSubmit()"
-  class="w-[430px] h-[280px] px-6 pt-9 pb-8 flex flex-col justify-center m-auto bg-gray-100 rounded-xl"
+  class="w-[430px] px-6 py-8 flex flex-col justify-center m-auto bg-gray-100 rounded-xl"
 >
   <div class="form__title mb-7 text-2xl font-bold">Login</div>
   <label for="login" class="text-gray-500 text-sm">login</label>
@@ -13,17 +13,11 @@
   />
   <label for="password" class="text-gray-500 text-sm">password</label>
   <input
-    type="text"
+    type="password"
     id="password"
     formControlName="password"
     class="mb-8 bg-gray-200 w-[382px] min-h-[44px] p-2"
   />
-  <a routerLink="youtube" class="ml-auto"
-    ><button
-      class="h-10 rounded-md w-20 mb-8 bg-red-500 text-white text-md text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
-      type="button"
-    >
-      Login
-    </button></a
-  >
+  <button type="submit">Login</button>
+  <!-- <a routerLink="/youtube" class="ml-auto"><app-button>Login</app-button></a> -->
 </form>
