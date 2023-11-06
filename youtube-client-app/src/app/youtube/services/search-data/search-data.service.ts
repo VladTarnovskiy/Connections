@@ -1,19 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject, map, of } from 'rxjs';
 import { data } from 'src/data/data';
 import { SortData } from '../../models/sort';
-import { Card } from '../../../models/card.model';
+import { Card } from '../../models/card.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchDataService {
-  private sortDataSource = new Subject<Card[]>();
+  private sortDataSource = new BehaviorSubject<Card[]>(data.items);
 
   sortData$ = this.sortDataSource.asObservable();
 
   setData() {
     this.sortDataSource.next(data.items);
+  }
+
+  getCard(id: number | string) {
+    console.log(this.sortDataSource);
+
+    return this.sortDataSource.pipe(
+      map((data: Card[]) => data.find((card) => card.id === id)!)
+    );
   }
 
   sort(sortData: SortData) {

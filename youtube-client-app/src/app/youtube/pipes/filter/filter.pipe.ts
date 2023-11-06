@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Card } from '../../../models/card.model';
+import { Card } from '../../models/card.model';
 
 @Pipe({
   name: 'filter',
@@ -13,8 +13,10 @@ export class FilterPipe implements PipeTransform {
       return items;
     }
 
-    return items.filter((item) => item.snippet.title
-      .toLocaleLowerCase()
-      .includes(searchText.toLocaleLowerCase()));
+    return items.filter((item) =>
+      item.snippet.title
+        .toLocaleLowerCase()
+        .includes(searchText.toLocaleLowerCase())
+    );
   }
 }

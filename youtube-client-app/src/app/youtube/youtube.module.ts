@@ -6,7 +6,9 @@ import { YouTubePageComponent } from './pages/youtube/youtube-page.component';
 import { CardColorDirective } from './directives/card-color/card-color.directive';
 import { SharedModule } from '../shared/shared.module';
 import { SearchDataService } from './services/search-data/search-data.service';
-import { NotfoundPageComponent } from './pages/notfound-page/notfound-page.component';
+import { NotfoundPageComponent } from './pages/notfound/notfound-page.component';
+import { DetailsPageComponent } from './pages/details/details-page.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,9 @@ import { NotfoundPageComponent } from './pages/notfound-page/notfound-page.compo
     YouTubePageComponent,
     CardColorDirective,
     NotfoundPageComponent,
+    DetailsPageComponent,
   ],
-  imports: [SharedModule, CommonModule],
-  providers: [SearchDataService],
-  exports: [YouTubePageComponent, NotfoundPageComponent],
+  imports: [SharedModule, CommonModule, RouterModule],
+  exports: [YouTubePageComponent, NotfoundPageComponent, DetailsPageComponent],
 })
 export class YoutubeModule {}

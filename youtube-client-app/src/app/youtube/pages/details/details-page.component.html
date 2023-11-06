@@ -1,0 +1,65 @@
+<div *ngIf="card | async as card">
+  <div
+    [appCardColor]="card.snippet.publishedAt"
+    class="flex flex-row m-auto text-gray-700 bg-white shadow-xl max-w-[1200px] w-full min-h-[460px] rounded-xl bg-clip-border border-b-4 box-border"
+  >
+    <div
+      class="self-center min-w-[729px] overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
+    >
+      <img
+        [src]="card.snippet.thumbnails.maxres.url"
+        alt="img-blur-shadow"
+        class="hover:scale-105 ease-in min-h-full"
+      />
+    </div>
+    <div class="p-6 pt-3">
+      <div class="flex justify-between items-center mb-[35px]">
+        <div
+          class="title mr-2 font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blue-gray-900"
+        >
+          {{ card.snippet.title }}
+        </div>
+        <div class="date flex-grow text-gray-500">
+          {{ card.snippet.publishedAt | date : "fullDate" }}
+        </div>
+      </div>
+
+      <div
+        class="block mb-4 font-sans text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+      >
+        <div>Description:</div>
+        <div class="text-gray-500">{{ card.snippet.description }}</div>
+      </div>
+      <div class="activity self-end flex justify-center items-center mb-2">
+        <div class="activity__item flex justify-center mr-2">
+          <img src="../../../assets/view.svg" alt="view" class="w-4 h-4 mr-1" />
+          <div class="activity__info">{{ card.statistics.viewCount }}</div>
+        </div>
+        <div class="activity__item flex justify-center mr-2">
+          <img
+            src="../../../assets/liked.svg"
+            alt="like"
+            class="w-4 h-4 mr-1"
+          />
+          <div class="activity__info">{{ card.statistics.likeCount }}</div>
+        </div>
+        <div class="activity__item flex justify-center mr-2">
+          <img
+            src="../../../assets/dislike.svg"
+            alt="dislike"
+            class="w-4 h-4 mr-1"
+          />
+          <div class="activity__info">{{ card.statistics.dislikeCount }}</div>
+        </div>
+        <div class="activity__item flex justify-center mr-2">
+          <img
+            src="../../../assets/comment.svg"
+            alt="comment"
+            class="w-4 h-4 mr-1"
+          />
+          <div class="activity__info">{{ card.statistics.commentCount }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

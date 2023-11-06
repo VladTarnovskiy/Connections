@@ -13,10 +13,7 @@ export class SearchBarComponent {
 
   filterButton = false;
 
-  constructor(private dataService: SearchDataService) {}
-
   onSearch(data: boolean) {
-    this.dataService.setData();
     this.searchResult.emit(data);
   }
 
