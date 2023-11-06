@@ -2,11 +2,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
+  selector: 'app-search-bar',
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchComponent {
+export class SearchBarComponent {
   @Output() searchResult = new EventEmitter<boolean>();
 
   @Output() sortBlock = new EventEmitter<boolean>();

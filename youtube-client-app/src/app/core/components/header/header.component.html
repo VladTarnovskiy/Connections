@@ -6,12 +6,11 @@
         alt="youtube"
         class="w-20 h-24"
       />
-      <!-- <div class="text-5xl font-semibold absolute left-24">YouTube</div> -->
     </div>
-    <app-search
+    <app-search-bar
       (sortBlock)="turnSortBlock($event)"
       (searchResult)="onSearch($event)"
-    ></app-search>
+    ></app-search-bar>
     <div class="header__profile flex justify-center items-center">
       <div class="mr-2">Your name</div>
       <button

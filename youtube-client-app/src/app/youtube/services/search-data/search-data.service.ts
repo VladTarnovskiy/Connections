@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { data } from 'src/data/data';
-import { SortData } from '../../../types/sort';
+import { SortData } from '../../models/sort';
 import { Card } from '../../../models/card.model';
 
 @Injectable({
@@ -36,21 +36,23 @@ export class SearchDataService {
 
   sortByViewAsc(cards: Card[]) {
     const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount),
+      (a: Card, b: Card) =>
+        Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
     );
     return sorted;
   }
 
   sortByViewDesc(cards: Card[]) {
     const sorted = JSON.parse(
-      JSON.stringify(this.sortByViewAsc(cards).reverse()),
+      JSON.stringify(this.sortByViewAsc(cards).reverse())
     );
     return sorted;
   }
 
   sortByDateAsc(cards: Card[]) {
     const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) => Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt),
+      (a: Card, b: Card) =>
+        Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt)
     );
     return sorted;
   }

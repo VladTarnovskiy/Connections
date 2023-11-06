@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { YouTubePageComponent } from './youtube/pages/youtube/youtube-page.component';
+import { YouTubePageComponent } from '../youtube/pages/youtube/youtube-page.component';
 
 const routes: Routes = [
   {
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRouterModule {}
