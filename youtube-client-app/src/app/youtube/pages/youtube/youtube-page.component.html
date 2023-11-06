@@ -1,0 +1,10 @@
+<app-header
+  (searchResult)="showResult($event)"
+  (sortBlock)="showSortBlock($event)"
+></app-header>
+<div *ngIf="sortBlock" class="name"><app-sort></app-sort></div>
+<div *ngIf="result" class="name">
+  <div class="cards__container mt-14">
+    <app-card *ngFor="let card of cards" [card]="card"></app-card>
+  </div>
+</div>

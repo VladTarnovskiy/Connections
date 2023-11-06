@@ -5,29 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MainPageComponent } from './pages/main-page/main-page.component';
-import { HeaderComponent } from './components/header/header.component';
-import { SearchComponent } from './components/search/search.component';
-import { SortComponent } from './components/sort/sort.component';
-import { CardComponent } from './components/card/card.component';
+import { YoutubeModule } from './youtube/youtube.module';
 import { MaterialModule } from './material/material.module';
-import { CardColorDirective } from './directives/card-color.directive';
-import { SearchDataService } from './services/search-data.service';
-import { ButtonComponent } from './components/button/button.component';
-import { FilterPipe } from './pipes/filter.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainPageComponent,
-    HeaderComponent,
-    SearchComponent,
-    SortComponent,
-    CardComponent,
-    CardColorDirective,
-    FilterPipe,
-  ],
-  providers: [SearchDataService],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
     BrowserModule,
@@ -36,7 +18,8 @@ import { FilterPipe } from './pipes/filter.pipe';
     MaterialModule,
     CommonModule,
     FormsModule,
-    ButtonComponent,
+    YoutubeModule,
   ],
+  exports: [CommonModule, FormsModule],
 })
 export class AppModule {}

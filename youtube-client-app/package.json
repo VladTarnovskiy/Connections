@@ -37,6 +37,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
+    "angular-cli-ghpages": "^0.6.2",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.49.0",
     "eslint-config-airbnb-base": "^15.0.0",

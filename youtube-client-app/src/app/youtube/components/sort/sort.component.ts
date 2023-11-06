@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SearchDataService } from 'src/app/services/search-data.service';
+import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
 @Component({
   selector: 'app-sort',

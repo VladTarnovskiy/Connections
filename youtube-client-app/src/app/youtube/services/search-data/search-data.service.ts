@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { data } from 'src/data/data';
-import { SortData } from '../types/sort';
-import { Card } from '../models/card.model';
+import { SortData } from '../../../types/sort';
+import { Card } from '../../../models/card.model';
 
 @Injectable({
   providedIn: 'root',

@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MainPageComponent } from './pages/main-page/main-page.component';
+import { YouTubePageComponent } from './youtube/pages/youtube/youtube-page.component';
 
 const routes: Routes = [
   {
-    path: 'home',
-    component: MainPageComponent,
+    path: 'youtube',
+    component: YouTubePageComponent,
   },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'youtube', pathMatch: 'full' },
 ];
 
 @NgModule({
