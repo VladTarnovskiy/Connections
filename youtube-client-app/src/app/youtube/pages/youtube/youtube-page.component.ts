@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Card } from 'src/app/youtube/models/card.model';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 

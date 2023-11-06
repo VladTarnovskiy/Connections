@@ -9,15 +9,21 @@
     type="text"
     id="login"
     formControlName="login"
-    class="mb-4 bg-gray-200 w-[382px] min-h-[44px] p-2"
+    class="mb-4 bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+    required
   />
   <label for="password" class="text-gray-500 text-sm">password</label>
   <input
     type="password"
     id="password"
     formControlName="password"
-    class="mb-8 bg-gray-200 w-[382px] min-h-[44px] p-2"
+    class="mb-8 bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+    required
   />
-  <button type="submit">Login</button>
-  <!-- <a routerLink="/youtube" class="ml-auto"><app-button>Login</app-button></a> -->
+  <button
+    type="submit"
+    class="select-none rounded-lg ml-auto bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+  >
+    Login
+  </button>
 </form>

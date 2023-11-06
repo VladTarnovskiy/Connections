@@ -8,7 +8,7 @@ describe('NotfoundPageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotfoundPageComponent]
+      declarations: [NotfoundPageComponent],
     });
     fixture = TestBed.createComponent(NotfoundPageComponent);
     component = fixture.componentInstance;

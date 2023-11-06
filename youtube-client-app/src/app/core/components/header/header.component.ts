@@ -1,4 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -10,11 +12,17 @@ export class HeaderComponent {
 
   @Output() sortBlock = new EventEmitter<boolean>();
 
+  constructor(private authService: AuthService, public router: Router) {}
+
   onSearch(data: boolean) {
     this.searchResult.emit(data);
   }
 
   turnSortBlock(data: boolean) {
     this.sortBlock.emit(data);
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

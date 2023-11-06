@@ -22,7 +22,9 @@
           class="w-10 h-10"
         />
       </button>
-      <a routerLink="login" class="ml-4"><app-button> Logout </app-button></a>
+      <a routerLink="login" class="ml-4" (click)="logout()"
+        ><app-button> Logout </app-button></a
+      >
     </div>
   </div>
 </header>

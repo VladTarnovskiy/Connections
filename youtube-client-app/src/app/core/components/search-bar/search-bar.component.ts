@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
 @Component({
   selector: 'app-search-bar',

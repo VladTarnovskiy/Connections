@@ -11,14 +11,17 @@ import { SearchDataService } from '../../services/search-data/search-data.servic
 })
 export class DetailsPageComponent implements OnInit {
   card!: Observable<Card>;
+
   constructor(
     private route: ActivatedRoute,
-    private service: SearchDataService
+    private service: SearchDataService,
   ) {}
 
   ngOnInit() {
     this.route.paramMap
       .pipe(map((params: ParamMap) => this.service.getCard(params.get('id')!)))
-      .subscribe((card) => (this.card = card));
+      .subscribe((card) => {
+        this.card = card;
+      });
   }
 }

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { HeaderComponent } from '../core/components/header/header.component';
+import { HeaderComponent } from './components/header/header.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { LayoutComponent } from './pages/layout/layout.component';
-import { SortComponent } from '../core/components/sort/sort.component';
+import { SortComponent } from './components/sort/sort.component';
 import { AppRouterModule } from '../router/app-router.module';
 import { SharedModule } from '../shared/shared.module';
 

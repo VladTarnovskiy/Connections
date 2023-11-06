@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, map, of } from 'rxjs';
+import { BehaviorSubject, map } from 'rxjs';
 import { data } from 'src/data/data';
 import { SortData } from '../../models/sort';
 import { Card } from '../../models/card.model';
@@ -17,10 +17,10 @@ export class SearchDataService {
   }
 
   getCard(id: number | string) {
-    console.log(this.sortDataSource);
-
     return this.sortDataSource.pipe(
-      map((data: Card[]) => data.find((card) => card.id === id)!)
+      map(
+        (cardData: Card[]) => cardData.find((cardItem) => cardItem.id === id)!,
+      ),
     );
   }
 
@@ -44,23 +44,21 @@ export class SearchDataService {
 
   sortByViewAsc(cards: Card[]) {
     const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) =>
-        Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
+      (a: Card, b: Card) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount),
     );
     return sorted;
   }
 
   sortByViewDesc(cards: Card[]) {
     const sorted = JSON.parse(
-      JSON.stringify(this.sortByViewAsc(cards).reverse())
+      JSON.stringify(this.sortByViewAsc(cards).reverse()),
     );
     return sorted;
   }
 
   sortByDateAsc(cards: Card[]) {
     const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) =>
-        Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt)
+      (a: Card, b: Card) => Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt),
     );
     return sorted;
   }
