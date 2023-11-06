@@ -1,15 +1,15 @@
 <div *ngIf="card | async as card">
   <div
     [appCardColor]="card.snippet.publishedAt"
-    class="flex flex-row m-auto text-gray-700 bg-white shadow-xl max-w-[1200px] w-full min-h-[460px] rounded-xl bg-clip-border border-b-4 box-border"
+    class="flex relative flex-row mt-4 m-auto text-gray-700 bg-white shadow-xl max-w-[1200px] w-full min-h-[460px] rounded-xl bg-clip-border border-b-4 box-border"
   >
     <div
-      class="self-center min-w-[729px] overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
+      class="min-w-[729px] h-fit overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
     >
       <img
         [src]="card.snippet.thumbnails.maxres.url"
         alt="img-blur-shadow"
-        class="hover:scale-105 ease-in min-h-full"
+        class="min-h-[461px]"
       />
     </div>
     <div class="p-6 pt-3">
@@ -61,5 +61,15 @@
         </div>
       </div>
     </div>
+    <a routerLink="/"
+      ><button
+        class="absolute left-[-32px] top-2 w-8 h-8 bg-red-500 rounded-l-md hover:shadow-lg hover:shadow-red-500/40"
+      >
+        <img
+          src="../../../../assets/arrow-sm-left.svg"
+          alt="arrow"
+          class="w-7 h-7"
+        /></button
+    ></a>
   </div>
 </div>

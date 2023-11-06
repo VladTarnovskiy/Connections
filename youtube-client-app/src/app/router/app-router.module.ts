@@ -9,16 +9,20 @@ const routes: Routes = [
   {
     path: 'youtube',
     component: YouTubePageComponent,
-    // component: NotfoundPageComponent,
-    // component: AuthPageComponent,
   },
   {
     path: 'details/:id',
-    // component: YouTubePageComponent,
-    // component: NotfoundPageComponent,
     component: DetailsPageComponent,
   },
+  {
+    path: 'login',
+    component: AuthPageComponent,
+  },
   { path: '', redirectTo: 'youtube', pathMatch: 'full' },
+  {
+    path: '**',
+    component: NotfoundPageComponent,
+  },
 ];
 
 @NgModule({
