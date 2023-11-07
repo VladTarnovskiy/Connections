@@ -18,7 +18,7 @@ export class AuthService {
       delay(1000),
       tap(() => {
         this.isLoggedIn = true;
-      })
+      }),
     );
   }
 

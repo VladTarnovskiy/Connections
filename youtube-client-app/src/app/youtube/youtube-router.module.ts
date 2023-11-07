@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { YouTubePageComponent } from '../youtube/pages/youtube/youtube-page.component';
+import { YouTubePageComponent } from './pages/youtube/youtube-page.component';
 import { authGuard } from '../core/guards/auth/auth.guard';
 import { DetailsPageComponent } from './pages/details/details-page.component';
 

@@ -16,11 +16,9 @@ export class SearchDataService {
     this.sortDataSource.next(data.items);
   }
 
-  getCard(id: number | string) {
+  getCard(id: number | string | null) {
     return this.sortDataSource.pipe(
-      map(
-        (cardData: Card[]) => cardData.find((cardItem) => cardItem.id === id)!,
-      ),
+      map((cardData: Card[]) => cardData.find((cardItem) => cardItem.id === id)),
     );
   }
 

@@ -10,7 +10,7 @@ import { SearchDataService } from '../../services/search-data/search-data.servic
   styleUrls: ['./details-page.component.scss'],
 })
 export class DetailsPageComponent implements OnInit {
-  card!: Observable<Card>;
+  card!: Observable<Card | undefined>;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,7 +19,7 @@ export class DetailsPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap
-      .pipe(map((params: ParamMap) => this.service.getCard(params.get('id')!)))
+      .pipe(map((params: ParamMap) => this.service.getCard(params.get('id'))))
       .subscribe((card) => {
         this.card = card;
       });
