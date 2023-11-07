@@ -1,12 +1,11 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CardComponent } from './components/card/card.component';
 import { YouTubePageComponent } from './pages/youtube/youtube-page.component';
 import { CardColorDirective } from './directives/card-color/card-color.directive';
 import { SharedModule } from '../shared/shared.module';
 import { NotfoundPageComponent } from './pages/notfound/notfound-page.component';
 import { DetailsPageComponent } from './pages/details/details-page.component';
+import { YouTubeRouterModule } from './youtube-router.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,7 @@ import { DetailsPageComponent } from './pages/details/details-page.component';
     NotfoundPageComponent,
     DetailsPageComponent,
   ],
-  imports: [SharedModule, CommonModule, RouterModule],
+  imports: [SharedModule, YouTubeRouterModule],
   exports: [YouTubePageComponent, NotfoundPageComponent, DetailsPageComponent],
 })
 export class YoutubeModule {}
