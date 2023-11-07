@@ -8,6 +8,6 @@ import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, CoreModule, AuthModule],
+  imports: [BrowserModule, BrowserAnimationsModule, CoreModule],
 })
 export class AppModule {}

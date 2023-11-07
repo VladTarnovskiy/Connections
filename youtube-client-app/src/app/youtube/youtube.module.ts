@@ -16,6 +16,5 @@ import { YouTubeRouterModule } from './youtube-router.module';
     DetailsPageComponent,
   ],
   imports: [SharedModule, YouTubeRouterModule],
-  exports: [YouTubePageComponent, NotfoundPageComponent, DetailsPageComponent],
 })
 export class YoutubeModule {}
