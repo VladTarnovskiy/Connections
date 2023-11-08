@@ -1,12 +1,16 @@
-import {
-  Directive, ElementRef, Input, OnInit,
-} from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+
+enum Colors {
+  Red = '#f87171',
+  Green = '#4ade80',
+  Yellow = '#fef08a',
+}
 
 @Directive({
   selector: '[appCardColor]',
 })
 export class CardColorDirective implements OnInit {
-  borderColor = '#f87171';
+  borderColor = Colors.Red;
 
   @Input('appCardColor') date!: string;
 
@@ -20,13 +24,13 @@ export class CardColorDirective implements OnInit {
   setBorderColor() {
     const x = this.getDateDiff(this.date);
     if (x < 7) {
-      this.borderColor = '#f87171';
+      this.borderColor = Colors.Red;
     } else if (x >= 7 && x < 30) {
-      this.borderColor = '#4ade80';
+      this.borderColor = Colors.Green;
     } else if (x >= 30 && x < 180) {
-      this.borderColor = '#fef08a';
+      this.borderColor = Colors.Yellow;
     } else {
-      this.borderColor = '#f87171';
+      this.borderColor = Colors.Red;
     }
   }
 
