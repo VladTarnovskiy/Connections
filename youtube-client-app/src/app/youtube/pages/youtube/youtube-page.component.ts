@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Card } from 'src/app/youtube/models/card.model';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
@@ -7,12 +8,19 @@ import { SearchDataService } from 'src/app/youtube/services/search-data/search-d
   templateUrl: './youtube-page.component.html',
   styleUrls: ['./youtube-page.component.scss'],
 })
-export class YouTubePageComponent {
+export class YouTubePageComponent implements OnInit, OnDestroy {
   cards!: Card[];
+  subscription!: Subscription;
 
-  constructor(private dataService: SearchDataService) {
-    this.dataService.sortData$.subscribe((data) => {
+  constructor(private dataService: SearchDataService) {}
+
+  ngOnInit() {
+    this.subscription = this.dataService.sortData$.subscribe((data) => {
       this.cards = data;
     });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

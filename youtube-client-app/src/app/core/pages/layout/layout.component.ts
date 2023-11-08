@@ -11,7 +11,10 @@ export class LayoutComponent {
 
   sortBlock = false;
 
-  sortInfo!: SortData;
+  sortInfo: SortData = {
+    sortBy: 'date',
+    direction: 'asc',
+  };
 
   showResult(result: boolean) {
     this.result = result;
