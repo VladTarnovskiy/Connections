@@ -17,6 +17,7 @@ export class LayoutComponent {
   };
 
   showResult(result: boolean) {
+    console.log(this.result);
     this.result = result;
   }
 
