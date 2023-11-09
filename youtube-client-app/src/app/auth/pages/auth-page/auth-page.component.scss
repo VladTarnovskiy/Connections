@@ -6,3 +6,10 @@
 .ng-valid.required {
   border-left: 2px solid #42a948;
 }
+
+.invalid__message {
+  margin-bottom: 1rem;
+  left: 0px;
+  bottom: -0.25rem;
+  color: rgb(239 68 68);
+}
