@@ -13,7 +13,7 @@ const KEY = 'AIzaSyCwWsTBJtwwuJh1VvJZPi7zIhljkTKzaRs';
 export class AuthInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<unknown>,
-    next: HttpHandler
+    next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
     const authReq = req.clone({
       params: req.params.set('key', KEY),

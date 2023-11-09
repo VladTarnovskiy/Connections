@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
-  BehaviorSubject, catchError, map, throwError,
+  BehaviorSubject, catchError, map, throwError, switchMap,
 } from 'rxjs';
 import {
   HttpClient,
@@ -8,12 +8,7 @@ import {
   HttpParams,
 } from '@angular/common/http';
 import { SortData } from '../../models/sort';
-import {
-  Card,
-  CardsInfo,
-  SearchCard,
-  SearchCardsInfo,
-} from '../../models/card.model';
+import { Card, CardsInfo, SearchCardsInfo } from '../../models/card.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,25 +34,23 @@ export class SearchDataService {
   }
 
   getCards(searchValue: string) {
-    const options = { params: new HttpParams().set('q', searchValue) };
+    const searchQuery = { params: new HttpParams().set('q', searchValue) };
     this.http
-      .get<SearchCardsInfo>(this.cardsURL, options)
+      .get<SearchCardsInfo>(this.cardsURL, searchQuery)
       .pipe(
-        map((items) => items.items),
+        map((items) => {
+          let ids = '';
+          items.items.forEach((item) => {
+            ids += `${item.id.videoId},`;
+          });
+          const options = {
+            params: new HttpParams().set('id', ids.slice(0, -1)),
+          };
+          return options;
+        }),
+        switchMap((httpOptions) => this.http.get<CardsInfo>(this.statisticsURL, httpOptions)),
         catchError(this.handleError),
       )
-      .subscribe((cards: SearchCard[]) => this.getSnippets(cards));
-  }
-
-  getSnippets(cards: SearchCard[]) {
-    let ids = '';
-    cards.forEach((item) => {
-      ids += `${item.id.videoId},`;
-    });
-    const options = { params: new HttpParams().set('id', ids.slice(0, -1)) };
-    this.http
-      .get<CardsInfo>(this.statisticsURL, options)
-      .pipe(catchError(this.handleError))
       .subscribe((value: CardsInfo) => this.sortDataSource.next(value.items));
   }
 

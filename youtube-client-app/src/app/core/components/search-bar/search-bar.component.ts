@@ -1,5 +1,9 @@
 import {
-  Component, EventEmitter, Output, OnInit,
+  Component,
+  EventEmitter,
+  Output,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
 import {
   Subject, debounceTime, distinctUntilChanged, filter,
@@ -11,7 +15,7 @@ import { SearchDataService } from 'src/app/youtube/services/search-data/search-d
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent implements OnInit {
+export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() sortBlock = new EventEmitter<boolean>();
 
   private searchTerms = new Subject<string>();
@@ -37,5 +41,9 @@ export class SearchBarComponent implements OnInit {
   turnSortBlock() {
     this.filterButton = !this.filterButton;
     this.sortBlock.emit(this.filterButton);
+  }
+
+  ngOnDestroy(): void {
+    this.searchTerms.unsubscribe();
   }
 }
