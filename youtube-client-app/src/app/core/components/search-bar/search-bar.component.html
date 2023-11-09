@@ -2,12 +2,12 @@
   <input
     #searchBox
     type="search"
-    class="shadow-lg rounded h-10 w-72 p-4"
+    class="shadow-lg rounded h-10 w-72 p-4 focus:shadow-md focus:shadow-red-500 outline-none"
     placeholder="What are you want to find out?"
     (input)="onSearch(searchBox.value)"
   />
   <button
-    class="h-10 bg-red-500 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+    class="h-10 bg-red-500 rounded-md w-10 text-white text-md text-center hover:shadow-lg hover:shadow-red-500/40"
     (click)="turnSortBlock()"
     [style.opacity]="filterButton ? 0.8 : 1"
   >

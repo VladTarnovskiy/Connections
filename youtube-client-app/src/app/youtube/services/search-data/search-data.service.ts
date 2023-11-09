@@ -4,7 +4,7 @@ import { data } from 'src/data/data';
 import { SortData } from '../../models/sort';
 import {
   Card,
-  CardItems,
+  CardsInfo,
   SearchCard,
   SearchCardsInfo,
 } from '../../models/card.model';
@@ -31,8 +31,11 @@ export class SearchDataService {
   sortData$ = this.sortDataSource.asObservable();
 
   getCard(id: number | string | null) {
-    return this.sortData$.pipe(
-      map((cardData: Card[]) => cardData.find((cardItem) => cardItem.id === id))
+    const options = { params: new HttpParams().set('id', String(id)) };
+    return this.http.get<CardsInfo>(this.statisticsURL, options).pipe(
+      map((cardsInfo) => cardsInfo.items),
+      map((cards) => cards[0]),
+      catchError(this.handleError)
     );
   }
 
@@ -54,9 +57,9 @@ export class SearchDataService {
     });
     const options = { params: new HttpParams().set('id', ids.slice(0, -1)) };
     this.http
-      .get<CardItems>(this.statisticsURL, options)
+      .get<CardsInfo>(this.statisticsURL, options)
       .pipe(catchError(this.handleError))
-      .subscribe((value: CardItems) => this.sortDataSource.next(value.items));
+      .subscribe((value: CardsInfo) => this.sortDataSource.next(value.items));
   }
 
   private handleError(error: HttpErrorResponse) {

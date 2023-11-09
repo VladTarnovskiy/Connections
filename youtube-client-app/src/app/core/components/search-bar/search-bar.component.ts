@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged, tap } from 'rxjs';
+import { Subject, debounceTime, distinctUntilChanged, filter, tap } from 'rxjs';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class SearchBarComponent {
   ngOnInit(): void {
     this.searchTerms
       .pipe(
+        filter((data) => data.length > 2),
         debounceTime(1000),
         tap((x) => console.log(x)),
         distinctUntilChanged()

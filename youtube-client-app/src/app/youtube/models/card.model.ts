@@ -1,4 +1,4 @@
-export interface CardItems {
+export interface CardsInfo {
   TODO: string;
   kind: string;
   etag: string;

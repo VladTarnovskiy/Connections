@@ -10,11 +10,11 @@ import { SearchDataService } from '../../services/search-data/search-data.servic
   styleUrls: ['./details-page.component.scss'],
 })
 export class DetailsPageComponent implements OnInit {
-  card!: Observable<Card | undefined>;
+  card!: Observable<Card>;
 
   constructor(
     private route: ActivatedRoute,
-    private service: SearchDataService,
+    private service: SearchDataService
   ) {}
 
   ngOnInit() {
