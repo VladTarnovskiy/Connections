@@ -1,4 +1,6 @@
-import { Directive, ElementRef, Input, OnInit } from '@angular/core';
+import {
+  Directive, ElementRef, Input, OnInit,
+} from '@angular/core';
 
 enum Colors {
   Red = '#f87171',

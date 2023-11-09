@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
+import {
+  BehaviorSubject, catchError, map, throwError,
+} from 'rxjs';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { SortData } from '../../models/sort';
 import {
   Card,
@@ -7,21 +14,14 @@ import {
   SearchCard,
   SearchCardsInfo,
 } from '../../models/card.model';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpParams,
-} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchDataService {
-  private cardsURL =
-    'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video';
+  private cardsURL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video';
 
-  private statisticsURL =
-    'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics';
+  private statisticsURL = 'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics';
 
   private sortDataSource = new BehaviorSubject<Card[]>([]);
 
@@ -34,7 +34,7 @@ export class SearchDataService {
     return this.http.get<CardsInfo>(this.statisticsURL, options).pipe(
       map((cardsInfo) => cardsInfo.items),
       map((cards) => cards[0]),
-      catchError(this.handleError)
+      catchError(this.handleError),
     );
   }
 
@@ -44,7 +44,7 @@ export class SearchDataService {
       .get<SearchCardsInfo>(this.cardsURL, options)
       .pipe(
         map((items) => items.items),
-        catchError(this.handleError)
+        catchError(this.handleError),
       )
       .subscribe((cards: SearchCard[]) => this.getSnippets(cards));
   }
@@ -52,7 +52,7 @@ export class SearchDataService {
   getSnippets(cards: SearchCard[]) {
     let ids = '';
     cards.forEach((item) => {
-      ids += item.id.videoId + ',';
+      ids += `${item.id.videoId},`;
     });
     const options = { params: new HttpParams().set('id', ids.slice(0, -1)) };
     this.http
@@ -67,11 +67,11 @@ export class SearchDataService {
     } else {
       console.error(
         `Backend returned code ${error.status}, body was: `,
-        error.error
+        error.error,
       );
     }
     return throwError(
-      () => new Error('Something bad happened; please try again later.')
+      () => new Error('Something bad happened; please try again later.'),
     );
   }
 
@@ -95,23 +95,21 @@ export class SearchDataService {
 
   sortByViewAsc(cards: Card[]) {
     const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) =>
-        Number(a.statistics.viewCount) - Number(b.statistics.viewCount)
+      (a: Card, b: Card) => Number(a.statistics.viewCount) - Number(b.statistics.viewCount),
     );
     return sorted;
   }
 
   sortByViewDesc(cards: Card[]) {
     const sorted = JSON.parse(
-      JSON.stringify(this.sortByViewAsc(cards).reverse())
+      JSON.stringify(this.sortByViewAsc(cards).reverse()),
     );
     return sorted;
   }
 
   sortByDateAsc(cards: Card[]) {
     const sorted = JSON.parse(JSON.stringify(cards)).sort(
-      (a: Card, b: Card) =>
-        Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt)
+      (a: Card, b: Card) => Date.parse(a.snippet.publishedAt) - Date.parse(b.snippet.publishedAt),
     );
     return sorted;
   }
@@ -125,7 +123,7 @@ export class SearchDataService {
       return value.snippet.title.toLowerCase().includes(stringData);
     }
     const initCardsData: Card[] = JSON.parse(
-      JSON.stringify(this.sortDataSource.getValue())
+      JSON.stringify(this.sortDataSource.getValue()),
     );
     const filteredCardsData = initCardsData.filter(isIncludeString);
     this.sortDataSource.next(filteredCardsData);

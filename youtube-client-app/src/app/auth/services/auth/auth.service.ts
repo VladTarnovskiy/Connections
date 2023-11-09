@@ -8,6 +8,7 @@ import { LoginData, UserDetails } from '../../models/userDetails';
 })
 export class AuthService {
   isLoggedIn = new BehaviorSubject<boolean>(false);
+
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
   login(userDetails: UserDetails): Observable<boolean> {
@@ -19,7 +20,7 @@ export class AuthService {
       delay(1000),
       tap(() => {
         this.isLoggedIn.next(true);
-      })
+      }),
     );
   }
 

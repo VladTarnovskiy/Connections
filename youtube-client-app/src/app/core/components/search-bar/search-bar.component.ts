@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged, filter, tap } from 'rxjs';
+import {
+  Component, EventEmitter, Output, OnInit,
+} from '@angular/core';
+import {
+  Subject, debounceTime, distinctUntilChanged, filter,
+} from 'rxjs';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
 @Component({
@@ -7,11 +11,13 @@ import { SearchDataService } from 'src/app/youtube/services/search-data/search-d
   templateUrl: './search-bar.component.html',
   styleUrls: ['./search-bar.component.scss'],
 })
-export class SearchBarComponent {
+export class SearchBarComponent implements OnInit {
   @Output() sortBlock = new EventEmitter<boolean>();
+
   private searchTerms = new Subject<string>();
 
   filterButton = false;
+
   constructor(private dataService: SearchDataService) {}
 
   onSearch(searchValue: string) {
@@ -23,8 +29,7 @@ export class SearchBarComponent {
       .pipe(
         filter((data) => data.length > 2),
         debounceTime(1000),
-        tap((x) => console.log(x)),
-        distinctUntilChanged()
+        distinctUntilChanged(),
       )
       .subscribe((searchValue) => this.dataService.getCards(searchValue));
   }

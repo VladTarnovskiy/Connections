@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Card } from 'src/app/youtube/models/card.model';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 
@@ -10,6 +10,7 @@ import { SearchDataService } from 'src/app/youtube/services/search-data/search-d
 })
 export class YouTubePageComponent implements OnInit, OnDestroy {
   cards!: Card[];
+
   subscription!: Subscription;
 
   constructor(private dataService: SearchDataService) {}

@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
@@ -8,9 +14,11 @@ import { AuthService } from 'src/app/auth/services/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
-  textButton: boolean = false;
+
+  textButton = false;
+
   @Output() sortBlock = new EventEmitter<boolean>();
 
   constructor(private authService: AuthService, public router: Router) {}

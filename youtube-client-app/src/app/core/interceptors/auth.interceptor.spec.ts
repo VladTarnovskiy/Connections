@@ -5,8 +5,8 @@ import { AuthInterceptor } from './auth.interceptor';
 describe('AuthInterceptor', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      AuthInterceptor
-      ]
+      AuthInterceptor,
+    ],
   }));
 
   it('should be created', () => {
