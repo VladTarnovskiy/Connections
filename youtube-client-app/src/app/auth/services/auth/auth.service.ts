@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { LoginData, UserDetails } from '../../models/userDetails';
 
@@ -7,7 +7,8 @@ import { LoginData, UserDetails } from '../../models/userDetails';
   providedIn: 'root',
 })
 export class AuthService {
-  isLoggedIn = false;
+  isLoggedIn = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.isLoggedIn.asObservable();
 
   login(userDetails: UserDetails): Observable<boolean> {
     const login = userDetails.login ?? '';
@@ -17,13 +18,13 @@ export class AuthService {
     return of(true).pipe(
       delay(1000),
       tap(() => {
-        this.isLoggedIn = true;
-      }),
+        this.isLoggedIn.next(true);
+      })
     );
   }
 
   logout(): void {
     localStorage.removeItem('userDetails');
-    this.isLoggedIn = false;
+    this.isLoggedIn.next(false);
   }
 }

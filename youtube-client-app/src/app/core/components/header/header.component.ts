@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
 
 @Component({
@@ -8,6 +9,8 @@ import { AuthService } from 'src/app/auth/services/auth/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  subscription!: Subscription;
+  textButton: boolean = false;
   @Output() sortBlock = new EventEmitter<boolean>();
 
   constructor(private authService: AuthService, public router: Router) {}
@@ -18,5 +21,15 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  ngOnInit() {
+    this.subscription = this.authService.isLoggedIn$.subscribe((data) => {
+      this.textButton = data;
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

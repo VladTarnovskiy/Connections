@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, tap, throwError } from 'rxjs';
-import { data } from 'src/data/data';
 import { SortData } from '../../models/sort';
 import {
   Card,
@@ -19,10 +18,10 @@ import {
 })
 export class SearchDataService {
   private cardsURL =
-    'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&type=video&key=AIzaSyCwWsTBJtwwuJh1VvJZPi7zIhljkTKzaRs';
+    'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=20&type=video';
 
   private statisticsURL =
-    'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCwWsTBJtwwuJh1VvJZPi7zIhljkTKzaRs&part=snippet,statistics';
+    'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics';
 
   private sortDataSource = new BehaviorSubject<Card[]>([]);
 
@@ -125,7 +124,9 @@ export class SearchDataService {
     function isIncludeString(value: Card) {
       return value.snippet.title.toLowerCase().includes(stringData);
     }
-    const initCardsData: Card[] = JSON.parse(JSON.stringify(data.items));
+    const initCardsData: Card[] = JSON.parse(
+      JSON.stringify(this.sortDataSource.getValue())
+    );
     const filteredCardsData = initCardsData.filter(isIncludeString);
     this.sortDataSource.next(filteredCardsData);
   }

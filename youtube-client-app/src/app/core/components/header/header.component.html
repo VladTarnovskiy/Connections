@@ -16,7 +16,7 @@
         <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
       </button>
       <a routerLink="login" class="ml-4" (click)="logout()"
-        ><app-button> Logout </app-button></a
+        ><app-button>{{ textButton ? "Logout" : "Login" }}</app-button></a
       >
     </div>
   </div>
