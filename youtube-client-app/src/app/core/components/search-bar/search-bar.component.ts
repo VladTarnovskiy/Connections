@@ -8,8 +8,6 @@ import { SearchDataService } from 'src/app/youtube/services/search-data/search-d
   styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
-  @Output() searchResult = new EventEmitter<boolean>();
-
   @Output() sortBlock = new EventEmitter<boolean>();
   private searchTerms = new Subject<string>();
 
@@ -23,7 +21,7 @@ export class SearchBarComponent {
   ngOnInit(): void {
     this.searchTerms
       .pipe(
-        debounceTime(300),
+        debounceTime(1000),
         tap((x) => console.log(x)),
         distinctUntilChanged()
       )

@@ -16,11 +16,6 @@ export class LayoutComponent {
     direction: 'asc',
   };
 
-  showResult(result: boolean) {
-    console.log(this.result);
-    this.result = result;
-  }
-
   showSortBlock(sortBlock: boolean) {
     this.sortBlock = sortBlock;
   }

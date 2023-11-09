@@ -19,10 +19,10 @@ import {
 })
 export class SearchDataService {
   private cardsURL =
-    'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&type=video&key=AIzaSyA5MqUDbAKPYlhA461fKYuYDDq67fNbXtw';
+    'https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=10&type=video&key=AIzaSyCwWsTBJtwwuJh1VvJZPi7zIhljkTKzaRs';
 
   private statisticsURL =
-    'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyA5MqUDbAKPYlhA461fKYuYDDq67fNbXtw&part=snippet,statistics';
+    'https://www.googleapis.com/youtube/v3/videos?key=AIzaSyCwWsTBJtwwuJh1VvJZPi7zIhljkTKzaRs&part=snippet,statistics';
 
   private sortDataSource = new BehaviorSubject<Card[]>([]);
 

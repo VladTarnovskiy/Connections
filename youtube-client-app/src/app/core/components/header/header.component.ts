@@ -8,15 +8,9 @@ import { AuthService } from 'src/app/auth/services/auth/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Output() searchResult = new EventEmitter<boolean>();
-
   @Output() sortBlock = new EventEmitter<boolean>();
 
   constructor(private authService: AuthService, public router: Router) {}
-
-  onSearch(data: boolean) {
-    this.searchResult.emit(data);
-  }
 
   turnSortBlock(data: boolean) {
     this.sortBlock.emit(data);

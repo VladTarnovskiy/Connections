@@ -1,7 +1,4 @@
-<app-header
-  (searchResult)="showResult($event)"
-  (sortBlock)="showSortBlock($event)"
-></app-header>
+<app-header (sortBlock)="showSortBlock($event)"></app-header>
 <div *ngIf="sortBlock" class="name"><app-sort></app-sort></div>
 
 <router-outlet></router-outlet>
