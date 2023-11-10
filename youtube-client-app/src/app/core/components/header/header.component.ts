@@ -17,7 +17,7 @@ import { AuthService } from 'src/app/auth/services/auth/auth.service';
 export class HeaderComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
 
-  textButton = false;
+  logIn = false;
 
   @Output() sortBlock = new EventEmitter<boolean>();
 
@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription = this.authService.isLoggedIn$.subscribe((data) => {
-      this.textButton = data;
+      this.logIn = data;
     });
   }
 
