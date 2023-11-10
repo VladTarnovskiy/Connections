@@ -6,8 +6,9 @@ import { authGuard } from './core/guards/auth/auth.guard';
 const routes: Routes = [
   {
     path: 'youtube',
-    loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule),
-    canMatch: [authGuard],
+    loadChildren: () =>
+      import('./youtube/youtube.module').then((m) => m.YoutubeModule),
+    canActivate: [authGuard],
   },
   {
     path: 'login',

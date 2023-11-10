@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ValidateData } from './validators/validators';
 
@@ -18,17 +18,33 @@ export class AdminPageComponent {
     img: ['', [Validators.required]],
     linkVideo: ['', [Validators.required]],
     date: ['', [Validators.required, ValidateData()]],
+    tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
   constructor(private fb: FormBuilder, public router: Router) {}
 
   onSubmit() {
     if (this.newCardForm.status === 'VALID') {
+      this.router.navigate(['/youtube']);
     }
   }
 
   onReset() {
+    const fieldsArray = this.newCardForm.get('tags') as FormArray;
+    fieldsArray.clear();
+    fieldsArray.push(this.fb.control('', Validators.required));
     this.newCardForm.reset();
+  }
+
+  addTag() {
+    if ((this.newCardForm.get('tags') as FormArray).length < 5) {
+      const fieldsArray = this.newCardForm.get('tags') as FormArray;
+      fieldsArray.push(this.fb.control('', Validators.required));
+    }
+  }
+
+  getControls() {
+    return (this.newCardForm.get('tags') as FormArray).controls;
   }
 
   get title() {

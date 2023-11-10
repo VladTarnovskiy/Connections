@@ -1,4 +1,4 @@
-.ng-invalid:not(form) {
+.ng-invalid:not(form, .form__arr) {
   border-left: 2px solid #ef4444;
 }
 

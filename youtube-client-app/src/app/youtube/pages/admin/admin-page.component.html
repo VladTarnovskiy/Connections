@@ -77,17 +77,44 @@
       The date is invalid.
     </div>
   </div>
+  <div class="mt-4">
+    <label for="tags" class="text-gray-500 text-sm">Tags</label>
+    <button
+      (click)="addTag()"
+      class="select-none px-1 ml-1 text-md rounded-lg bg-red-500 font-sans font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+    >
+      +
+    </button>
+
+    <div
+      formArrayName="tags"
+      class="form__arr"
+      *ngFor="let field of getControls(); let i = index"
+    >
+      <input
+        type="text"
+        id="tags"
+        [formControlName]="i"
+        placeholder="Tag {{ i + 1 }}"
+        class="bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none mt-2"
+        required
+      />
+      <div *ngIf="field?.errors?.['required']" class="invalid__message">
+        Please enter a tag.
+      </div>
+    </div>
+  </div>
   <button
     type="button"
     (click)="onReset()"
-    class="select-none mt-4 rounded-lg ml-auto bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+    class="select-none mt-4 rounded-lg ml-auto bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
   >
     Reset
   </button>
   <button
     type="submit"
-    class="select-none mt-4 rounded-lg ml-auto bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+    class="select-none mt-4 rounded-lg ml-auto bg-red-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
   >
-    Login
+    Create
   </button>
 </form>

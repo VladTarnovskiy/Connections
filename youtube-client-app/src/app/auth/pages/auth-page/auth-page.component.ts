@@ -18,7 +18,7 @@ export class AuthPageComponent {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    public router: Router
+    public router: Router,
   ) {}
 
   onSubmit() {
