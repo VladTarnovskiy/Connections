@@ -15,9 +15,14 @@
       >
         <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
       </button>
-      <a routerLink="login" class="ml-4" (click)="logout()"
-        ><app-button>{{ textButton ? "Logout" : "Login" }}</app-button></a
-      >
+      <div>
+        <a routerLink="youtube/admin" class="ml-4">
+          <app-button>Admin</app-button>
+        </a>
+        <a routerLink="login" class="ml-4" (click)="logout()"
+          ><app-button>{{ textButton ? "Logout" : "Login" }}</app-button>
+        </a>
+      </div>
     </div>
   </div>
 </header>

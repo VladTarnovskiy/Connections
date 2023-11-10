@@ -1,0 +1,93 @@
+<form
+  [formGroup]="newCardForm"
+  (ngSubmit)="onSubmit()"
+  class="w-[430px] px-6 py-8 flex flex-col justify-center m-auto bg-gray-100 rounded-xl"
+>
+  <div class="form__title mb-7 text-2xl font-bold">Login</div>
+  <div>
+    <label for="title" class="text-gray-500 text-sm">Title</label>
+    <input
+      type="text"
+      id="title"
+      formControlName="title"
+      class="bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+      required
+    />
+    <div *ngIf="title?.errors?.['required']" class="invalid__message">
+      Please enter a title.
+    </div>
+    <div *ngIf="title?.errors?.['minlength']" class="invalid__message">
+      The title is too short.
+    </div>
+    <div *ngIf="title?.errors?.['maxlength']" class="invalid__message">
+      The title is too long.
+    </div>
+  </div>
+  <div class="mt-4">
+    <label for="description" class="text-gray-500 text-sm">Description</label>
+    <input
+      type="text"
+      id="description"
+      formControlName="description"
+      class="bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+    />
+    <div *ngIf="description?.errors?.['maxlength']" class="invalid__message">
+      The description is too long.
+    </div>
+  </div>
+  <div class="mt-4">
+    <label for="img" class="text-gray-500 text-sm">Img</label>
+    <input
+      type="text"
+      id="img"
+      formControlName="img"
+      class="bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+      required
+    />
+    <div *ngIf="img?.errors?.['required']" class="invalid__message">
+      Please enter a link to the image.
+    </div>
+  </div>
+  <div class="mt-4">
+    <label for="linkVideo" class="text-gray-500 text-sm">Link video</label>
+    <input
+      type="text"
+      id="linkVideo"
+      formControlName="linkVideo"
+      class="bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+      required
+    />
+    <div *ngIf="linkVideo?.errors?.['required']" class="invalid__message">
+      Please enter a link to the video.
+    </div>
+  </div>
+  <div class="mt-4">
+    <label for="date" class="text-gray-500 text-sm">Creation date</label>
+    <input
+      type="date"
+      id="date"
+      formControlName="date"
+      class="bg-gray-200 w-[382px] min-h-[44px] p-2 outline-none"
+      required
+    />
+    <div *ngIf="date?.errors?.['required']" class="invalid__message">
+      Please enter a creation date.
+    </div>
+    <div *ngIf="date?.errors?.['invalidData']" class="invalid__message">
+      The date is invalid.
+    </div>
+  </div>
+  <button
+    type="button"
+    (click)="onReset()"
+    class="select-none mt-4 rounded-lg ml-auto bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+  >
+    Reset
+  </button>
+  <button
+    type="submit"
+    class="select-none mt-4 rounded-lg ml-auto bg-red-500 py-3 px-6 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
+  >
+    Login
+  </button>
+</form>

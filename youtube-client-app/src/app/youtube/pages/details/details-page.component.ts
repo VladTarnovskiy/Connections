@@ -14,7 +14,7 @@ export class DetailsPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private service: SearchDataService,
+    private service: SearchDataService
   ) {}
 
   ngOnInit() {

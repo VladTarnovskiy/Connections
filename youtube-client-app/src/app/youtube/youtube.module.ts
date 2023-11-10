@@ -6,6 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { NotfoundPageComponent } from './pages/notfound/notfound-page.component';
 import { DetailsPageComponent } from './pages/details/details-page.component';
 import { YouTubeRouterModule } from './youtube-router.module';
+import { AdminPageComponent } from './pages/admin/admin-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,7 +16,8 @@ import { YouTubeRouterModule } from './youtube-router.module';
     CardColorDirective,
     NotfoundPageComponent,
     DetailsPageComponent,
+    AdminPageComponent,
   ],
-  imports: [SharedModule, YouTubeRouterModule],
+  imports: [SharedModule, YouTubeRouterModule, ReactiveFormsModule],
 })
 export class YoutubeModule {}
