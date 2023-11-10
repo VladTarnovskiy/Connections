@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "npx ng deploy --base-href=https://rolling-scopes-school.github.io/vladtarnovskiy-ANGULAR2023Q4/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "lint": "ng lint"
@@ -37,7 +38,7 @@
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
-    "angular-cli-ghpages": "^0.6.2",
+    "angular-cli-ghpages": "1.0.7",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.49.0",
     "eslint-config-airbnb-base": "^15.0.0",
