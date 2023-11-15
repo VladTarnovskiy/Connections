@@ -5,10 +5,9 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import {
-  Subject, debounceTime, distinctUntilChanged, filter,
-} from 'rxjs';
-import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
+import { Store } from '@ngrx/store';
+import { Subject, debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 @Component({
   selector: 'app-search-bar',
@@ -22,7 +21,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   filterButton = false;
 
-  constructor(private dataService: SearchDataService) {}
+  constructor(private store: Store) {}
 
   onSearch(searchValue: string) {
     this.searchTerms.next(searchValue);
@@ -33,9 +32,11 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       .pipe(
         filter((data) => data.length > 2),
         debounceTime(1000),
-        distinctUntilChanged(),
+        distinctUntilChanged()
       )
-      .subscribe((searchValue) => this.dataService.getCards(searchValue));
+      .subscribe((searchValue) =>
+        this.store.dispatch(CardsActions.FetchCards({ searchValue }))
+      );
   }
 
   turnSortBlock() {

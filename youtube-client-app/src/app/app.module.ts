@@ -5,17 +5,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
-import { StoreModule } from '@ngrx/store';
+import { StateModule } from './redux/state.module';
 
 @NgModule({
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   imports: [
+    StateModule,
     BrowserModule,
     BrowserAnimationsModule,
     CoreModule,
     HttpClientModule,
-    StoreModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

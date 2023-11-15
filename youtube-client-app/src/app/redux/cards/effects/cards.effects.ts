@@ -1,12 +1,14 @@
+import { SortData } from './../../../youtube/models/sort';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
 import * as CardsActions from '../actions/cards.action';
 
 import { catchError, map, of, exhaustMap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
-export class UserEffects {
+export class CardsEffects {
   constructor(
     private actions$: Actions,
     private userService: SearchDataService
@@ -15,10 +17,13 @@ export class UserEffects {
   fetchUser$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CardsActions.FetchCards),
-      exhaustMap(
-        this.userService.fetchUser().pipe(
-          map((cards) => CardsActions.FetchCardsSuccess({ cards })),
-          catchError(() => of(CardsActions.FetchCardsFailed()))
+      exhaustMap(({ searchValue }) =>
+        this.userService.getCards(searchValue).pipe(
+          map((cardsInfo) => CardsActions.FetchCardsSuccess({ cardsInfo })),
+          catchError((error: HttpErrorResponse) => {
+            const handleError = this.userService.handleError(error);
+            return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          })
         )
       )
     )

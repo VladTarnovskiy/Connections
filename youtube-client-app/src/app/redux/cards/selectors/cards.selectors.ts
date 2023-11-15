@@ -1,10 +1,10 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CardsState } from '../reducers/cards.reducer';
 
-export const getCardsStore = createFeatureSelector<CardsState>('cards');
+export const getCardsStore = createFeatureSelector<CardsState>('cardsInfo');
 export const getCurrentCards = createSelector(
   getCardsStore,
-  (state: CardsState) => state.cards
+  (state: CardsState) => state.cardsInfo?.items
 );
 export const getIsFetched = createSelector(
   getCardsStore,

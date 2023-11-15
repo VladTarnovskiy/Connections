@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
+import { Store } from '@ngrx/store';
+import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 enum Position {
   ASC = 'asc',
@@ -18,7 +19,7 @@ export class SortComponent {
 
   filterString = '';
 
-  constructor(private dataService: SearchDataService) {}
+  constructor(private store: Store) {}
 
   sortByDate() {
     if (this.sortByDateDir === Position.DESC) {
@@ -26,7 +27,11 @@ export class SortComponent {
     } else {
       this.sortByDateDir = Position.DESC;
     }
-    this.dataService.sort({ sortBy: 'date', direction: this.sortByDateDir });
+    this.store.dispatch(
+      CardsActions.SortCards({
+        sortData: { sortBy: 'date', direction: this.sortByDateDir },
+      })
+    );
   }
 
   sortByView() {
@@ -35,11 +40,18 @@ export class SortComponent {
     } else {
       this.sortByViewDir = Position.DESC;
     }
-
-    this.dataService.sort({ sortBy: 'view', direction: this.sortByViewDir });
+    this.store.dispatch(
+      CardsActions.SortCards({
+        sortData: { sortBy: 'view', direction: this.sortByViewDir },
+      })
+    );
   }
 
   filterByString() {
-    this.dataService.filterByString(this.filterString.toLowerCase());
+    this.store.dispatch(
+      CardsActions.FilterCards({
+        filter: this.filterString.toLowerCase(),
+      })
+    );
   }
 }

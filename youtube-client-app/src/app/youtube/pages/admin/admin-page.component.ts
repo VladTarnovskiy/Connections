@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ValidateData } from './validators/validators';
+import { Store } from '@ngrx/store';
+import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 @Component({
   selector: 'app-admin-page',
@@ -21,11 +23,20 @@ export class AdminPageComponent {
     tags: this.fb.array([this.fb.control('', Validators.required)]),
   });
 
-  constructor(private fb: FormBuilder, public router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    public router: Router,
+    private store: Store
+  ) {}
 
   onSubmit() {
     if (this.newCardForm.status === 'VALID') {
       this.router.navigate(['/youtube']);
+      this.store.dispatch(
+        CardsActions.AddCustomCard({
+          customCard: this.newCardForm.getRawValue(),
+        })
+      );
     }
   }
 
