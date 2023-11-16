@@ -8,6 +8,7 @@ import { NotfoundPageComponent } from './pages/notfound/notfound-page.component'
 import { DetailsPageComponent } from './pages/details/details-page.component';
 import { YouTubeRouterModule } from './youtube-router.module';
 import { AdminPageComponent } from './pages/admin/admin-page.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AdminPageComponent } from './pages/admin/admin-page.component';
     NotfoundPageComponent,
     DetailsPageComponent,
     AdminPageComponent,
+    PaginationComponent,
   ],
   imports: [SharedModule, YouTubeRouterModule, ReactiveFormsModule],
 })
