@@ -10,7 +10,7 @@ import * as FavCardsActions from 'src/app/redux/favorite/actions/fav-cards.actio
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
   @Input() card!: Card;
   favCards$: Observable<Card[] | null> = this.store.select(getFavoriteCards);
   isFavorite: boolean = false;
@@ -35,9 +35,9 @@ export class CardComponent implements OnInit {
       });
   }
 
-  // ngOnDestroy() {
-  //   this.subscription.unsubscribe();
-  // }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 
   addFavorite() {
     this.store.dispatch(FavCardsActions.AddFavCard({ newCard: this.card }));

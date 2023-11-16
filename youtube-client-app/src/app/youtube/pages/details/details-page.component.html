@@ -1,4 +1,4 @@
-<div *ngIf="card | async as card">
+<div *ngIf="card$ | async as card">
   <div
     [appCardColor]="card.snippet.publishedAt"
     class="flex relative flex-row mt-4 m-auto text-gray-700 bg-white shadow-xl max-w-[1200px] w-full min-h-[460px] rounded-xl bg-clip-border border-b-4 box-border"
@@ -15,7 +15,7 @@
     <div class="p-6 pt-3">
       <div class="flex justify-end">
         <ng-container *ngIf="isFavorite; else noFavorite">
-          <button (click)="removeFavorite()">
+          <button (click)="removeFavorite(card.id)">
             <img
               src="assets/heart-fill.svg"
               class="w-6 h-6"
@@ -23,7 +23,7 @@
             /></button
         ></ng-container>
         <ng-template #noFavorite>
-          <button (click)="addFavorite()">
+          <button (click)="addFavorite(card)">
             <img
               src="assets/heart-nofill.svg"
               class="w-6 h-6"
@@ -69,15 +69,11 @@
         </div>
       </div>
     </div>
-    <a routerLink="/"
-      ><button
-        class="absolute left-[-42px] w-10 h-10 bg-transparent rounded-l-md shadow-lg hover:shadow-red-500/40"
-      >
-        <img
-          src="assets/arrow-sm-left.svg"
-          alt="arrow"
-          class="w-10 h-10"
-        /></button
-    ></a>
+    <button
+      class="absolute left-[-42px] w-10 h-10 bg-transparent rounded-l-md shadow-lg hover:shadow-red-500/40"
+      appHistoryBack
+    >
+      <img src="assets/arrow-sm-left.svg" alt="arrow" class="w-10 h-10" />
+    </button>
   </div>
 </div>

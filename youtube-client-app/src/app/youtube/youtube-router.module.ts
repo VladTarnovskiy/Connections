@@ -10,7 +10,7 @@ const routes: Routes = [
     component: YouTubePageComponent,
   },
   {
-    path: 'details/:id',
+    path: 'details/:detailsId',
     component: DetailsPageComponent,
   },
   {
