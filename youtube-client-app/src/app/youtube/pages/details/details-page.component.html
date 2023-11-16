@@ -13,6 +13,26 @@
       />
     </div>
     <div class="p-6 pt-3">
+      <div class="flex justify-end">
+        <ng-container *ngIf="isFavorite; else noFavorite">
+          <button (click)="removeFavorite()">
+            <img
+              src="assets/heart-fill.svg"
+              class="w-6 h-6"
+              alt="heart-nofill"
+            /></button
+        ></ng-container>
+        <ng-template #noFavorite>
+          <button (click)="addFavorite()">
+            <img
+              src="assets/heart-nofill.svg"
+              class="w-6 h-6"
+              alt="heart-fill"
+            />
+          </button>
+        </ng-template>
+      </div>
+
       <div class="flex justify-between items-center mb-[35px]">
         <div
           class="title mr-2 font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blue-gray-900"

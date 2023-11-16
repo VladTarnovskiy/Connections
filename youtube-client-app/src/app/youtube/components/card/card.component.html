@@ -38,6 +38,18 @@
   </div>
   <div class="p-6 pt-0 flex justify-between items-center">
     <a [routerLink]="['./details', card.id]"><app-button>More</app-button></a>
-    <img src="assets/heart-nofill.svg" class="w-6 h-6" alt="heart-nofill" />
+    <ng-container *ngIf="isFavorite; else noFavorite"
+      ><button (click)="removeFavorite()">
+        <img
+          src="assets/heart-fill.svg"
+          class="w-6 h-6"
+          alt="heart-nofill"
+        /></button
+    ></ng-container>
+    <ng-template #noFavorite>
+      <button (click)="addFavorite()">
+        <img src="assets/heart-nofill.svg" class="w-6 h-6" alt="heart-fill" />
+      </button>
+    </ng-template>
   </div>
 </div>

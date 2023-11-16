@@ -7,13 +7,13 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const KEY = 'AIzaSyCwWsTBJtwwuJh1VvJZPi7zIhljkTKzaRs';
+const KEY = 'AIzaSyAd2Q5HTi9GaL7wZgdOf2bTHr0QtUUeU7g';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   intercept(
     req: HttpRequest<unknown>,
-    next: HttpHandler,
+    next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     const authReq = req.clone({
       params: req.params.set('key', KEY),
