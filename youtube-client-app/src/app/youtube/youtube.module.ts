@@ -21,5 +21,6 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     PaginationComponent,
   ],
   imports: [SharedModule, YouTubeRouterModule, ReactiveFormsModule],
+  exports: [CardComponent],
 })
 export class YoutubeModule {}

@@ -1,17 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FavCardComponent } from './components/fav-card/fav-card.component';
 import { FavoritePageComponent } from './pages/favorite-page/favorite-page.component';
-
-
+import { YoutubeModule } from '../youtube/youtube.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [
-    FavCardComponent,
-    FavoritePageComponent
-  ],
-  imports: [
-    CommonModule
-  ]
+  declarations: [FavoritePageComponent],
+  imports: [YoutubeModule, SharedModule],
 })
-export class FavoriteModule { }
+export class FavoriteModule {}

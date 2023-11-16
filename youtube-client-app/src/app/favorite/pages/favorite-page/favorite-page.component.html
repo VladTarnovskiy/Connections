@@ -1,1 +1,4 @@
-<p>favorite-page works!</p>
+<div class="fav-cards__container mt-14">
+  <app-card *ngFor="let card of favCards$ | async" [card]="card"></app-card>
+</div>
+y
