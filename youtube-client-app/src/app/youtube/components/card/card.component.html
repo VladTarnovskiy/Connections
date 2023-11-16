@@ -36,7 +36,8 @@
       {{ card.snippet.title }}
     </div>
   </div>
-  <div class="p-6 pt-0">
+  <div class="p-6 pt-0 flex justify-between items-center">
     <a [routerLink]="['./details', card.id]"><app-button>More</app-button></a>
+    <img src="assets/heart-nofill.svg" class="w-6 h-6" alt="heart-nofill" />
   </div>
 </div>

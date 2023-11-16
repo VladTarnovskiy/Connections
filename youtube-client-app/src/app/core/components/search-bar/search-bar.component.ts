@@ -6,7 +6,13 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Subject, debounceTime, distinctUntilChanged, filter } from 'rxjs';
+import {
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  BehaviorSubject,
+} from 'rxjs';
 import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 @Component({
@@ -17,7 +23,7 @@ import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() sortBlock = new EventEmitter<boolean>();
 
-  private searchTerms = new Subject<string>();
+  private searchTerms = new BehaviorSubject<string>('cat');
 
   filterButton = false;
 
