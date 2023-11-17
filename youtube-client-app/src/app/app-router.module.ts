@@ -7,14 +7,12 @@ import { FavoritePageComponent } from './favorite/pages/favorite-page/favorite-p
 const routes: Routes = [
   {
     path: 'youtube',
-    loadChildren: () =>
-      import('./youtube/youtube.module').then((m) => m.YoutubeModule),
+    loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule),
     canActivate: [authGuard],
   },
   {
     path: 'favorite',
-    loadChildren: () =>
-      import('./favorite/favorite.module').then((m) => m.FavoriteModule),
+    loadChildren: () => import('./favorite/favorite.module').then((m) => m.FavoriteModule),
     canActivate: [authGuard],
     component: FavoritePageComponent,
   },

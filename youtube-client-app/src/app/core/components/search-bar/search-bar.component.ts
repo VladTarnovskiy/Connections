@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  Subject,
   debounceTime,
   distinctUntilChanged,
   filter,
@@ -38,11 +37,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       .pipe(
         filter((data) => data.length > 2),
         debounceTime(1000),
-        distinctUntilChanged()
+        distinctUntilChanged(),
       )
-      .subscribe((searchValue) =>
-        this.store.dispatch(CardsActions.FetchCards({ searchValue }))
-      );
+      .subscribe((searchValue) => this.store.dispatch(CardsActions.FetchCards({ searchValue })));
   }
 
   turnSortBlock() {

@@ -5,20 +5,20 @@ const actionSource = '[Favorite]';
 
 export const FavCards = createAction(
   `${actionSource} Fav Cards`,
-  props<{ favCards: Card[] }>()
+  props<{ favCards: Card[] }>(),
 );
 
 export const AddFavCard = createAction(
   `${actionSource} Add Fav Card`,
-  props<{ newCard: Card }>()
+  props<{ newCard: Card }>(),
 );
 
 export const RemoveFavCard = createAction(
   `${actionSource} Remove Fav Card`,
-  props<{ key: string }>()
+  props<{ key: string }>(),
 );
 
 export const FavCardsFailed = createAction(
   `${actionSource} Fav Cards Failed`,
-  props<{ error: string }>()
+  props<{ error: string }>(),
 );

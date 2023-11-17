@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ValidateData } from './validators/validators';
 import { Store } from '@ngrx/store';
 import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 import { v4 as uuidv4 } from 'uuid';
+import { ValidateData } from './validators/validators';
 
 @Component({
   selector: 'app-admin-page',
@@ -27,7 +27,7 @@ export class AdminPageComponent {
   constructor(
     private fb: FormBuilder,
     public router: Router,
-    private store: Store
+    private store: Store,
   ) {}
 
   onSubmit() {
@@ -39,7 +39,7 @@ export class AdminPageComponent {
             ...this.newCardForm.getRawValue(),
             id: uuidv4() as string,
           },
-        })
+        }),
       );
     }
   }

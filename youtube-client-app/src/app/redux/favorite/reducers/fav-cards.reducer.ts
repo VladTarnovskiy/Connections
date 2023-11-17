@@ -20,11 +20,9 @@ export const reducer = createReducer(
     favCards,
   })),
   on(FavCardsActions.AddFavCard, (state, { newCard }) => {
-    console.log(state.favCards);
-
     if (state.favCards !== null) {
       const havFav = state.favCards?.find(
-        (currentCard: Card) => currentCard.id === newCard.id
+        (currentCard: Card) => currentCard.id === newCard.id,
       );
       if (!havFav) {
         const newCards = state.favCards.concat(newCard);
@@ -32,25 +30,23 @@ export const reducer = createReducer(
           ...state,
           favCards: newCards,
         };
-      } else {
-        return {
-          ...state,
-        };
       }
-    } else {
       return {
         ...state,
-        favCards: [newCard],
       };
     }
+    return {
+      ...state,
+      favCards: [newCard],
+    };
   }),
   on(FavCardsActions.RemoveFavCard, (state, { key }) => {
     const havFav = state.favCards?.find(
-      (currentCard) => currentCard.id === key
+      (currentCard) => currentCard.id === key,
     );
     if (havFav) {
       const newFavCards = JSON.parse(JSON.stringify(state.favCards)).filter(
-        (favCard: Card) => favCard.id !== key
+        (favCard: Card) => favCard.id !== key,
       );
       return {
         ...state,
@@ -64,5 +60,5 @@ export const reducer = createReducer(
   on(FavCardsActions.FavCardsFailed, (state, { error }) => ({
     ...state,
     error,
-  }))
+  })),
 );

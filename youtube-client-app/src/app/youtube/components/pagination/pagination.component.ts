@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { PagesInfo } from 'src/app/redux/cards/reducers/cards.reducer';
+import { PagesInfo } from 'src/app/redux/cards/models/page';
 import {
   selectPage,
   selectPageInfo,
@@ -15,9 +15,13 @@ import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 })
 export class PaginationComponent implements OnInit, OnDestroy {
   pagesInfo$: Observable<PagesInfo> = this.store.select(selectPageInfo);
+
   page$: Observable<number> = this.store.select(selectPage);
+
   pagesInfo!: PagesInfo;
+
   subscription!: Subscription;
+
   page!: number;
 
   constructor(private store: Store) {}
@@ -27,34 +31,33 @@ export class PaginationComponent implements OnInit, OnDestroy {
       this.pagesInfo = pagesInfo;
     });
 
-    const childSubscription = this.page$.subscribe(
-      (storePage) => (this.page = storePage)
-    );
+    const childSubscription = this.page$.subscribe((storePage) => {
+      this.page = storePage;
+    });
 
     this.subscription.add(childSubscription);
   }
 
   nextPage() {
     if (this.pagesInfo.nextPage) {
-      console.log(this.pagesInfo.nextPage);
       this.store.dispatch(
-        CardsActions.ChangePage({
+        CardsActions.ChangeCurrentPage({
           pageToken: this.pagesInfo.nextPage,
           searchValue: this.pagesInfo.searchValue,
           page: (this.page += 1),
-        })
+        }),
       );
     }
   }
+
   prevPage() {
     if (this.pagesInfo.prevPage) {
-      console.log(this.pagesInfo.prevPage);
       this.store.dispatch(
-        CardsActions.ChangePage({
+        CardsActions.ChangeCurrentPage({
           pageToken: this.pagesInfo.prevPage,
           searchValue: this.pagesInfo.searchValue,
           page: (this.page -= 1),
-        })
+        }),
       );
     }
   }

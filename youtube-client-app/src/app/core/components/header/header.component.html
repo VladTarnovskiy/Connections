@@ -9,16 +9,21 @@
         />
       </a>
     </div>
-    <app-search-bar (sortBlock)="turnSortBlock($event)"></app-search-bar>
+    <ng-container *ngIf="logIn">
+      <app-search-bar (sortBlock)="turnSortBlock($event)"></app-search-bar>
+    </ng-container>
     <div class="header__profile flex justify-center items-center">
-      <div class="mr-2">Your name</div>
       <div class="flex justify-center items-center mr-4">
         <ng-container *ngIf="logIn">
-          <button
-            class="h-10 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
-          >
-            <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
-          </button>
+          <div class="flex justify-center items-center">
+            <div class="mr-1">Your name</div>
+            <button
+              class="h-10 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+            >
+              <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
+            </button>
+          </div>
+
           <a routerLink="youtube/admin" class="ml-4">
             <app-button>Admin</app-button>
           </a>

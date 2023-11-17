@@ -1,14 +1,15 @@
-import { CustomCard } from './../../../youtube/models/customCard.model';
 import { createReducer, on } from '@ngrx/store';
 import { CardsInfo } from 'src/app/youtube/models/card.model';
-import * as CardsActions from '../actions/cards.action';
 import { SortData } from 'src/app/youtube/models/sort';
+import * as CardsActions from '../actions/cards.action';
+import { CustomCard } from '../../../youtube/models/customCard.model';
 import {
   sortByDateAsc,
   sortByDateDesc,
   sortByViewAsc,
   sortByViewDesc,
 } from '../utils/sort';
+import { PagesInfo } from '../models/page';
 
 export interface CardsState {
   cardsInfo: CardsInfo | null;
@@ -20,20 +21,13 @@ export interface CardsState {
   page: number;
 }
 
-export interface PagesInfo {
-  nextPage: string | null;
-  prevPage: string | null;
-  searchValue: string;
-}
-
 const initialCustomCards = (): CustomCard[] | null => {
   const storageCustomCards = localStorage.getItem('customCards');
   if (storageCustomCards) {
     const customCards = JSON.parse(storageCustomCards) as CustomCard[];
     return customCards;
-  } else {
-    return null;
   }
+  return null;
 };
 
 export const initialState: CardsState = {
@@ -91,33 +85,27 @@ export const reducer = createReducer(
       return {
         ...state,
         cardsInfo,
-        isLoading: true,
-      };
-    } else {
-      return {
-        ...state,
       };
     }
+    return {
+      ...state,
+    };
   }),
   on(CardsActions.FilterCards, (state, { filter }) => {
     if (state.cardsInfo) {
-      const filteredCardsData = state.cardsInfo.items.filter((card) =>
-        card.snippet.title.toLowerCase().includes(filter)
-      );
+      const filteredCardsData = state.cardsInfo.items.filter((card) => card.snippet.title.toLowerCase().includes(filter));
       const cardsInfo: CardsInfo = {
-        ...state.cardsInfo!,
+        ...state.cardsInfo,
         items: filteredCardsData,
       };
       return {
         ...state,
         cardsInfo,
-        isLoading: true,
-      };
-    } else {
-      return {
-        ...state,
       };
     }
+    return {
+      ...state,
+    };
   }),
 
   on(CardsActions.SetPagesInfo, (state, { pagesInfo }) => ({
@@ -125,7 +113,7 @@ export const reducer = createReducer(
     pagesInfo,
     isLoading: true,
   })),
-  on(CardsActions.ChangePage, (state, { page }) => ({
+  on(CardsActions.ChangeCurrentPage, (state, { page }) => ({
     ...state,
     page,
     isLoading: true,
@@ -137,7 +125,6 @@ export const reducer = createReducer(
     } else {
       newCustomCard = [customCard];
     }
-    console.log(customCard);
     return {
       ...state,
       customCards: newCustomCard,
@@ -146,7 +133,7 @@ export const reducer = createReducer(
   on(CardsActions.RemoveCustomCard, (state, { customCardId }) => {
     if (state.customCards) {
       const newCustomCard = state.customCards.filter(
-        (customCard) => customCard.id !== customCardId
+        (customCard) => customCard.id !== customCardId,
       );
       return {
         ...state,
@@ -156,5 +143,5 @@ export const reducer = createReducer(
     return {
       ...state,
     };
-  })
+  }),
 );

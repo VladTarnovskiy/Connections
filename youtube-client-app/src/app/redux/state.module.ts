@@ -16,7 +16,7 @@ import { SharedModule } from '../shared/shared.module';
         favoriteCards: fromFavorites.reducer,
         router: routerReducer,
       },
-      {}
+      {},
     ),
     EffectsModule.forRoot([CardsEffects]),
     StoreRouterConnectingModule.forRoot(),

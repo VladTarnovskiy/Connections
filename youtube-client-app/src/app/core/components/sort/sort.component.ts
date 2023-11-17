@@ -30,7 +30,7 @@ export class SortComponent {
     this.store.dispatch(
       CardsActions.SortCards({
         sortData: { sortBy: 'date', direction: this.sortByDateDir },
-      })
+      }),
     );
   }
 
@@ -43,7 +43,7 @@ export class SortComponent {
     this.store.dispatch(
       CardsActions.SortCards({
         sortData: { sortBy: 'view', direction: this.sortByViewDir },
-      })
+      }),
     );
   }
 
@@ -51,7 +51,7 @@ export class SortComponent {
     this.store.dispatch(
       CardsActions.FilterCards({
         filter: this.filterString.toLowerCase(),
-      })
+      }),
     );
   }
 }

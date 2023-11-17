@@ -8,7 +8,7 @@ describe('PaginationComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PaginationComponent]
+      declarations: [PaginationComponent],
     });
     fixture = TestBed.createComponent(PaginationComponent);
     component = fixture.componentInstance;

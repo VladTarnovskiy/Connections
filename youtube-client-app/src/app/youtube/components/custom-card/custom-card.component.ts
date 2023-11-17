@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { CustomCard } from '../../models/customCard.model';
 import { Store } from '@ngrx/store';
 import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
+import { CustomCard } from '../../models/customCard.model';
 
 @Component({
   selector: 'app-custom-card',
