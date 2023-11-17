@@ -3,19 +3,24 @@ import { CardsState } from '../reducers/cards.reducer';
 import { selectRouteParams } from '../../router/selectors/cards.selectors';
 import { Card } from 'src/app/youtube/models/card.model';
 
-export const getCardsStore = createFeatureSelector<CardsState>('cardsInfo');
-export const getCurrentCards = createSelector(
-  getCardsStore,
+export const selectCardsStore = createFeatureSelector<CardsState>('cardsInfo');
+export const selectCurrentCards = createSelector(
+  selectCardsStore,
   (state: CardsState) => state.cardsInfo?.items
 );
 
-export const getIsFetched = createSelector(
-  getCardsStore,
-  (state: CardsState) => state.isFetched
+export const selectPageInfo = createSelector(
+  selectCardsStore,
+  (state: CardsState) => state.pagesInfo
+);
+
+export const selectLoading = createSelector(
+  selectCardsStore,
+  (state: CardsState) => state.isLoading
 );
 
 export const selectCard = createSelector(
-  getCurrentCards,
+  selectCurrentCards,
   selectRouteParams,
   (cards, { detailsId }) => {
     if (cards) {

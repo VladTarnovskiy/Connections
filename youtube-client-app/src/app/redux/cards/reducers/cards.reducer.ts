@@ -1,7 +1,6 @@
 import { CustomCard } from './../../../youtube/models/customCard.model';
 import { createReducer, on } from '@ngrx/store';
 import { CardsInfo } from 'src/app/youtube/models/card.model';
-
 import * as CardsActions from '../actions/cards.action';
 import { SortData } from 'src/app/youtube/models/sort';
 import {
@@ -14,20 +13,28 @@ import {
 export interface CardsState {
   cardsInfo: CardsInfo | null;
   customCards: CustomCard[] | null;
-  searchValue: string;
-  isFetched: boolean;
   isLoading: boolean;
   error: string | null;
   sortData: SortData;
+  pagesInfo: PagesInfo;
+}
+
+export interface PagesInfo {
+  nextPage: string | null;
+  prevPage: string | null;
+  searchValue: string;
 }
 
 export const initialState: CardsState = {
   cardsInfo: null,
   customCards: null,
-  searchValue: '',
-  isFetched: false,
   isLoading: false,
   error: null,
+  pagesInfo: {
+    nextPage: null,
+    prevPage: null,
+    searchValue: '',
+  },
   sortData: {
     sortBy: '',
     direction: '',
@@ -40,6 +47,16 @@ export const reducer = createReducer(
     ...state,
     searchValue,
     isLoading: true,
+  })),
+  on(CardsActions.FetchCardsSuccess, (state, { cardsInfo }) => ({
+    ...state,
+    cardsInfo,
+    isLoading: false,
+  })),
+  on(CardsActions.FetchCardsFailed, (state, { error }) => ({
+    ...state,
+    error,
+    isLoading: false,
   })),
   on(CardsActions.SortCards, (state, { sortData }) => {
     if (state.cardsInfo) {
@@ -89,23 +106,16 @@ export const reducer = createReducer(
       };
     }
   }),
-  on(CardsActions.FetchCardsSuccess, (state, { cardsInfo }) => ({
-    ...state,
-    cardsInfo,
-    isFetched: true,
-    isLoading: false,
-  })),
-  on(CardsActions.FetchCardsFailed, (state, { error }) => ({
-    ...state,
-    error,
-    isFetched: true,
-    isLoading: false,
-  })),
-  on(CardsActions.ClearCardsData, (state) => ({
-    ...state,
-    cardsInfo: null,
-  })),
 
+  on(CardsActions.SetPagesInfo, (state, { pagesInfo }) => ({
+    ...state,
+    pagesInfo,
+    isLoading: true,
+  })),
+  on(CardsActions.ChangePage, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(CardsActions.AddCustomCard, (state, { customCard }) => {
     let newCustomCard = [];
     if (state.customCards) {

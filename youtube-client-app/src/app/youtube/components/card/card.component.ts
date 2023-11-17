@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription, find, from, map, switchMap } from 'rxjs';
-import { getFavoriteCards } from 'src/app/redux/favorite/selectors/fav-cards.selectors';
+import { selectFavoriteCards } from 'src/app/redux/favorite/selectors/fav-cards.selectors';
 import { Card } from 'src/app/youtube/models/card.model';
 import * as FavCardsActions from 'src/app/redux/favorite/actions/fav-cards.action';
 
@@ -12,7 +12,7 @@ import * as FavCardsActions from 'src/app/redux/favorite/actions/fav-cards.actio
 })
 export class CardComponent implements OnInit, OnDestroy {
   @Input() card!: Card;
-  favCards$: Observable<Card[] | null> = this.store.select(getFavoriteCards);
+  favCards$: Observable<Card[] | null> = this.store.select(selectFavoriteCards);
   isFavorite: boolean = false;
   subscription!: Subscription;
 

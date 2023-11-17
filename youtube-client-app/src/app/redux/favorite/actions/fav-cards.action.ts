@@ -22,7 +22,3 @@ export const FavCardsFailed = createAction(
   `${actionSource} Fav Cards Failed`,
   props<{ error: string }>()
 );
-
-export const ClearCardsData = createAction(
-  `${actionSource} Clear Fav Cards Data`
-);

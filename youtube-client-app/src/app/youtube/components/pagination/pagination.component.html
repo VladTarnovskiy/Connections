@@ -1,5 +1,6 @@
-<div class="flex justify-center text-2xl pb-5 pt-2">
+<div class="flex justify-center text-2xl pb-5 pt-6">
   <button
+    (click)="prevPage()"
     class="select-none rounded-md bg-red-500 p-1 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
   >
     <img
@@ -8,8 +9,9 @@
       class="w-7 h-7 mt-[-2px]"
     />
   </button>
-  <div class="mx-3 pt-[2px]">1</div>
+  <div class="mx-3 pt-[2px]">{{ page }}</div>
   <button
+    (click)="nextPage()"
     class="select-none rounded-md bg-red-500 p-1 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-red-500/20 transition-all hover:shadow-lg hover:shadow-red-500/40"
   >
     <img

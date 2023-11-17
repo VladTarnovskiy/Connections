@@ -1,6 +1,6 @@
 <div
   [appCardColor]="card.snippet.publishedAt"
-  class="relative flex flex-col text-gray-700 bg-white shadow-md w-96 rounded-xl bg-clip-border mb-6 border-b-4 box-border"
+  class="relative flex flex-col text-gray-700 h-full bg-white shadow-md w-96 rounded-xl bg-clip-border border-b-4 box-border"
 >
   <div
     class="relative h-56 mx-4 -mt-6 overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
@@ -23,7 +23,7 @@
       </div>
       <div class="activity__item flex justify-center mr-2">
         <img src=" assets/dislike.svg" alt="dislike" class="w-4 h-4 mr-1" />
-        <div class="activity__info">{{ card.statistics.dislikeCount }}</div>
+        <div class="activity__info">{{ card.statistics.favoriteCount }}</div>
       </div>
       <div class="activity__item flex justify-center mr-2">
         <img src="assets/comment.svg" alt="comment" class="w-4 h-4 mr-1" />
@@ -36,7 +36,7 @@
       {{ card.snippet.title }}
     </div>
   </div>
-  <div class="p-6 pt-0 flex justify-between items-center">
+  <div class="p-6 pt-0 mt-auto flex justify-between items-center">
     <a [routerLink]="['/youtube/details', card.id]"
       ><app-button>More</app-button></a
     >

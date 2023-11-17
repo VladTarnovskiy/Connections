@@ -2,6 +2,13 @@ import { CustomCard } from './../../../youtube/models/customCard.model';
 import { createAction, props } from '@ngrx/store';
 import { CardsInfo } from 'src/app/youtube/models/card.model';
 import { SortData } from 'src/app/youtube/models/sort';
+import { PagesInfo } from '../reducers/cards.reducer';
+
+type PageType = 'next' | 'prev';
+
+interface ChangePage {
+  type: PageType;
+}
 
 const actionSource = '[Cards]';
 
@@ -20,7 +27,15 @@ export const FetchCardsFailed = createAction(
   props<{ error: string }>()
 );
 
-export const ClearCardsData = createAction(`${actionSource} Clear Cards Data`);
+export const ChangePage = createAction(
+  `${actionSource} ChangePage`,
+  props<{ pageToken: string; searchValue: string }>()
+);
+
+export const SetPagesInfo = createAction(
+  `${actionSource} SetPagesInfo`,
+  props<{ pagesInfo: PagesInfo }>()
+);
 
 export const SortCards = createAction(
   `${actionSource} Sort Cards`,

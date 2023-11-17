@@ -64,9 +64,5 @@ export const reducer = createReducer(
   on(FavCardsActions.FavCardsFailed, (state, { error }) => ({
     ...state,
     error,
-  })),
-  on(FavCardsActions.ClearCardsData, (state) => ({
-    ...state,
-    favCards: null,
   }))
 );

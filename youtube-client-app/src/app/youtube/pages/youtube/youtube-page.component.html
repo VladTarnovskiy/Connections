@@ -1,4 +1,9 @@
-<div class="cards__container mt-14">
-  <app-card *ngFor="let card of cards$ | async" [card]="card"></app-card>
-</div>
-<app-pagination></app-pagination>
+<ng-container *ngIf="isLoading$ | async; else content">
+  <div class="w-full flex justify-center"><app-loader></app-loader></div>
+</ng-container>
+<ng-template #content>
+  <div class="cards__container mt-14">
+    <app-card *ngFor="let card of cards$ | async" [card]="card"></app-card>
+  </div>
+  <app-pagination *ngIf="cards$ | async"></app-pagination>
+</ng-template>

@@ -4,7 +4,7 @@ import { Card } from '../../models/card.model';
 import { Store } from '@ngrx/store';
 import * as FavCardsActions from 'src/app/redux/favorite/actions/fav-cards.action';
 import { selectCard } from 'src/app/redux/cards/selectors/cards.selectors';
-import { getFavoriteCards } from 'src/app/redux/favorite/selectors/fav-cards.selectors';
+import { selectFavoriteCards } from 'src/app/redux/favorite/selectors/fav-cards.selectors';
 
 @Component({
   selector: 'app-details',
@@ -15,7 +15,7 @@ export class DetailsPageComponent {
   isFavorite: boolean = false;
   card$: Observable<Card | null> = this.store.select(selectCard);
   cardId!: string;
-  favCards$: Observable<Card[] | null> = this.store.select(getFavoriteCards);
+  favCards$: Observable<Card[] | null> = this.store.select(selectFavoriteCards);
   subscription!: Subscription;
 
   constructor(private store: Store) {}

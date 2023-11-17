@@ -58,6 +58,7 @@ export interface SearchCardsInfo {
   kind: string;
   etag: string;
   nextPageToken: string;
+  prevPageToken: string;
   regionCode: string;
   pageInfo: SearchPageInfo;
   items: SearchCard[];

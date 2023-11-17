@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const KEY = 'AIzaSyAd2Q5HTi9GaL7wZgdOf2bTHr0QtUUeU7g';
+const KEY = 'AIzaSyA3HVbW6KQggRiqqxjqzxImada9IlHg390';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {

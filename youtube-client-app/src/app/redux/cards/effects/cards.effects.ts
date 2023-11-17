@@ -1,4 +1,3 @@
-import { SortData } from './../../../youtube/models/sort';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { SearchDataService } from 'src/app/youtube/services/search-data/search-data.service';
@@ -14,7 +13,7 @@ export class CardsEffects {
     private userService: SearchDataService
   ) {}
 
-  fetchUser$ = createEffect(() =>
+  fetchCards$ = createEffect(() =>
     this.actions$.pipe(
       ofType(CardsActions.FetchCards),
       exhaustMap(({ searchValue }) =>
@@ -29,14 +28,18 @@ export class CardsEffects {
     )
   );
 
-  clearData$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(CardsActions.ClearCardsData)
-        // tap(() => {
-        //   this.userService.clearToken();
-        // })
-      ),
-    { dispatch: false }
+  changePage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(CardsActions.ChangePage),
+      exhaustMap(({ pageToken, searchValue }) =>
+        this.userService.getCards(searchValue, pageToken).pipe(
+          map((cardsInfo) => CardsActions.FetchCardsSuccess({ cardsInfo })),
+          catchError((error: HttpErrorResponse) => {
+            const handleError = this.userService.handleError(error);
+            return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          })
+        )
+      )
+    )
   );
 }

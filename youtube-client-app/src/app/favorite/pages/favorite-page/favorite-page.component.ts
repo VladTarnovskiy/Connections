@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getFavoriteCards } from 'src/app/redux/favorite/selectors/fav-cards.selectors';
+import { selectFavoriteCards } from 'src/app/redux/favorite/selectors/fav-cards.selectors';
 import { Card } from 'src/app/youtube/models/card.model';
 
 @Component({
@@ -11,7 +11,7 @@ import { Card } from 'src/app/youtube/models/card.model';
 })
 export class FavoritePageComponent {
   cards!: Card[];
-  favCards$: Observable<Card[] | null> = this.store.select(getFavoriteCards);
+  favCards$: Observable<Card[] | null> = this.store.select(selectFavoriteCards);
 
   constructor(private store: Store) {}
 }

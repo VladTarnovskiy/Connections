@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, throwError, switchMap } from 'rxjs';
+import { catchError, map, throwError, switchMap, tap } from 'rxjs';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpParams,
 } from '@angular/common/http';
 import { CardsInfo, SearchCardsInfo } from '../../models/card.model';
+import { Store } from '@ngrx/store';
+import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +19,7 @@ export class SearchDataService {
   private statisticsURL =
     'https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: Store) {}
 
   getCard(id: number | string | null) {
     const options = { params: new HttpParams().set('id', String(id)) };
@@ -28,12 +30,31 @@ export class SearchDataService {
     );
   }
 
-  getCards(searchValue: string) {
-    const searchQuery = { params: new HttpParams().set('q', searchValue) };
+  getCards(searchValue: string, pageToken?: string) {
+    let searchQuery = { params: new HttpParams().set('q', searchValue) };
+    if (pageToken) {
+      searchQuery = {
+        params: new HttpParams()
+          .set('q', searchValue)
+          .set('pageToken', pageToken),
+      };
+    }
     return this.http.get<SearchCardsInfo>(this.cardsURL, searchQuery).pipe(
-      map((items) => {
+      tap((cardInfo) => console.log(cardInfo)),
+      tap((cardsInfo) =>
+        this.store.dispatch(
+          CardsActions.SetPagesInfo({
+            pagesInfo: {
+              nextPage: cardsInfo.nextPageToken,
+              prevPage: cardsInfo.prevPageToken,
+              searchValue,
+            },
+          })
+        )
+      ),
+      map((cardsInfo) => {
         let ids = '';
-        items.items.forEach((item) => {
+        cardsInfo.items.forEach((item) => {
           ids += `${item.id.videoId},`;
         });
         const options = {
@@ -44,8 +65,6 @@ export class SearchDataService {
       switchMap((httpOptions) =>
         this.http.get<CardsInfo>(this.statisticsURL, httpOptions)
       )
-      // ,
-      // catchError(this.handleError)
     );
   }
 
