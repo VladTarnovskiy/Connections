@@ -3,13 +3,13 @@
 </ng-container>
 <ng-template #content>
   <div class="cards__container mt-14">
-    <ng-container *ngIf="(page$ | async) === 1"
+    <ng-container *ngIf="page === 1"
       ><app-custom-card
         *ngFor="let card of customCards$ | async"
         [customCard]="card"
       ></app-custom-card
     ></ng-container>
-    <ng-container *ngIf="(page$ | async) === 1; else secondPage">
+    <ng-container *ngIf="page === 1; else secondPage">
       <ng-container *ngFor="let card of cards$ | async; index as i"
         ><app-card *ngIf="i < customCardsCount" [card]="card"></app-card
       ></ng-container>

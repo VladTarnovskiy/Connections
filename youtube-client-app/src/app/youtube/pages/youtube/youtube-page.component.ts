@@ -16,17 +16,20 @@ import { CustomCard } from '../../models/customCard.model';
   styleUrls: ['./youtube-page.component.scss'],
 })
 export class YouTubePageComponent implements OnDestroy, OnInit {
-  cards$: Observable<Card[] | undefined> = this.store.select(selectCurrentCards);
+  cards$: Observable<Card[] | undefined> =
+    this.store.select(selectCurrentCards);
 
   isLoading$: Observable<boolean> = this.store.select(selectLoading);
 
   page$: Observable<number> = this.store.select(selectPage);
 
-  customCards$: Observable<CustomCard[] | null> = this.store.select(selectCustomCards);
+  customCards$: Observable<CustomCard[] | null> =
+    this.store.select(selectCustomCards);
 
   customCardsCount!: number;
 
   subscription!: Subscription;
+  page: number = 1;
 
   constructor(private store: Store) {}
 
@@ -36,11 +39,18 @@ export class YouTubePageComponent implements OnDestroy, OnInit {
         this.customCardsCount = 20 - customCards.length;
       }
     });
+
+    const childSubscription = this.page$.subscribe((page) => {
+      this.page = page;
+    });
+
+    this.subscription.add(childSubscription);
   }
 
   ngOnDestroy() {
     const setLocalDataSubscription = this.customCards$.subscribe(
-      (customCards) => localStorage.setItem('customCards', JSON.stringify(customCards)),
+      (customCards) =>
+        localStorage.setItem('customCards', JSON.stringify(customCards))
     );
     this.subscription.unsubscribe();
     setLocalDataSubscription.unsubscribe();
