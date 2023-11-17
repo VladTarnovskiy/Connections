@@ -29,7 +29,6 @@ export class YouTubePageComponent implements OnDestroy, OnInit {
   customCardsCount!: number;
 
   subscription!: Subscription;
-  page: number = 1;
 
   constructor(private store: Store) {}
 
@@ -39,12 +38,6 @@ export class YouTubePageComponent implements OnDestroy, OnInit {
         this.customCardsCount = 20 - customCards.length;
       }
     });
-
-    const childSubscription = this.page$.subscribe((page) => {
-      this.page = page;
-    });
-
-    this.subscription.add(childSubscription);
   }
 
   ngOnDestroy() {
