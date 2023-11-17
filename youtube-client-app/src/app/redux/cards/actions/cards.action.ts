@@ -51,3 +51,8 @@ export const AddCustomCard = createAction(
   `${actionSource} Add Custom Card`,
   props<{ customCard: CustomCard }>()
 );
+
+export const RemoveCustomCard = createAction(
+  `${actionSource} Remove Custom Card`,
+  props<{ customCardId: string }>()
+);

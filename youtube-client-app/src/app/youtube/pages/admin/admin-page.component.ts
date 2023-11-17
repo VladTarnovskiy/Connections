@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ValidateData } from './validators/validators';
 import { Store } from '@ngrx/store';
 import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-admin-page',
@@ -34,7 +35,10 @@ export class AdminPageComponent {
       this.router.navigate(['/youtube']);
       this.store.dispatch(
         CardsActions.AddCustomCard({
-          customCard: this.newCardForm.getRawValue(),
+          customCard: {
+            ...this.newCardForm.getRawValue(),
+            id: uuidv4() as string,
+          },
         })
       );
     }

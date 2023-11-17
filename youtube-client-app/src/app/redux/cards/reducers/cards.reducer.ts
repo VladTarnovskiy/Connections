@@ -26,9 +26,19 @@ export interface PagesInfo {
   searchValue: string;
 }
 
+const initialCustomCards = (): CustomCard[] | null => {
+  const storageCustomCards = localStorage.getItem('customCards');
+  if (storageCustomCards) {
+    const customCards = JSON.parse(storageCustomCards) as CustomCard[];
+    return customCards;
+  } else {
+    return null;
+  }
+};
+
 export const initialState: CardsState = {
   cardsInfo: null,
-  customCards: null,
+  customCards: initialCustomCards(),
   isLoading: false,
   error: null,
   pagesInfo: {
@@ -131,6 +141,20 @@ export const reducer = createReducer(
     return {
       ...state,
       customCards: newCustomCard,
+    };
+  }),
+  on(CardsActions.RemoveCustomCard, (state, { customCardId }) => {
+    if (state.customCards) {
+      const newCustomCard = state.customCards.filter(
+        (customCard) => customCard.id !== customCardId
+      );
+      return {
+        ...state,
+        customCards: newCustomCard,
+      };
+    }
+    return {
+      ...state,
     };
   })
 );

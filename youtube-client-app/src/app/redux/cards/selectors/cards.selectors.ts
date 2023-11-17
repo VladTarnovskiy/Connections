@@ -24,6 +24,11 @@ export const selectPage = createSelector(
   (state: CardsState) => state.page
 );
 
+export const selectCustomCards = createSelector(
+  selectCardsStore,
+  (state: CardsState) => state.customCards
+);
+
 export const selectCard = createSelector(
   selectCurrentCards,
   selectRouteParams,

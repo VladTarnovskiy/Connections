@@ -5,4 +5,5 @@ export interface CustomCard {
   linkVideo: string | null;
   date: string | null;
   tags: (string | null)[];
+  id: string;
 }

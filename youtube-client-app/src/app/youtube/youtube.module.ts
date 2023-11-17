@@ -10,6 +10,7 @@ import { YouTubeRouterModule } from './youtube-router.module';
 import { AdminPageComponent } from './pages/admin/admin-page.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { HistoryBackDirective } from './directives/historyBack/history-back.directive';
+import { CustomCardComponent } from './components/custom-card/custom-card.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { HistoryBackDirective } from './directives/historyBack/history-back.dire
     AdminPageComponent,
     PaginationComponent,
     HistoryBackDirective,
+    CustomCardComponent,
   ],
   imports: [SharedModule, YouTubeRouterModule, ReactiveFormsModule],
   exports: [CardComponent],
