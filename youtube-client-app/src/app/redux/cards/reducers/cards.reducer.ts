@@ -13,7 +13,7 @@ import { PagesInfo } from '../models/page';
 
 export interface CardsState {
   cardsInfo: CardsInfo | null;
-  customCards: CustomCard[] | null;
+  customCards: CustomCard[];
   isLoading: boolean;
   error: string | null;
   sortData: SortData;
@@ -21,18 +21,9 @@ export interface CardsState {
   page: number;
 }
 
-const initialCustomCards = (): CustomCard[] | null => {
-  const storageCustomCards = localStorage.getItem('customCards');
-  if (storageCustomCards) {
-    const customCards = JSON.parse(storageCustomCards) as CustomCard[];
-    return customCards;
-  }
-  return null;
-};
-
 export const initialState: CardsState = {
   cardsInfo: null,
-  customCards: initialCustomCards(),
+  customCards: [],
   isLoading: false,
   error: null,
   pagesInfo: {
@@ -93,7 +84,9 @@ export const reducer = createReducer(
   }),
   on(CardsActions.FilterCards, (state, { filter }) => {
     if (state.cardsInfo) {
-      const filteredCardsData = state.cardsInfo.items.filter((card) => card.snippet.title.toLowerCase().includes(filter));
+      const filteredCardsData = state.cardsInfo.items.filter((card) =>
+        card.snippet.title.toLowerCase().includes(filter)
+      );
       const cardsInfo: CardsInfo = {
         ...state.cardsInfo,
         items: filteredCardsData,
@@ -118,30 +111,38 @@ export const reducer = createReducer(
     page,
     isLoading: true,
   })),
-  on(CardsActions.AddCustomCard, (state, { customCard }) => {
-    let newCustomCard = [];
-    if (state.customCards) {
-      newCustomCard = [...state.customCards, customCard];
-    } else {
-      newCustomCard = [customCard];
-    }
-    return {
-      ...state,
-      customCards: newCustomCard,
-    };
-  }),
-  on(CardsActions.RemoveCustomCard, (state, { customCardId }) => {
-    if (state.customCards) {
-      const newCustomCard = state.customCards.filter(
-        (customCard) => customCard.id !== customCardId,
-      );
+  on(CardsActions.InitCustomCards, (state, { storageCustomCards }) => {
+    if (storageCustomCards) {
       return {
         ...state,
-        customCards: newCustomCard,
+        customCards: storageCustomCards,
       };
     }
     return {
       ...state,
     };
   }),
+  on(CardsActions.AddCustomCard, (state, { customCard }) => {
+    let newCustomCards = [...state.customCards, customCard];
+    localStorage.setItem('customCards', JSON.stringify(newCustomCards));
+    return {
+      ...state,
+      customCards: newCustomCards,
+    };
+  }),
+  on(CardsActions.RemoveCustomCard, (state, { customCardId }) => {
+    if (state.customCards.length) {
+      const newCustomCards = state.customCards.filter(
+        (customCard) => customCard.id !== customCardId
+      );
+      localStorage.setItem('customCards', JSON.stringify(newCustomCards));
+      return {
+        ...state,
+        customCards: newCustomCards,
+      };
+    }
+    return {
+      ...state,
+    };
+  })
 );

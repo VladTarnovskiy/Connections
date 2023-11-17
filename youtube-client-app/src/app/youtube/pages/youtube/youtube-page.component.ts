@@ -9,6 +9,7 @@ import {
   selectPage,
 } from 'src/app/redux/cards/selectors/cards.selectors';
 import { CustomCard } from '../../models/customCard.model';
+import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 @Component({
   selector: 'app-youtube-page',
@@ -38,14 +39,23 @@ export class YouTubePageComponent implements OnDestroy, OnInit {
         this.customCardsCount = 20 - customCards.length;
       }
     });
+    this.store.dispatch(
+      CardsActions.InitCustomCards({
+        storageCustomCards: this.initialCustomCards(),
+      })
+    );
+  }
+
+  initialCustomCards(): CustomCard[] | null {
+    const storageCustomCards = localStorage.getItem('customCards');
+    if (storageCustomCards) {
+      const customCards = JSON.parse(storageCustomCards) as CustomCard[];
+      return customCards;
+    }
+    return null;
   }
 
   ngOnDestroy() {
-    const setLocalDataSubscription = this.customCards$.subscribe(
-      (customCards) =>
-        localStorage.setItem('customCards', JSON.stringify(customCards))
-    );
     this.subscription.unsubscribe();
-    setLocalDataSubscription.unsubscribe();
   }
 }
