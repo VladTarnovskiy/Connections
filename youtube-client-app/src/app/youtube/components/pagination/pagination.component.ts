@@ -2,7 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { PagesInfo } from 'src/app/redux/cards/reducers/cards.reducer';
-import { selectPageInfo } from 'src/app/redux/cards/selectors/cards.selectors';
+import {
+  selectPage,
+  selectPageInfo,
+} from 'src/app/redux/cards/selectors/cards.selectors';
 import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
 
 @Component({
@@ -11,27 +14,34 @@ import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent implements OnInit, OnDestroy {
-  pages$: Observable<PagesInfo> = this.store.select(selectPageInfo);
+  pagesInfo$: Observable<PagesInfo> = this.store.select(selectPageInfo);
+  page$: Observable<number> = this.store.select(selectPage);
   pagesInfo!: PagesInfo;
   subscription!: Subscription;
-  page: number = 1;
+  page!: number;
 
   constructor(private store: Store) {}
 
   ngOnInit() {
-    this.subscription = this.pages$.subscribe(
-      (pagesInfo) => (this.pagesInfo = pagesInfo)
+    this.subscription = this.pagesInfo$.subscribe((pagesInfo) => {
+      this.pagesInfo = pagesInfo;
+    });
+
+    const childSubscription = this.page$.subscribe(
+      (storePage) => (this.page = storePage)
     );
+
+    this.subscription.add(childSubscription);
   }
 
   nextPage() {
     if (this.pagesInfo.nextPage) {
       console.log(this.pagesInfo.nextPage);
-      this.page += 1;
       this.store.dispatch(
         CardsActions.ChangePage({
           pageToken: this.pagesInfo.nextPage,
           searchValue: this.pagesInfo.searchValue,
+          page: (this.page += 1),
         })
       );
     }
@@ -39,11 +49,11 @@ export class PaginationComponent implements OnInit, OnDestroy {
   prevPage() {
     if (this.pagesInfo.prevPage) {
       console.log(this.pagesInfo.prevPage);
-      this.page -= 1;
       this.store.dispatch(
         CardsActions.ChangePage({
           pageToken: this.pagesInfo.prevPage,
           searchValue: this.pagesInfo.searchValue,
+          page: (this.page -= 1),
         })
       );
     }

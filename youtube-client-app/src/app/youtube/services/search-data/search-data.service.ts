@@ -40,7 +40,6 @@ export class SearchDataService {
       };
     }
     return this.http.get<SearchCardsInfo>(this.cardsURL, searchQuery).pipe(
-      tap((cardInfo) => console.log(cardInfo)),
       tap((cardsInfo) =>
         this.store.dispatch(
           CardsActions.SetPagesInfo({

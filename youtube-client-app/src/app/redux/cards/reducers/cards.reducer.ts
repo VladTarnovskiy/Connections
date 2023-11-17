@@ -17,6 +17,7 @@ export interface CardsState {
   error: string | null;
   sortData: SortData;
   pagesInfo: PagesInfo;
+  page: number;
 }
 
 export interface PagesInfo {
@@ -35,6 +36,8 @@ export const initialState: CardsState = {
     prevPage: null,
     searchValue: '',
   },
+  page: 1,
+
   sortData: {
     sortBy: '',
     direction: '',
@@ -112,8 +115,9 @@ export const reducer = createReducer(
     pagesInfo,
     isLoading: true,
   })),
-  on(CardsActions.ChangePage, (state) => ({
+  on(CardsActions.ChangePage, (state, { page }) => ({
     ...state,
+    page,
     isLoading: true,
   })),
   on(CardsActions.AddCustomCard, (state, { customCard }) => {

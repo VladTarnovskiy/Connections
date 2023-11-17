@@ -19,6 +19,11 @@ export const selectLoading = createSelector(
   (state: CardsState) => state.isLoading
 );
 
+export const selectPage = createSelector(
+  selectCardsStore,
+  (state: CardsState) => state.page
+);
+
 export const selectCard = createSelector(
   selectCurrentCards,
   selectRouteParams,

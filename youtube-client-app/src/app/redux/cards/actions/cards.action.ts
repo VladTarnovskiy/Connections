@@ -29,7 +29,7 @@ export const FetchCardsFailed = createAction(
 
 export const ChangePage = createAction(
   `${actionSource} ChangePage`,
-  props<{ pageToken: string; searchValue: string }>()
+  props<{ pageToken: string; searchValue: string; page: number }>()
 );
 
 export const SetPagesInfo = createAction(
