@@ -8,50 +8,50 @@ const actionSource = '[Cards]';
 
 export const FetchCards = createAction(
   `${actionSource} Fetch Cards`,
-  props<{ searchValue: string }>()
+  props<{ searchValue: string }>(),
 );
 
 export const FetchCardsSuccess = createAction(
   `${actionSource} Fetch Cards Success`,
-  props<{ cardsInfo: CardsInfo }>()
+  props<{ cardsInfo: CardsInfo }>(),
 );
 
 export const FetchCardsFailed = createAction(
   `${actionSource} Fetch Cards Failed`,
-  props<{ error: string }>()
+  props<{ error: string }>(),
 );
 
 export const ChangeCurrentPage = createAction(
   `${actionSource} ChangeCurrentPage`,
-  props<{ pageToken: string; searchValue: string; page: number }>()
+  props<{ pageToken: string; searchValue: string; page: number }>(),
 );
 
 export const SetPagesInfo = createAction(
   `${actionSource} SetPagesInfo`,
-  props<{ pagesInfo: PagesInfo }>()
+  props<{ pagesInfo: PagesInfo }>(),
 );
 
 export const SortCards = createAction(
   `${actionSource} Sort Cards`,
-  props<{ sortData: SortData }>()
+  props<{ sortData: SortData }>(),
 );
 
 export const FilterCards = createAction(
   `${actionSource} Filter Cards`,
-  props<{ filter: string }>()
+  props<{ filter: string }>(),
 );
 
 export const AddCustomCard = createAction(
   `${actionSource} Add Custom Card`,
-  props<{ customCard: CustomCard }>()
+  props<{ customCard: CustomCard }>(),
 );
 
 export const InitCustomCards = createAction(
   `${actionSource} Init Custom Card`,
-  props<{ storageCustomCards: CustomCard[] | null }>()
+  props<{ storageCustomCards: CustomCard[] | null }>(),
 );
 
 export const RemoveCustomCard = createAction(
   `${actionSource} Remove Custom Card`,
-  props<{ customCardId: string }>()
+  props<{ customCardId: string }>(),
 );

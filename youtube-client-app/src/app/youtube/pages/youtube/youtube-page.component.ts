@@ -8,8 +8,8 @@ import {
   selectLoading,
   selectPage,
 } from 'src/app/redux/cards/selectors/cards.selectors';
-import { CustomCard } from '../../models/customCard.model';
 import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
+import { CustomCard } from '../../models/customCard.model';
 
 @Component({
   selector: 'app-youtube-page',
@@ -17,15 +17,13 @@ import * as CardsActions from 'src/app/redux/cards/actions/cards.action';
   styleUrls: ['./youtube-page.component.scss'],
 })
 export class YouTubePageComponent implements OnDestroy, OnInit {
-  cards$: Observable<Card[] | undefined> =
-    this.store.select(selectCurrentCards);
+  cards$: Observable<Card[] | undefined> = this.store.select(selectCurrentCards);
 
   isLoading$: Observable<boolean> = this.store.select(selectLoading);
 
   page$: Observable<number> = this.store.select(selectPage);
 
-  customCards$: Observable<CustomCard[] | null> =
-    this.store.select(selectCustomCards);
+  customCards$: Observable<CustomCard[] | null> = this.store.select(selectCustomCards);
 
   customCardsCount!: number;
 
@@ -42,7 +40,7 @@ export class YouTubePageComponent implements OnDestroy, OnInit {
     this.store.dispatch(
       CardsActions.InitCustomCards({
         storageCustomCards: this.initialCustomCards(),
-      })
+      }),
     );
   }
 
