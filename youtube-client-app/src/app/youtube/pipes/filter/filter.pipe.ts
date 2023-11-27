@@ -5,7 +5,7 @@ import { Card } from '../../models/card.model';
   name: 'filter',
 })
 export class FilterPipe implements PipeTransform {
-  transform(items: Card[], searchText: string): Card[] {
+  transform(items?: Card[], searchText?: string): Card[] {
     if (!items) {
       return [];
     }
@@ -13,8 +13,10 @@ export class FilterPipe implements PipeTransform {
       return items;
     }
 
-    return items.filter((item) => item.snippet.title
-      .toLocaleLowerCase()
-      .includes(searchText.toLocaleLowerCase()));
+    return items.filter((item) =>
+      item.snippet.title
+        .toLocaleLowerCase()
+        .includes(searchText.toLocaleLowerCase())
+    );
   }
 }
