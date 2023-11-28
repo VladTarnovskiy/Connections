@@ -3,6 +3,6 @@
     <app-card *ngFor="let card of favCards$ | async" [card]="card"></app-card>
   </ng-container>
   <ng-template #message>
-    <div class="mt-[250px] text-xl text-black">No favorite.</div>
+    <div class="no-item mt-[250px] text-xl text-black">No favorite.</div>
   </ng-template>
 </div>

@@ -25,6 +25,6 @@ import { CustomCardComponent } from './components/custom-card/custom-card.compon
     CustomCardComponent,
   ],
   imports: [SharedModule, YouTubeRouterModule, ReactiveFormsModule],
-  exports: [CardComponent],
+  exports: [CardComponent, CardColorDirective],
 })
 export class YoutubeModule {}

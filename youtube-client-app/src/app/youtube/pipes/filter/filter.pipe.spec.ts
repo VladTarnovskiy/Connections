@@ -1,6 +1,6 @@
 import { FilterPipe } from './filter.pipe';
 
-const mockCardsInfo = [
+export const mockCardsInfo = [
   {
     kind: 'youtube#video',
     etag: 'nz24ZjyncPsg-XIQvwS3GBYUdUk',

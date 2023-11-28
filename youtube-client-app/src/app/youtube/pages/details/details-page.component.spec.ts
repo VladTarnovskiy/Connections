@@ -1,16 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DetailsComponent } from './details-page.component';
+import { DetailsPageComponent } from './details-page.component';
+import { provideMockStore } from '@ngrx/store/testing';
 
 describe('DetailsComponent', () => {
-  let component: DetailsComponent;
-  let fixture: ComponentFixture<DetailsComponent>;
+  let component: DetailsPageComponent;
+  let fixture: ComponentFixture<DetailsPageComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DetailsComponent],
+      declarations: [DetailsPageComponent],
+      providers: [provideMockStore({})],
     });
-    fixture = TestBed.createComponent(DetailsComponent);
+    fixture = TestBed.createComponent(DetailsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
