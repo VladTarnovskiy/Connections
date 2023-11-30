@@ -11,10 +11,8 @@
     </div>
     <ng-container *ngIf="logIn">
       <app-search-bar (sortBlock)="turnSortBlock($event)"></app-search-bar>
-    </ng-container>
-    <div class="header__profile flex justify-center items-center">
-      <div class="flex justify-center items-center mr-4">
-        <ng-container *ngIf="logIn">
+      <div class="header__profile flex justify-center items-center">
+        <div class="flex justify-center items-center mr-4">
           <div class="flex justify-center items-center">
             <div class="mr-1">Your name</div>
             <button
@@ -37,11 +35,11 @@
                   class="w-4 h-4 ml-1 pt-1" /></span
             ></app-button>
           </a>
-        </ng-container>
+        </div>
+        <a routerLink="login" class="ml-4" (click)="logout()"
+          ><app-button>Logout</app-button>
+        </a>
       </div>
-      <a routerLink="login" class="ml-4" (click)="logout()"
-        ><app-button>{{ logIn ? "Logout" : "Login" }}</app-button>
-      </a>
-    </div>
+    </ng-container>
   </div>
 </header>

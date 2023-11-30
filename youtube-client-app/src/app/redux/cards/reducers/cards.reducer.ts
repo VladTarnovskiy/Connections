@@ -24,7 +24,7 @@ export interface CardsState {
 export const initialState: CardsState = {
   cardsInfo: null,
   customCards: [],
-  isLoading: false,
+  isLoading: true,
   error: null,
   pagesInfo: {
     nextPage: null,
@@ -41,9 +41,9 @@ export const initialState: CardsState = {
 
 export const reducer = createReducer(
   initialState,
-  on(CardsActions.FetchCards, (state, { searchValue }) => ({
+  on(CardsActions.FetchCards, (state) => ({
     ...state,
-    searchValue,
+    page: 1,
     isLoading: true,
   })),
   on(CardsActions.FetchCardsSuccess, (state, { cardsInfo }) => ({
@@ -84,7 +84,9 @@ export const reducer = createReducer(
   }),
   on(CardsActions.FilterCards, (state, { filter }) => {
     if (state.cardsInfo) {
-      const filteredCardsData = state.cardsInfo.items.filter((card) => card.snippet.title.toLowerCase().includes(filter));
+      const filteredCardsData = state.cardsInfo.items.filter((card) =>
+        card.snippet.title.toLowerCase().includes(filter)
+      );
       const cardsInfo: CardsInfo = {
         ...state.cardsInfo,
         items: filteredCardsData,
@@ -131,7 +133,7 @@ export const reducer = createReducer(
   on(CardsActions.RemoveCustomCard, (state, { customCardId }) => {
     if (state.customCards.length) {
       const newCustomCards = state.customCards.filter(
-        (customCard) => customCard.id !== customCardId,
+        (customCard) => customCard.id !== customCardId
       );
       localStorage.setItem('customCards', JSON.stringify(newCustomCards));
       return {
@@ -142,5 +144,5 @@ export const reducer = createReducer(
     return {
       ...state,
     };
-  }),
+  })
 );
