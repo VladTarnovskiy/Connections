@@ -1,79 +1,86 @@
 <div *ngIf="card$ | async as card">
   <div
     [appCardColor]="card.snippet.publishedAt"
-    class="flex relative flex-row mt-4 m-auto text-gray-700 bg-white shadow-xl max-w-[1200px] w-full min-h-[460px] rounded-xl bg-clip-border border-b-4 box-border"
+    class="mt-4 m-auto text-gray-700 bg-white shadow-xl max-w-[1200px] w-full min-h-[460px] rounded-xl bg-clip-border border-b-4 box-border"
   >
-    <div
-      class="min-w-[729px] h-fit overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
-    >
-      <img
-        [src]="card.snippet.thumbnails.maxres.url"
-        alt="img-blur-shadow"
-        class="min-h-[461px]"
-      />
-    </div>
-    <div class="p-6 pt-3">
-      <div class="flex justify-end">
-        <ng-container *ngIf="isFavorite; else noFavorite">
-          <button (click)="removeFavorite(card.id)">
-            <img
-              src="assets/heart-fill.svg"
-              class="w-6 h-6"
-              alt="heart-nofill"
-            /></button
-        ></ng-container>
-        <ng-template #noFavorite>
-          <button (click)="addFavorite(card)">
-            <img
-              src="assets/heart-nofill.svg"
-              class="w-6 h-6"
-              alt="heart-fill"
-            />
-          </button>
-        </ng-template>
-      </div>
-
-      <div class="flex justify-between items-center mb-[35px]">
-        <div
-          class="title mr-2 font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blue-gray-900"
-        >
-          {{ card.snippet.title }}
-        </div>
-        <div class="date flex-grow text-gray-500">
-          {{ card.snippet.publishedAt | date : "fullDate" }}
-        </div>
-      </div>
-
+    <div class="flex relative flex-row">
       <div
-        class="block mb-4 font-sans text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
+        class="min-w-[729px] h-fit overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40"
       >
-        <div>Description:</div>
-        <div class="text-gray-500">{{ card.snippet.description }}</div>
+        <img
+          [src]="
+            card.snippet.thumbnails.maxres
+              ? card.snippet.thumbnails.maxres.url
+              : 'assets/no-image.svg'
+          "
+          alt="img-blur-shadow"
+          class="min-h-[461px]"
+        />
       </div>
-      <div class="activity self-end flex justify-center items-center mb-2">
-        <div class="activity__item flex justify-center mr-2">
-          <img src="assets/view.svg" alt="view" class="w-4 h-4 mr-1" />
-          <div class="activity__info">{{ card.statistics.viewCount }}</div>
+      <div class="p-6 pt-3">
+        <div class="flex justify-end">
+          <ng-container *ngIf="isFavorite; else noFavorite">
+            <button (click)="removeFavorite(card.id)">
+              <img
+                src="assets/heart-fill.svg"
+                class="w-6 h-6"
+                alt="heart-nofill"
+              /></button
+          ></ng-container>
+          <ng-template #noFavorite>
+            <button (click)="addFavorite(card)">
+              <img
+                src="assets/heart-nofill.svg"
+                class="w-6 h-6"
+                alt="heart-fill"
+              />
+            </button>
+          </ng-template>
         </div>
-        <div class="activity__item flex justify-center mr-2">
-          <img src="assets/liked.svg" alt="like" class="w-4 h-4 mr-1" />
-          <div class="activity__info">{{ card.statistics.likeCount }}</div>
+        <div class="flex justify-between items-center mb-[35px]">
+          <div
+            class="title mr-2 font-sans text-2xl antialiased font-bold leading-snug tracking-normal text-blue-gray-900"
+          >
+            {{ card.snippet.title }}
+          </div>
+          <div class="date flex-grow text-gray-500">
+            {{ card.snippet.publishedAt | date : "fullDate" }}
+          </div>
         </div>
-        <div class="activity__item flex justify-center mr-2">
-          <img src="assets/dislike.svg" alt="dislike" class="w-4 h-4 mr-1" />
-          <div class="activity__info">{{ card.statistics.dislikeCount }}</div>
-        </div>
-        <div class="activity__item flex justify-center mr-2">
-          <img src="assets/comment.svg" alt="comment" class="w-4 h-4 mr-1" />
-          <div class="activity__info">{{ card.statistics.commentCount }}</div>
+        <div class="activity self-end flex justify-center items-center mb-2">
+          <div class="activity__item flex justify-center mr-2">
+            <img src="assets/view.svg" alt="view" class="w-4 h-4 mr-1" />
+            <div class="activity__info">{{ card.statistics.viewCount }}</div>
+          </div>
+          <div class="activity__item flex justify-center mr-2">
+            <img src="assets/liked.svg" alt="like" class="w-4 h-4 mr-1" />
+            <div class="activity__info">{{ card.statistics.likeCount }}</div>
+          </div>
+          <div class="activity__item flex justify-center mr-2">
+            <img src="assets/dislike.svg" alt="dislike" class="w-4 h-4 mr-1" />
+            <div class="activity__info">
+              {{ card.statistics.favoriteCount }}
+            </div>
+          </div>
+          <div class="activity__item flex justify-center mr-2">
+            <img src="assets/comment.svg" alt="comment" class="w-4 h-4 mr-1" />
+            <div class="activity__info">{{ card.statistics.commentCount }}</div>
+          </div>
         </div>
       </div>
+      <button
+        class="absolute left-[-42px] w-10 h-10 bg-transparent rounded-l-md shadow-lg hover:shadow-red-500/40"
+        appHistoryBack
+      >
+        <img src="assets/arrow-sm-left.svg" alt="arrow" class="w-10 h-10" />
+      </button>
     </div>
-    <button
-      class="absolute left-[-42px] w-10 h-10 bg-transparent rounded-l-md shadow-lg hover:shadow-red-500/40"
-      appHistoryBack
+
+    <div
+      class="block p-5 font-sans text-md antialiased font-semibold leading-snug tracking-normal text-blue-gray-900"
     >
-      <img src="assets/arrow-sm-left.svg" alt="arrow" class="w-10 h-10" />
-    </button>
+      <div class="text-base">Description:</div>
+      <div class="text-gray-500">{{ card.snippet.description }}</div>
+    </div>
   </div>
 </div>
