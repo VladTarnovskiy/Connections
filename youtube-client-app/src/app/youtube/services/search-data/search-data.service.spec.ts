@@ -37,7 +37,6 @@ describe('SearchDataService', () => {
     request.flush(mockCardsStatisticInfo);
 
     controller.verify();
-    console.log(cardInfo);
 
     expect(cardInfo?.snippet.publishedAt).toBe('2023-11-29T14:00:20Z');
   });

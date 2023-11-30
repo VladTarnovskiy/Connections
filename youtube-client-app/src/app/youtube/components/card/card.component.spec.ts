@@ -3,6 +3,8 @@ import { CardComponent } from './card.component';
 import { provideMockStore } from '@ngrx/store/testing';
 import { mockCardsInfo } from '../../pipes/filter/filter.pipe.spec';
 import { Component } from '@angular/core';
+import { YoutubeModule } from '../../youtube.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
 @Component({
   selector: 'app-button',
@@ -17,6 +19,7 @@ describe('CardComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [CardComponent, MockButtonElement],
+      imports: [YoutubeModule, RouterTestingModule],
       providers: [provideMockStore({})],
     });
     fixture = TestBed.createComponent(CardComponent);

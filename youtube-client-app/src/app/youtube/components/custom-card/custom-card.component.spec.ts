@@ -1,6 +1,8 @@
+import { YoutubeModule } from './../../youtube.module';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CustomCardComponent } from './custom-card.component';
 import { provideMockStore } from '@ngrx/store/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const mockCustomCard = {
   title: 'hello',
@@ -19,7 +21,9 @@ describe('CustomCardComponent', () => {
   beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [CustomCardComponent],
+      imports: [YoutubeModule],
       providers: [provideMockStore({})],
+      schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(CustomCardComponent);
     component = fixture.componentInstance;

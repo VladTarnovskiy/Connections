@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AdminPageComponent } from './admin-page.component';
 import { provideMockStore } from '@ngrx/store/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AdminPageComponent', () => {
   let component: AdminPageComponent;
@@ -11,6 +11,7 @@ describe('AdminPageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [AdminPageComponent],
       providers: [provideMockStore({})],
+      schemas: [NO_ERRORS_SCHEMA],
     });
     fixture = TestBed.createComponent(AdminPageComponent);
     component = fixture.componentInstance;
