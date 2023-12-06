@@ -1,8 +1,0 @@
-<div class="fav-cards__container mt-14">
-  <ng-container *ngIf="haveCards; else message">
-    <app-card *ngFor="let card of favCards$ | async" [card]="card"></app-card>
-  </ng-container>
-  <ng-template #message>
-    <div class="no-item mt-[250px] text-xl text-black">No favorite.</div>
-  </ng-template>
-</div>
