@@ -2,11 +2,7 @@
   <div class="header__content flex justify-between items-center">
     <div class="header__logo">
       <a routerLink="youtube" class="w-20 h-24 mr-4 flex items-center relative">
-        <!-- <img
-          src="assets/youtube-svgrepo-com.svg"
-          alt="youtube"
-          class="w-20 h-24"
-        /> -->
+        <img src="assets/Logo-2.svg" alt="youtube" class="w-16 h-20" />
       </a>
     </div>
     <!-- <ng-container *ngIf="logIn"> -->
@@ -14,13 +10,14 @@
       <div class="flex justify-center items-center mr-4">
         <div class="flex justify-center items-center">
           <div class="mr-1">Your name</div>
-          <button
-            class="h-10 rounded-md w-10 text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
-          >
-            <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
-          </button>
+          <a routerLink="/profile" class="h-10">
+            <button
+              class="rounded-md text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+            >
+              <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
+            </button>
+          </a>
         </div>
-
         <a routerLink="youtube/admin" class="ml-4">
           <app-button>Admin</app-button>
         </a>
