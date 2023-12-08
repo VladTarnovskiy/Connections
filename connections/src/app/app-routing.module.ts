@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/pages/login/login.component';
-import { RegisterComponent } from './auth/pages/register/register.component';
 import { ProfileComponent } from './profile/pages/profile/profile.component';
+import { NotfoundPageComponent } from './core/pages/notfound/notfound-page.component';
 
 const routes: Routes = [
   // {
@@ -17,14 +16,8 @@ const routes: Routes = [
   //   component: FavoritePageComponent,
   // },
   {
-    path: 'login',
+    path: 'auth',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    component: LoginComponent,
-  },
-  {
-    path: 'register',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-    component: RegisterComponent,
   },
   {
     path: 'profile',
@@ -38,10 +31,10 @@ const routes: Routes = [
   //   component: RegisterComponent,
   // redirectTo: 'youtube', pathMatch: 'full'
   // },
-  // {
-  //   path: '**',
-  //   component: NotfoundPageComponent,
-  // },
+  {
+    path: '**',
+    component: NotfoundPageComponent,
+  },
 ];
 
 @NgModule({
