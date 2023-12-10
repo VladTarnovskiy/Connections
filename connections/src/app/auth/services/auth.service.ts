@@ -1,7 +1,6 @@
 import { IRegistration, UserDetails } from './../models/registration';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map, tap } from 'rxjs';
-// import { tap, delay } from 'rxjs/operators';
+import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
@@ -36,10 +35,10 @@ export class AuthService {
     //     this.isLoggedIn.next(true);
     //   })
     // );
-    return this.http.get(this.loginURL).pipe(
-      tap((info) => console.log(info))
-      // map((cardsInfo) => cardsInfo)
-      // catchError(this.handleError)
+    return this.http.post(this.loginURL, null).pipe(
+      tap((info) => console.log(info)),
+      map((cardsInfo) => cardsInfo),
+      catchError(this.handleError)
     );
   }
 
@@ -54,10 +53,10 @@ export class AuthService {
     //     this.isLoggedIn.next(true);
     //   })
     // );
-    return this.http.get(this.registerURL).pipe(
+    return this.http.post(this.registerURL, userDetails).pipe(
       tap((info) => console.log(info)),
-      map((cardsInfo) => cardsInfo)
-      // catchError(this.handleError)
+      map((cardsInfo) => cardsInfo),
+      catchError(this.handleError)
     );
   }
 

@@ -24,6 +24,15 @@
         <div *ngIf="name?.errors?.['required']" class="invalid__message">
           Please enter a username.
         </div>
+        <div *ngIf="name?.errors?.['maxlength']" class="invalid__message">
+          Username should contains less then 40 symbols.
+        </div>
+        <div
+          *ngIf="name?.errors?.['forbiddenUsername']"
+          class="invalid__message"
+        >
+          {{name?.errors?.['forbiddenUsername'].value}}
+        </div>
       </div>
       <div class="form__item mb-3">
         <label htmlFor="email" class="block text-sm font-medium text-gray-900">

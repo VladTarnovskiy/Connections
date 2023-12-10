@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ValidatePassword } from './validators.ts/validators';
+import { ValidatePassword } from './validators.ts/password';
+import { ValidateName } from './validators.ts/name';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ import { ValidatePassword } from './validators.ts/validators';
 })
 export class RegisterComponent {
   registerForm = this.fb.group({
-    name: ['', [Validators.required]],
+    name: ['', [Validators.required, Validators.maxLength(40), ValidateName()]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, ValidatePassword()]],
   });
@@ -27,7 +28,7 @@ export class RegisterComponent {
       this.authService
         .register(this.registerForm.getRawValue())
         .subscribe(() => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['auth/login']);
         });
     }
   }
