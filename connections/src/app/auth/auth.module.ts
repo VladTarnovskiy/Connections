@@ -3,11 +3,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SharedModule } from '../shared/shared.module';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'register',
     pathMatch: 'full',
   },
   {
@@ -22,6 +23,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
-  imports: [SharedModule, RouterModule.forChild(routes)],
+  imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })
 export class AuthModule {}

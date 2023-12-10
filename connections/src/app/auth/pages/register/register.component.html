@@ -9,28 +9,39 @@
     </h2>
   </div>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form__item mb-3">
         <label htmlFor="name" class="block text-sm font-medium text-gray-900">
           <p class="block text-sm text-gray-900 dark:text-base_white">Name:</p>
           <input
             id="name"
-            name="name"
             type="text"
+            formControlName="name"
             class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-base_blue"
+            required
           />
         </label>
+        <div *ngIf="name?.errors?.['required']" class="invalid__message">
+          Please enter a username.
+        </div>
       </div>
       <div class="form__item mb-3">
         <label htmlFor="email" class="block text-sm font-medium text-gray-900">
           <p class="block text-sm text-gray-900 dark:text-base_white">Email:</p>
           <input
             id="email"
-            name="email"
+            formControlName="email"
+            required
             type="email"
             class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-base_blue"
           />
         </label>
+        <div *ngIf="email?.errors?.['required']" class="invalid__message">
+          Please enter a email.
+        </div>
+        <div *ngIf="email?.errors?.['email']" class="invalid__message">
+          The email is invalid.
+        </div>
       </div>
       <div class="form__item mb-5">
         <label
@@ -42,12 +53,22 @@
           </p>
           <input
             id="password"
-            name="password"
+            formControlName="password"
             type="password"
-            autoComplete="off"
+            required
+            autoComplete="on"
             class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-base_blue"
           />
         </label>
+        <div *ngIf="password?.errors?.['required']" class="invalid__message">
+          Please enter a password.
+        </div>
+        <div
+          *ngIf="password?.errors?.['forbiddenPassword']"
+          class="invalid__message"
+        >
+          {{password?.errors?.['forbiddenPassword'].value}}
+        </div>
       </div>
       <div class="mt-8">
         <div class="text-sm flex flex-start text-black">
