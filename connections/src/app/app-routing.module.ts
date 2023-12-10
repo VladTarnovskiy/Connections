@@ -4,11 +4,14 @@ import { ProfileComponent } from './profile/pages/profile/profile.component';
 import { NotfoundPageComponent } from './core/pages/notfound/notfound-page.component';
 
 const routes: Routes = [
-  // {
-  //   path: 'youtube',
-  //   loadChildren: () => import('./youtube/youtube.module').then((m) => m.YoutubeModule),
-  //   // canActivate: [authGuard],
-  // },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./connections/connections.module').then(
+        (m) => m.ConnectionsModule
+      ),
+    // canActivate: [authGuard],
+  },
   // {
   //   path: 'favorite',
   //   loadChildren: () => import('./favorite/favorite.module').then((m) => m.FavoriteModule),
