@@ -1,5 +1,5 @@
-export interface IRegistration {
-  login: string;
+export interface IRespUserData {
+  uid: string;
   token: string;
 }
 

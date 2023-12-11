@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ValidatePassword } from './validators.ts/password';
 import { ValidateName } from './validators.ts/name';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -25,11 +26,16 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.status === 'VALID') {
-      this.authService
-        .register(this.registerForm.getRawValue())
-        .subscribe(() => {
-          this.router.navigate(['auth/login']);
-        });
+      this.authService.register(this.registerForm.getRawValue()).subscribe({
+        next: () => {
+          setTimeout(() => {
+            this.router.navigate(['auth/login']);
+          }, 2000);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.authService.handleError(err);
+        },
+      });
     }
   }
 

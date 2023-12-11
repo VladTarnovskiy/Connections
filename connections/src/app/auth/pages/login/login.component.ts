@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +23,15 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.status === 'VALID') {
-      this.authService.login(this.loginForm.getRawValue()).subscribe(() => {
-        this.router.navigate(['/']);
+      this.authService.login(this.loginForm.getRawValue()).subscribe({
+        next: () => {
+          setTimeout(() => {
+            this.router.navigate(['/']);
+          }, 2000);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.authService.handleError(err);
+        },
       });
     }
   }

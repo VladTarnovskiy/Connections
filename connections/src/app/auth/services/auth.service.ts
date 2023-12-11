@@ -1,7 +1,8 @@
-import { IRegistration, UserDetails } from './../models/registration';
+import { UserDetails } from './../models/registration';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { MessageService } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,10 @@ export class AuthService {
 
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private messageService: MessageService
+  ) {}
 
   // getCard(id: number | string | null) {
   //   const options = { params: new HttpParams().set('id', String(id)) };
@@ -25,9 +29,9 @@ export class AuthService {
   //   );
 
   login(userDetails: Omit<UserDetails, 'name'>) {
-    const login = userDetails.email ?? '';
-    const details: IRegistration = { login, token: 'faketoken' };
-    localStorage.setItem('userDetails', JSON.stringify(details));
+    // const login = userDetails.email ?? '';
+    // const details: IRespUserData = { login, token: 'faketoken' };
+    // localStorage.setItem('userDetails', JSON.stringify(details));
 
     // return of(true).pipe(
     //   delay(1000),
@@ -35,10 +39,13 @@ export class AuthService {
     //     this.isLoggedIn.next(true);
     //   })
     // );
-    return this.http.post(this.loginURL, null).pipe(
+    return this.http.post(this.loginURL, userDetails).pipe(
       tap((info) => console.log(info)),
-      map((cardsInfo) => cardsInfo),
-      catchError(this.handleError)
+      map((userData) => {
+        localStorage.setItem('userDetails', JSON.stringify(userData));
+        return userData;
+      })
+      // catchError(() => this.handleError())
     );
   }
 
@@ -55,8 +62,13 @@ export class AuthService {
     // );
     return this.http.post(this.registerURL, userDetails).pipe(
       tap((info) => console.log(info)),
-      map((cardsInfo) => cardsInfo),
-      catchError(this.handleError)
+      tap(() =>
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'User registered',
+        })
+      )
     );
   }
 
@@ -78,10 +90,15 @@ export class AuthService {
     this.isLoggedIn.next(false);
   }
 
-  handleError(error: HttpErrorResponse) {
-    if (error.status === 0) {
-      return `An error occurred:', ${error.error}`;
-    }
-    return `Backend returned code ${error.status}, body was: , ${error.error} `;
+  handleError(err: HttpErrorResponse) {
+    // if (error.status === 0) {
+    //   return `An error occurred:', ${error.error}`;
+    // }
+    this.messageService.add({
+      severity: 'error',
+      summary: err.error.type,
+      detail: err.error.message,
+    });
+    // return `Backend returned code ${err.status}, body was: , ${err.error} `;
   }
 }

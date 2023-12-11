@@ -89,11 +89,17 @@
 
         <button
           type="submit"
-          class="mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out hover:cursor-pointer hover:shadow-yellow-300/60 active:scale-[95%]"
+          class="mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out hover:cursor-pointer active:scale-[95%]"
+          [ngClass]="
+            registerForm.status === 'VALID'
+              ? 'opacity-100'
+              : 'opacity-50 hover:cursor-auto active:scale-100'
+          "
         >
           Sign Up
         </button>
       </div>
     </form>
+    <p-toast position="bottom-right"></p-toast>
   </div>
 </section>
