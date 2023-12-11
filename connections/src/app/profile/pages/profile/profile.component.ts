@@ -1,7 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProfileService } from '../../services/profile.service';
 import { IProfile } from '../../models/profile';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectProfileData } from 'src/app/store/profile/selectors/profile.selectors';
+import * as ProfileActions from 'src/app/store/profile/actions/profile.action';
 
 @Component({
   selector: 'app-profile',
@@ -9,16 +11,24 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit, OnDestroy {
+  profileData$: Observable<IProfile | null> =
+    this.store.select(selectProfileData);
   subscription!: Subscription;
-  profileData!: IProfile;
+  // profileData!: IProfile;
 
-  constructor(private profileService: ProfileService) {}
+  constructor(private store: Store) {}
+
   ngOnInit(): void {
-    this.subscription = this.profileService
-      .getProfile()
-      .subscribe((data: IProfile) => {
-        this.profileData = data;
-      });
+    // this.subscription =
+    this.store.dispatch(ProfileActions.FetchProfile());
+    // .subscribe({
+    //   next: () => (data: IProfile) => {
+    //     this.profileData = data;
+    //   },
+    //   error: (err: HttpErrorResponse) => {
+    //     this.profileService.handleError(err);
+    //   },
+    // });
   }
   ngOnDestroy() {
     this.subscription.unsubscribe();

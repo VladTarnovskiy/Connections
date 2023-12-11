@@ -9,7 +9,7 @@ export interface IProfileResp {
     S: string;
   };
   createdAt: {
-    S: string; // unix timestamp in milliseconds
+    S: string;
   };
 }
 

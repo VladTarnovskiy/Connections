@@ -1,5 +1,6 @@
 <section
   class="form relative flex flex-1 flex-col justify-center px-6 py-12 lg:px-4 text-base_green"
+  *ngIf="profileData$ | async as profileData"
 >
   <div class="sm:mx-auto sm:w-full sm:max-w-sm">
     <h2
@@ -13,6 +14,7 @@
       <div class="mb-3 flex justify-between">
         <div class="mr-2">Username:</div>
         <div class="font-semibold">{{ profileData.name }}</div>
+        <input class="input__name" />
       </div>
       <div class="mb-3 flex justify-between">
         <div class="mr-2">Email:</div>
@@ -24,7 +26,9 @@
       </div>
       <div class="mb-3 flex justify-between">
         <div class="mr-2">Creation at:</div>
-        <div class="font-semibold">{{ profileData.createdAt }}</div>
+        <div class="font-semibold">
+          {{ profileData.createdAt | date : "medium" }}
+        </div>
       </div>
       <div class="mt-8">
         <button
@@ -37,3 +41,4 @@
     </div>
   </div>
 </section>
+<p-toast position="bottom-right"></p-toast>

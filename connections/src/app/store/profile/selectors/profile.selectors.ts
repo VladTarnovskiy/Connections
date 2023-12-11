@@ -1,0 +1,15 @@
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { ProfileState } from '../reducers/profile.reducer';
+
+export const selectProfileStore =
+  createFeatureSelector<ProfileState>('profileData');
+
+export const selectProfileData = createSelector(
+  selectProfileStore,
+  (state: ProfileState) => state.profileData
+);
+
+// export const selectFavoriteError = createSelector(
+//   selectFavoriteStore,
+//   (state: ProfileState) => state.error,
+// );

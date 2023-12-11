@@ -40,9 +40,11 @@ export class AuthService {
     //   })
     // );
     return this.http.post(this.loginURL, userDetails).pipe(
-      tap((info) => console.log(info)),
       map((userData) => {
-        localStorage.setItem('userDetails', JSON.stringify(userData));
+        localStorage.setItem(
+          'userDetails',
+          JSON.stringify({ ...userData, email: userDetails.email })
+        );
         return userData;
       })
       // catchError(() => this.handleError())
@@ -61,7 +63,6 @@ export class AuthService {
     //   })
     // );
     return this.http.post(this.registerURL, userDetails).pipe(
-      tap((info) => console.log(info)),
       tap(() =>
         this.messageService.add({
           severity: 'success',
