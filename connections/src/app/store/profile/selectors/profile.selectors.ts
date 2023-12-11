@@ -9,6 +9,11 @@ export const selectProfileData = createSelector(
   (state: ProfileState) => state.profileData
 );
 
+export const selectProfileLoading = createSelector(
+  selectProfileStore,
+  (state: ProfileState) => state.isLoading
+);
+
 // export const selectFavoriteError = createSelector(
 //   selectFavoriteStore,
 //   (state: ProfileState) => state.error,

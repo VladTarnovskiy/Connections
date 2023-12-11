@@ -17,9 +17,6 @@ export class ProfileEffects {
       ofType(ProfileActions.FetchProfile),
       exhaustMap(() =>
         this.profileService.getProfile().pipe(
-          tap(() => {
-            console.log('here');
-          }),
           map((profileData) => ProfileActions.AddProfile({ profileData }))
           // catchError((error: HttpErrorResponse) => {
           //   const handleError = this.userService.handleError(error);

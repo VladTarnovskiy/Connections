@@ -25,7 +25,6 @@ export class ProfileService {
 
   getProfile() {
     return this.http.get<IProfileResp>(this.profilerURL).pipe(
-      tap((info) => console.log(info)),
       map((data: IProfileResp) => {
         const userData: IProfile = {
           name: data.name.S,
@@ -37,6 +36,23 @@ export class ProfileService {
       })
       // catchError(() => this.handleError())
     );
+  }
+
+  updateProfile(name: string) {
+    return this.http
+      .put(this.profilerURL, { name })
+      .pipe
+      // map((data: IProfileResp) => {
+      //   const userData: IProfile = {
+      //     name: data.name.S,
+      //     email: data.email.S,
+      //     uid: data.uid.S,
+      //     createdAt: data.createdAt.S,
+      //   };
+      //   return userData;
+      // })
+      // catchError(() => this.handleError())
+      ();
   }
 
   handleError(err: HttpErrorResponse) {

@@ -10,6 +10,11 @@ export const AddProfile = createAction(
   props<{ profileData: IProfile }>()
 );
 
+export const UpdateProfile = createAction(
+  `${actionSource} Update Profile`,
+  props<{ name: string }>()
+);
+
 // export const RemoveFavCard = createAction(
 //   `${actionSource} Remove Fav Card`,
 //   props<{ key: string }>(),

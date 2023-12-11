@@ -9,7 +9,9 @@
     <div class="header__profile flex justify-center items-center">
       <div class="flex justify-center items-center mr-4">
         <div class="flex justify-center items-center">
-          <div class="mr-1">Your name</div>
+          <div class="mr-1" *ngIf="profileData$ | async as profileData">
+            {{ profileData.name }}
+          </div>
           <a routerLink="/profile" class="h-10">
             <button
               class="rounded-md text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
