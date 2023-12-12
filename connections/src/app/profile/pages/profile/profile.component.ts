@@ -11,6 +11,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { ValidateName } from 'src/app/auth/pages/register/validators.ts/name';
 import { ProfileService } from '../../services/profile.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -29,7 +30,11 @@ export class ProfileComponent {
     ValidateName(),
   ]);
 
-  constructor(private store: Store, private profileService: ProfileService) {}
+  constructor(
+    private store: Store,
+    private profileService: ProfileService,
+    private authService: AuthService
+  ) {}
 
   editName() {
     this.edit = true;
@@ -49,5 +54,9 @@ export class ProfileComponent {
       });
       this.edit = false;
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

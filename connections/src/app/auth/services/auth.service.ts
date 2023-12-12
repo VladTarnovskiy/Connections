@@ -1,6 +1,6 @@
 import { UserDetails } from './../models/registration';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, tap } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, delay, map, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 
@@ -46,6 +46,10 @@ export class AuthService {
           JSON.stringify({ ...userData, email: userDetails.email })
         );
         return userData;
+      }),
+      delay(1000),
+      tap(() => {
+        this.isLoggedIn.next(true);
       })
       // catchError(() => this.handleError())
     );

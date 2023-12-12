@@ -7,37 +7,23 @@
     </div>
     <!-- <ng-container *ngIf="logIn"> -->
     <div class="header__profile flex justify-center items-center">
-      <div class="flex justify-center items-center mr-4">
-        <div class="flex justify-center items-center">
-          <div class="mr-1" *ngIf="profileData$ | async as profileData">
-            {{ profileData.name }}
-          </div>
-          <a routerLink="/profile" class="h-10">
-            <button
-              class="rounded-md text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
-            >
-              <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
-            </button>
-          </a>
+      <div class="flex justify-center items-center">
+        <div
+          class="mr-1 font-semibold"
+          *ngIf="profileData$ | async as profileData"
+        >
+          {{ profileData.name }}
         </div>
-        <a routerLink="youtube/admin" class="ml-4">
-          <app-button>Admin</app-button>
-        </a>
-        <a routerLink="favorite" class="ml-2">
-          <app-button
-            ><span class="flex"
-              >Fav
-              <img
-                src="assets/fav.svg"
-                alt="like"
-                class="w-4 h-4 ml-1 pt-1" /></span
-          ></app-button>
+        <a routerLink="/profile" class="h-10">
+          <button
+            class="rounded-md text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+          >
+            <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
+          </button>
         </a>
       </div>
-      <a routerLink="auth" class="ml-4" (click)="logout()"
-        ><app-button>Logout</app-button>
-      </a>
     </div>
     <!-- </ng-container> -->
   </div>
 </header>
+<p-toast position="bottom-right"></p-toast>

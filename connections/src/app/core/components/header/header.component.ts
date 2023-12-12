@@ -5,7 +5,6 @@ import { Observable, Subscription } from 'rxjs';
 import { IProfile } from 'src/app/profile/models/profile';
 import { selectProfileData } from 'src/app/store/profile/selectors/profile.selectors';
 import * as ProfileActions from 'src/app/store/profile/actions/profile.action';
-// import { AuthService } from 'src/app/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -18,15 +17,7 @@ export class HeaderComponent implements OnInit {
     this.store.select(selectProfileData);
   logIn = false;
 
-  constructor(
-    // private authService: AuthService,
-    private store: Store,
-    public router: Router
-  ) {}
-
-  logout() {
-    // this.authService.logout();
-  }
+  constructor(private store: Store, public router: Router) {}
 
   // ngOnInit() {
   // this.subscription = this.authService.isLoggedIn$.subscribe((data) => {
