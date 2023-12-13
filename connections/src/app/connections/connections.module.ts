@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { ConnectionsComponent } from './pages/connections/connections.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
-import { GroupComponent } from './components/group/group.component';
+import { GroupsComponent } from './components/groups/groups.component';
 import { PeopleComponent } from './components/people/people.component';
+import { GroupComponent } from './components/group/group.component';
 
 const routes: Routes = [
   {
@@ -21,7 +22,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ConnectionsComponent, GroupComponent, PeopleComponent],
+  declarations: [ConnectionsComponent, GroupsComponent, PeopleComponent, GroupComponent],
   imports: [SharedModule, RouterModule.forChild(routes)],
 })
 export class ConnectionsModule {}
