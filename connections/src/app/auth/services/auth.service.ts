@@ -1,9 +1,10 @@
 import { IRespUserData, UserDetails } from './../models/registration';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, delay, map, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { ProfileService } from 'src/app/profile/services/profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class AuthService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService,
+    private profileService: ProfileService,
     public router: Router
   ) {}
 
@@ -76,6 +78,12 @@ export class AuthService {
         return of();
       })
     );
+  }
+
+  checkLogin() {
+    this.profileService.getProfile().subscribe(() => {
+      this.isLoggedIn.next(true);
+    });
   }
 
   logout(): void {
