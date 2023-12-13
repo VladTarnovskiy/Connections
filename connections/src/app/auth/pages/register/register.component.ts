@@ -1,42 +1,47 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import * as AuthActions from 'src/app/store/auth/actions/auth.action';
 import { ValidatePassword } from './validators.ts/password';
 import { ValidateName } from './validators.ts/name';
-import { HttpErrorResponse } from '@angular/common/http';
+import { UserDetails } from '../../models/registration';
+import { Observable, Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { selectRegisterLoading } from 'src/app/store/auth/selectors/auth.selectors';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit, OnDestroy {
+  isLoading$: Observable<boolean> = this.store.select(selectRegisterLoading);
+  isLoading = false;
+  subscription!: Subscription;
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.maxLength(40), ValidateName()]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, ValidatePassword()]],
   });
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    public router: Router
-  ) {}
+  constructor(private fb: FormBuilder, private store: Store) {}
 
   onSubmit() {
-    if (this.registerForm.status === 'VALID') {
-      this.authService.register(this.registerForm.getRawValue()).subscribe({
-        next: () => {
-          setTimeout(() => {
-            this.router.navigate(['auth/login']);
-          }, 2000);
-        },
-        error: (err: HttpErrorResponse) => {
-          this.authService.handleError(err);
-        },
-      });
+    const formUserData = this.registerForm.getRawValue() as UserDetails;
+    if (this.registerForm.status === 'VALID' && this.isLoading === false) {
+      this.store.dispatch(
+        AuthActions.FetchRegister({ registerData: formUserData })
+      );
     }
+  }
+
+  ngOnInit(): void {
+    this.subscription = this.isLoading$.subscribe((value) => {
+      this.isLoading = value;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   get name() {

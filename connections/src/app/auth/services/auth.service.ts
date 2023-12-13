@@ -1,8 +1,9 @@
-import { UserDetails } from './../models/registration';
+import { IRespUserData, UserDetails } from './../models/registration';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, delay, map, tap } from 'rxjs';
+import { BehaviorSubject, catchError, delay, map, of, tap } from 'rxjs';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MessageService } from 'primeng/api';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -17,55 +18,44 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService
+    private messageService: MessageService,
+    public router: Router
   ) {}
 
-  // getCard(id: number | string | null) {
-  //   const options = { params: new HttpParams().set('id', String(id)) };
-  //   return this.http.get<CardsInfo>(this.statisticsURL, options).pipe(
-  //     map((cardsInfo) => cardsInfo.items),
-  //     map((cards) => cards[0]),
-  //     catchError(this.obsHandleError)
-  //   );
-
   login(userDetails: Omit<UserDetails, 'name'>) {
-    // const login = userDetails.email ?? '';
-    // const details: IRespUserData = { login, token: 'faketoken' };
-    // localStorage.setItem('userDetails', JSON.stringify(details));
-
-    // return of(true).pipe(
-    //   delay(1000),
-    //   tap(() => {
-    //     this.isLoggedIn.next(true);
-    //   })
-    // );
-    return this.http.post(this.loginURL, userDetails).pipe(
+    return this.http.post<IRespUserData>(this.loginURL, userDetails).pipe(
       map((userData) => {
         localStorage.setItem(
           'userDetails',
           JSON.stringify({ ...userData, email: userDetails.email })
         );
-        return userData;
+        return { ...userData, email: userDetails.email };
       }),
-      delay(1000),
+      tap(() =>
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'User login',
+        })
+      ),
       tap(() => {
         this.isLoggedIn.next(true);
+      }),
+      tap(() => {
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1500);
+      }),
+      catchError((err) => {
+        if (err) {
+          this.handleError(err);
+        }
+        return of();
       })
-      // catchError(() => this.handleError())
     );
   }
 
   register(userDetails: UserDetails) {
-    // const login = userDetails.email ?? '';
-    // const details: IRegistration = { login, token: 'faketoken' };
-    // localStorage.setItem('userDetails', JSON.stringify(details));
-
-    // return of(true).pipe(
-    //   delay(1000),
-    //   tap(() => {
-    //     this.isLoggedIn.next(true);
-    //   })
-    // );
     return this.http.post(this.registerURL, userDetails).pipe(
       tap(() =>
         this.messageService.add({
@@ -73,22 +63,20 @@ export class AuthService {
           summary: 'Success',
           detail: 'User registered',
         })
-      )
+      ),
+      tap(() =>
+        setTimeout(() => {
+          this.router.navigate(['auth/login']);
+        }, 1000)
+      ),
+      catchError((err) => {
+        if (err) {
+          this.handleError(err);
+        }
+        return of();
+      })
     );
   }
-
-  // login(userDetails: UserDetails): Observable<boolean> {
-  //   const login = userDetails.email ?? '';
-  //   const details: IRegistration = { login, token: 'faketoken' };
-  //   localStorage.setItem('userDetails', JSON.stringify(details));
-
-  //   return of(true).pipe(
-  //     delay(1000),
-  //     tap(() => {
-  //       this.isLoggedIn.next(true);
-  //     })
-  //   );
-  // }
 
   logout(): void {
     localStorage.removeItem('userDetails');
@@ -96,14 +84,10 @@ export class AuthService {
   }
 
   handleError(err: HttpErrorResponse) {
-    // if (error.status === 0) {
-    //   return `An error occurred:', ${error.error}`;
-    // }
     this.messageService.add({
       severity: 'error',
       summary: err.error.type,
       detail: err.error.message,
     });
-    // return `Backend returned code ${err.status}, body was: , ${err.error} `;
   }
 }

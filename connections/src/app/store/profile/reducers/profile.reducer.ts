@@ -5,11 +5,13 @@ import { IProfile } from 'src/app/profile/models/profile';
 export interface ProfileState {
   profileData: IProfile | null;
   isLoading: boolean;
+  edit: boolean;
 }
 
 export const initialState: ProfileState = {
   profileData: null,
-  isLoading: true,
+  isLoading: false,
+  edit: false,
 };
 
 export const reducer = createReducer(
@@ -23,53 +25,27 @@ export const reducer = createReducer(
     profileData,
     isLoading: false,
   })),
+  on(ProfileActions.FetchUpdateProfile, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(ProfileActions.ChangeEditProfile, (state, { edit }) => ({
+    ...state,
+    edit,
+  })),
   on(ProfileActions.UpdateProfile, (state, { name }) => {
     if (state.profileData) {
-      return { profileData: { ...state.profileData, name }, isLoading: false };
+      return {
+        edit: false,
+        profileData: { ...state.profileData, name },
+        isLoading: false,
+      };
     } else {
       return { ...state };
     }
-  })
-  // on(FavCardsActions.AddFavCard, (state, { newCard }) => {
-  //   if (state.favCards !== null) {
-  //     const havFav = state.favCards?.find(
-  //       (currentCard: Card) => currentCard.id === newCard.id,
-  //     );
-  //     if (!havFav) {
-  //       const newCards = state.favCards.concat(newCard);
-  //       return {
-  //         ...state,
-  //         favCards: newCards,
-  //       };
-  //     }
-  //     return {
-  //       ...state,
-  //     };
-  //   }
-  //   return {
-  //     ...state,
-  //     favCards: [newCard],
-  //   };
-  // }),
-  // on(FavCardsActions.RemoveFavCard, (state, { key }) => {
-  //   const havFav = state.favCards?.find(
-  //     (currentCard) => currentCard.id === key,
-  //   );
-  //   if (havFav) {
-  //     const newFavCards = JSON.parse(JSON.stringify(state.favCards)).filter(
-  //       (favCard: Card) => favCard.id !== key,
-  //     );
-  //     return {
-  //       ...state,
-  //       favCards: newFavCards,
-  //     };
-  //   }
-  //   return {
-  //     ...state,
-  //   };
-  // }),
-  // on(FavCardsActions.FavCardsFailed, (state, { error }) => ({
-  //   ...state,
-  //   error,
-  // })),
+  }),
+  on(ProfileActions.RemoveProfile, (state) => ({
+    ...state,
+    profileData: null,
+  }))
 );

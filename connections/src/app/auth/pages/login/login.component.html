@@ -57,20 +57,27 @@
             <button type="button" class="underline ml-1">Sign Up</button>
           </a>
         </div>
-
         <button
+          *ngIf="!isLoading; else loadingBut"
           type="submit"
-          class="mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out hover:cursor-pointer hover:shadow-yellow-300/60 active:scale-[95%]"
+          class="mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
           [ngClass]="
             loginForm.status === 'VALID'
-              ? 'opacity-100'
+              ? 'opacity-100 hover:cursor-pointer active:scale-[95%]'
               : 'opacity-50 hover:cursor-auto active:scale-100'
           "
         >
           Log in
         </button>
+        <ng-template #loadingBut
+          ><button
+            type="submit"
+            class="opacity-50 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+          >
+            Log in
+          </button></ng-template
+        >
       </div>
     </form>
   </div>
 </section>
-<p-toast position="bottom-right"></p-toast>

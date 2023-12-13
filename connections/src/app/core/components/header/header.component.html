@@ -5,25 +5,25 @@
         <img src="assets/Logo-2.svg" alt="youtube" class="w-16 h-20" />
       </a>
     </div>
-    <!-- <ng-container *ngIf="logIn"> -->
-    <div class="header__profile flex justify-center items-center">
-      <div class="flex justify-center items-center">
-        <div
-          class="mr-1 font-semibold"
-          *ngIf="profileData$ | async as profileData"
-        >
-          {{ profileData.name }}
-        </div>
-        <a routerLink="/profile" class="h-10">
-          <button
-            class="rounded-md text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+    <ng-container *ngIf="logIn">
+      <div class="header__profile flex justify-center items-center">
+        <div class="flex justify-center items-center">
+          <div
+            class="mr-1 font-semibold"
+            *ngIf="profileData$ | async as profileData"
           >
-            <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
-          </button>
-        </a>
+            {{ profileData.name }}
+          </div>
+          <a routerLink="/profile" class="h-10">
+            <button
+              class="rounded-md text-white text-md text-center ml-2 hover:shadow-lg hover:shadow-red-500/40"
+            >
+              <img src="assets/Profile.svg" alt="profile" class="w-10 h-10" />
+            </button>
+          </a>
+        </div>
       </div>
-    </div>
-    <!-- </ng-container> -->
+    </ng-container>
   </div>
 </header>
 <p-toast position="bottom-right"></p-toast>

@@ -14,7 +14,7 @@ export const selectProfileLoading = createSelector(
   (state: ProfileState) => state.isLoading
 );
 
-// export const selectFavoriteError = createSelector(
-//   selectFavoriteStore,
-//   (state: ProfileState) => state.error,
-// );
+export const selectProfileEdit = createSelector(
+  selectProfileStore,
+  (state: ProfileState) => state.edit
+);

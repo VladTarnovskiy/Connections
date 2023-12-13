@@ -4,9 +4,9 @@ export interface IRespUserData {
 }
 
 export interface UserDetails {
-  password: string | null;
-  email: string | null;
-  name: string | null;
+  password: string;
+  email: string;
+  name: string;
 }
 
 export interface IUserDataStorage {

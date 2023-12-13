@@ -12,7 +12,7 @@ export class ProfileEffects {
     private profileService: ProfileService
   ) {}
 
-  fetchCards$ = createEffect(() =>
+  fetchProfile$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ProfileActions.FetchProfile),
       exhaustMap(() =>
@@ -27,18 +27,18 @@ export class ProfileEffects {
     )
   );
 
-  // changePage$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(CardsActions.ChangeCurrentPage),
-  //     exhaustMap(({ pageToken, searchValue }) =>
-  //       this.userService.getCards(searchValue, pageToken).pipe(
-  //         map((cardsInfo) => CardsActions.FetchCardsSuccess({ cardsInfo }))
-  //         // catchError((error: HttpErrorResponse) => {
-  //         //   const handleError = this.userService.handleError(error);
-  //         //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-  //         // }),
-  //       )
-  //     )
-  //   )
-  // );
+  fetchUpdateProfile$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ProfileActions.FetchUpdateProfile),
+      exhaustMap(({ name }) =>
+        this.profileService.updateProfile(name).pipe(
+          map((name) => ProfileActions.UpdateProfile({ name }))
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
 }
