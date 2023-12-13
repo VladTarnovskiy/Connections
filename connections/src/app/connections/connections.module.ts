@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { GroupsComponent } from './components/groups/groups.component';
 import { PeopleComponent } from './components/people/people.component';
 import { GroupComponent } from './components/group/group.component';
+import { PersonComponent } from './components/person/person.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ConnectionsComponent, GroupsComponent, PeopleComponent, GroupComponent],
+  declarations: [ConnectionsComponent, GroupsComponent, PeopleComponent, GroupComponent, PersonComponent],
   imports: [SharedModule, RouterModule.forChild(routes)],
 })
 export class ConnectionsModule {}

@@ -1,6 +1,13 @@
-<div
-  class="groups__item rounded bg-gray-200 border-[1px] min-h-4 w-full mb-2 p-1 flex justify-between items-center"
->
-  <div class="group__title">Name</div>
-  <div>In chat<span class="ml-2 text-green-500">●</span></div>
+<div class="connections_title flex justify-start items-center mb-4">
+  <div class="connections__name text-3xl mr-2">Peoples</div>
+  <button class="connections__update mr-2">
+    <img src="assets/update.svg" alt="update" class="w-6 h-6" />
+  </button>
+  <div class="connections__timer">00:59</div>
+</div>
+<div class="groups__container">
+  <app-person
+    *ngFor="let personData of peopleData$ | async"
+    [personData]="personData"
+  ></app-person>
 </div>

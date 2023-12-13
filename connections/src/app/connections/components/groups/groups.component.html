@@ -1,4 +1,13 @@
-<app-group
-  *ngFor="let groupData of groupsData$ | async"
-  [groupData]="groupData"
-></app-group>
+<div class="connections_title flex justify-start items-center mb-4">
+  <div class="connections__name text-3xl mr-2">Groups</div>
+  <button class="connections__update mr-2">
+    <img src="assets/update.svg" alt="update" class="w-6 h-6" />
+  </button>
+  <div class="connections__timer">00:59</div>
+</div>
+<div class="groups__container">
+  <app-group
+    *ngFor="let groupData of groupsData$ | async"
+    [groupData]="groupData"
+  ></app-group>
+</div>

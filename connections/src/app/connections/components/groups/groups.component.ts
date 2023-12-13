@@ -27,15 +27,6 @@ export class GroupsComponent {
 
   constructor(private store: Store) {}
 
-  onSubmit() {
-    // const formUserData = this.loginForm.getRawValue() as Omit<
-    //   UserDetails,
-    //   'name'
-    // >;
-    // if (this.loginForm.status === 'VALID' && this.isLoading === false) {
-    // }
-  }
-
   // ngOnInit(): void {
   //   this.subscription = this.isLoading$.subscribe((value) => {
   //     this.isLoading = value;

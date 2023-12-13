@@ -1,27 +1,27 @@
 import { createAction, props } from '@ngrx/store';
-import { IProfile } from 'src/app/profile/models/profile';
+import { IPerson } from 'src/app/connections/models/people';
 
 const actionSource = '[People]';
 
 export const FetchPeople = createAction(`${actionSource} Fetch People`);
 
-export const FetchUpdatePeople = createAction(
-  `${actionSource} Fetch Update People`,
-  props<{ name: string }>()
-);
+// export const FetchUpdateGroups = createAction(
+//   `${actionSource} Fetch Update Groups`,
+//   props<{ name: string }>()
+// );
 
 export const AddPeople = createAction(
   `${actionSource} Add People`,
-  props<{ peopleData: IProfile }>()
+  props<{ peopleData: IPerson[] }>()
 );
 
-export const UpdatePeople = createAction(
-  `${actionSource} Update People`,
-  props<{ name: string }>()
-);
+// export const UpdateGroups = createAction(
+//   `${actionSource} Update Groups`,
+//   props<{ name: string }>()
+// );
 
-// export const ChangeEditPeople = createAction(
-//   `${actionSource} Change Edit Profile`,
+// export const ChangeEditGroups = createAction(
+//   `${actionSource} Change Edit Groups`,
 //   props<{ edit: boolean }>()
 // );
 

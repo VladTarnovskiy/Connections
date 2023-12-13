@@ -1,44 +1,43 @@
-// import { Injectable } from '@angular/core';
-// import { Actions, createEffect, ofType } from '@ngrx/effects';
-// import { map, exhaustMap, tap } from 'rxjs';
-// // import { HttpErrorResponse } from '@angular/common/http';
-// import * as ProfileActions from '../actions/profile.action';
-// import { ProfileService } from 'src/app/profile/services/profile.service';
+import { Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { map, exhaustMap } from 'rxjs';
+import * as PeopleActions from '../actions/people.action';
+import { PeopleService } from 'src/app/connections/services/people/people.service';
 
-// @Injectable()
-// export class ProfileEffects {
-//   constructor(
-//     private actions$: Actions,
-//     private profileService: ProfileService
-//   ) {}
+@Injectable()
+export class PeopleEffects {
+  constructor(
+    private actions$: Actions,
+    private peopleService: PeopleService
+  ) {}
 
-//   fetchProfile$ = createEffect(() =>
-//     this.actions$.pipe(
-//       ofType(ProfileActions.FetchProfile),
-//       exhaustMap(() =>
-//         this.profileService.getProfile().pipe(
-//           map((profileData) => ProfileActions.AddProfile({ profileData }))
-//           // catchError((error: HttpErrorResponse) => {
-//           //   const handleError = this.userService.handleError(error);
-//           //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-//           // }),
-//         )
-//       )
-//     )
-//   );
+  fetchPeople$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(PeopleActions.FetchPeople),
+      exhaustMap(() =>
+        this.peopleService.getPeople().pipe(
+          map((peopleData) => PeopleActions.AddPeople({ peopleData }))
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
 
-//   fetchUpdateProfile$ = createEffect(() =>
-//     this.actions$.pipe(
-//       ofType(ProfileActions.FetchUpdateProfile),
-//       exhaustMap(({ name }) =>
-//         this.profileService.updateProfile(name).pipe(
-//           map((name) => ProfileActions.UpdateProfile({ name }))
-//           // catchError((error: HttpErrorResponse) => {
-//           //   const handleError = this.userService.handleError(error);
-//           //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-//           // }),
-//         )
-//       )
-//     )
-//   );
-// }
+  // fetchUpdateProfile$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(ProfileActions.FetchUpdateProfile),
+  //     exhaustMap(({ name }) =>
+  //       this.profileService.updateProfile(name).pipe(
+  //         map((name) => ProfileActions.UpdateProfile({ name }))
+  //         // catchError((error: HttpErrorResponse) => {
+  //         //   const handleError = this.userService.handleError(error);
+  //         //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+  //         // }),
+  //       )
+  //     )
+  //   )
+  // );
+}

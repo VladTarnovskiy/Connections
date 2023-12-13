@@ -1,51 +1,49 @@
-// import { createReducer, on } from '@ngrx/store';
-// import * as ProfileActions from '../actions/profile.action';
-// import { IProfile } from 'src/app/profile/models/profile';
+import { createReducer, on } from '@ngrx/store';
+import * as PeopleActions from '../actions/people.action';
+import { IPerson } from 'src/app/connections/models/people';
 
-// export interface ProfileState {
-//   profileData: IProfile | null;
-//   isLoading: boolean;
-//   edit: boolean;
-// }
+export interface PeopleState {
+  peopleData: IPerson[] | null;
+  isLoading: boolean;
+}
 
-// export const initialState: ProfileState = {
-//   profileData: null,
-//   isLoading: false,
-//   edit: false,
-// };
+export const initialState: PeopleState = {
+  peopleData: null,
+  isLoading: false,
+};
 
-// export const reducer = createReducer(
-//   initialState,
-//   on(ProfileActions.FetchProfile, (state) => ({
-//     ...state,
-//     isLoading: true,
-//   })),
-//   on(ProfileActions.AddProfile, (state, { profileData }) => ({
-//     ...state,
-//     profileData,
-//     isLoading: false,
-//   })),
-//   on(ProfileActions.FetchUpdateProfile, (state) => ({
-//     ...state,
-//     isLoading: true,
-//   })),
-//   on(ProfileActions.ChangeEditProfile, (state, { edit }) => ({
-//     ...state,
-//     edit,
-//   })),
-//   on(ProfileActions.UpdateProfile, (state, { name }) => {
-//     if (state.profileData) {
-//       return {
-//         edit: false,
-//         profileData: { ...state.profileData, name },
-//         isLoading: false,
-//       };
-//     } else {
-//       return { ...state };
-//     }
-//   }),
-//   on(ProfileActions.RemoveProfile, (state) => ({
-//     ...state,
-//     profileData: null,
-//   }))
-// );
+export const reducer = createReducer(
+  initialState,
+  on(PeopleActions.FetchPeople, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(PeopleActions.AddPeople, (state, { peopleData }) => ({
+    ...state,
+    peopleData,
+    isLoading: false,
+  }))
+  // on(ProfileActions.FetchUpdateProfile, (state) => ({
+  //   ...state,
+  //   isLoading: true,
+  // })),
+  // on(ProfileActions.ChangeEditProfile, (state, { edit }) => ({
+  //   ...state,
+  //   edit,
+  // })),
+  // on(ProfileActions.UpdateProfile, (state, { name }) => {
+  //   if (state.profileData) {
+  //     return {
+  //       edit: false,
+  //       profileData: { ...state.profileData, name },
+  //       isLoading: false,
+  //     };
+  //   } else {
+  //     return { ...state };
+  //   }
+  // }),
+  // on(ProfileActions.RemoveProfile, (state) => ({
+  //   ...state,
+  //   profileData: null,
+  // }))
+);

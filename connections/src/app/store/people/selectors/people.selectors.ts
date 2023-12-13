@@ -1,18 +1,17 @@
-// import { createFeatureSelector, createSelector } from '@ngrx/store';
-// import { ProfileState } from '../reducers/profile.reducer';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { PeopleState } from '../reducers/people.reducer';
 
-// export const selectProfileStore =
-//   createFeatureSelector<ProfileState>('profileData');
+export const selectPeopleStore = createFeatureSelector<PeopleState>('people');
 
-// export const selectProfileData = createSelector(
-//   selectProfileStore,
-//   (state: ProfileState) => state.profileData
-// );
+export const selectPeopleData = createSelector(
+  selectPeopleStore,
+  (state: PeopleState) => state.peopleData
+);
 
-// export const selectProfileLoading = createSelector(
-//   selectProfileStore,
-//   (state: ProfileState) => state.isLoading
-// );
+export const selectPeopleLoading = createSelector(
+  selectPeopleStore,
+  (state: PeopleState) => state.isLoading
+);
 
 // export const selectProfileEdit = createSelector(
 //   selectProfileStore,

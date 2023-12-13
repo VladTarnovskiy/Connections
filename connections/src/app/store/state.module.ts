@@ -5,10 +5,12 @@ import { EffectsModule } from '@ngrx/effects';
 import * as fromProfile from './profile/reducers/profile.reducer';
 import * as fromAuth from './auth/reducers/auth.reducer';
 import * as fromGroups from './groups/reducers/groups.reducer';
+import * as fromPeople from './people/reducers/people.reducer';
 import { ProfileEffects } from './profile/effects/profile.effects';
 import { SharedModule } from '../shared/shared.module';
 import { AuthEffects } from './auth/effects/auth.effects';
 import { GroupsEffects } from './groups/effects/groups.effects';
+import { PeopleEffects } from './people/effects/people.effects';
 
 @NgModule({
   declarations: [],
@@ -18,12 +20,17 @@ import { GroupsEffects } from './groups/effects/groups.effects';
         profile: fromProfile.reducer,
         auth: fromAuth.reducer,
         groups: fromGroups.reducer,
-
+        people: fromPeople.reducer,
         // router: routerReducer,
       },
       {}
     ),
-    EffectsModule.forRoot([ProfileEffects, AuthEffects, GroupsEffects]),
+    EffectsModule.forRoot([
+      ProfileEffects,
+      AuthEffects,
+      GroupsEffects,
+      PeopleEffects,
+    ]),
     // StoreRouterConnectingModule.forRoot(),
     SharedModule,
   ],
