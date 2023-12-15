@@ -11,6 +11,7 @@ import {
 } from 'src/app/store/groups/selectors/groups.selectors';
 import { IGroup } from '../../models/groups';
 import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
+import { IRemoveGroupData } from 'src/app/store/groups/models/group';
 
 @Component({
   selector: 'app-groups',
@@ -26,11 +27,11 @@ export class GroupsComponent implements OnInit, OnDestroy {
   isCreateGroupModal$: Observable<boolean> = this.store.select(
     selectGroupIsCreateModal
   );
-  isRemoveGroupModal$: Observable<boolean> = this.store.select(
+  removeGroupData$: Observable<IRemoveGroupData | null> = this.store.select(
     selectGroupIsRemoveModal
   );
   isActive = true;
-  timer = 0; // isLoading = false;
+  timer = 0;
   subscription!: Subscription;
 
   constructor(private store: Store) {}

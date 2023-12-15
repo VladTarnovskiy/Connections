@@ -1,14 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
 import * as GroupsActions from '../actions/groups.action';
 import { IGroup } from 'src/app/connections/models/groups';
+import { IRemoveGroupData } from '../models/group';
 
 export interface GroupsState {
   groupsData: IGroup[];
   isLoading: boolean;
   timer: number;
   isActive: boolean;
+  removeGroupData: IRemoveGroupData | null;
   isCreateGroupModal: boolean;
-  isRemoveGroupModal: boolean;
 }
 
 export const initialState: GroupsState = {
@@ -16,8 +17,8 @@ export const initialState: GroupsState = {
   isLoading: false,
   timer: 0,
   isActive: true,
+  removeGroupData: null,
   isCreateGroupModal: false,
-  isRemoveGroupModal: false,
 };
 
 export const reducer = createReducer(
@@ -46,13 +47,10 @@ export const reducer = createReducer(
       isCreateGroupModal,
     })
   ),
-  on(
-    GroupsActions.ChangeIsRemoveGroupModal,
-    (state, { isRemoveGroupModal }) => ({
-      ...state,
-      isRemoveGroupModal,
-    })
-  ),
+  on(GroupsActions.ChangeIsRemoveGroupModal, (state, { removeGroupData }) => ({
+    ...state,
+    removeGroupData,
+  })),
   on(GroupsActions.AddGroup, (state, { name }) => {
     const temporaryGroupData: IGroup = {
       id: '',
@@ -64,6 +62,16 @@ export const reducer = createReducer(
     return {
       ...state,
       groupsData: [...state.groupsData, temporaryGroupData],
+    };
+  }),
+  on(GroupsActions.DeleteGroup, (state, { groupID }) => {
+    const groupData: IGroup[] = state.groupsData.filter(
+      (group) => group.id !== groupID
+    );
+
+    return {
+      ...state,
+      groupsData: groupData,
     };
   })
   // on(ProfileActions.FetchUpdateProfile, (state) => ({

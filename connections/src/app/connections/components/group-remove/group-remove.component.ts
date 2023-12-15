@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
 
@@ -8,15 +8,20 @@ import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
   styleUrls: ['./group-remove.component.scss'],
 })
 export class GroupRemoveComponent {
+  @Input() groupID!: string;
+
   constructor(private store: Store) {}
 
   removeGroup() {
-    console.log('ewd');
+    this.store.dispatch(
+      GroupsActions.FetchDeleteGroup({ groupID: this.groupID })
+    );
+    this.closeModal();
   }
 
   closeModal() {
     this.store.dispatch(
-      GroupsActions.ChangeIsRemoveGroupModal({ isRemoveGroupModal: false })
+      GroupsActions.ChangeIsRemoveGroupModal({ removeGroupData: null })
     );
   }
 }

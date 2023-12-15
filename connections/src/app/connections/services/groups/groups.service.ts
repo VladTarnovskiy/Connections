@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IGroupsResp } from '../../models/groups';
 import { catchError, map, of, tap } from 'rxjs';
@@ -10,6 +10,7 @@ import { ToastService } from 'src/app/core/services/toast/toast.service';
 export class GroupsService {
   private groupsURL = 'https://tasks.app.rs.school/angular/groups/list';
   private createGroupURL = 'https://tasks.app.rs.school/angular/groups/create';
+  private deleteGroupURL = 'https://tasks.app.rs.school/angular/groups/delete';
 
   constructor(private http: HttpClient, private toastService: ToastService) {}
 
@@ -39,6 +40,23 @@ export class GroupsService {
     return this.http.post(this.createGroupURL, { name }).pipe(
       tap(() => {
         this.toastService.addSuccessToast('Group created');
+      }),
+      catchError((err) => {
+        if (err) {
+          this.toastService.handleError(err);
+        }
+        return of();
+      })
+    );
+  }
+
+  deleteGroup(groupID: string) {
+    const options = {
+      params: new HttpParams().set('groupID', groupID),
+    };
+    return this.http.delete(this.deleteGroupURL, options).pipe(
+      tap(() => {
+        this.toastService.addSuccessToast('Group deleted');
       }),
       catchError((err) => {
         if (err) {

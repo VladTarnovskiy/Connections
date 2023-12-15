@@ -22,7 +22,12 @@ export class GroupComponent implements OnInit, OnDestroy {
 
   addRemoveGroupModal() {
     this.store.dispatch(
-      GroupsActions.ChangeIsRemoveGroupModal({ isRemoveGroupModal: true })
+      GroupsActions.ChangeIsRemoveGroupModal({
+        removeGroupData: {
+          isRemoveGroupModal: true,
+          groupID: this.groupData.id,
+        },
+      })
     );
   }
 

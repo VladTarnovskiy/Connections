@@ -42,6 +42,21 @@ export class GroupsEffects {
     )
   );
 
+  fetchDeleteGroup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupsActions.FetchDeleteGroup),
+      exhaustMap(({ groupID }) =>
+        this.groupsService.deleteGroup(groupID).pipe(
+          map(() => GroupsActions.DeleteGroup({ groupID }))
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
+
   // fetchUpdateProfile$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(ProfileActions.FetchUpdateProfile),

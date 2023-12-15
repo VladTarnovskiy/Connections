@@ -30,5 +30,5 @@ export const selectGroupIsCreateModal = createSelector(
 
 export const selectGroupIsRemoveModal = createSelector(
   selectGroupsStore,
-  (state: GroupsState) => state.isRemoveGroupModal
+  (state: GroupsState) => state.removeGroupData
 );
