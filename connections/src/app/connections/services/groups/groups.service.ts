@@ -1,19 +1,17 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MessageService } from 'primeng/api';
 import { IGroupsResp } from '../../models/groups';
-import { catchError, map, of } from 'rxjs';
+import { catchError, map, of, tap } from 'rxjs';
+import { ToastService } from 'src/app/core/services/toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupsService {
   private groupsURL = 'https://tasks.app.rs.school/angular/groups/list';
+  private createGroupURL = 'https://tasks.app.rs.school/angular/groups/create';
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService
-  ) {}
+  constructor(private http: HttpClient, private toastService: ToastService) {}
 
   getGroups() {
     return this.http.get<IGroupsResp>(this.groupsURL).pipe(
@@ -30,37 +28,24 @@ export class GroupsService {
       }),
       catchError((err) => {
         if (err) {
-          this.handleError(err);
+          this.toastService.handleError(err);
         }
         return of();
       })
     );
   }
 
-  // updateProfile(name: string) {
-  //   return this.http.put(this.profilerURL, { name }).pipe(
-  //     map(() => name),
-  //     tap(() =>
-  //       this.messageService.add({
-  //         severity: 'success',
-  //         summary: 'Success',
-  //         detail: 'Username updated',
-  //       })
-  //     ),
-  //     catchError((err) => {
-  //       if (err) {
-  //         this.handleError(err);
-  //       }
-  //       return of();
-  //     })
-  //   );
-  // }
-
-  handleError(err: HttpErrorResponse) {
-    this.messageService.add({
-      severity: 'error',
-      summary: err.error.type,
-      detail: err.error.message,
-    });
+  createGroup(name: string) {
+    return this.http.post(this.createGroupURL, { name }).pipe(
+      tap(() => {
+        this.toastService.addSuccessToast('Group created');
+      }),
+      catchError((err) => {
+        if (err) {
+          this.toastService.handleError(err);
+        }
+        return of();
+      })
+    );
   }
 }

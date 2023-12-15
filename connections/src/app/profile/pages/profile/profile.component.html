@@ -44,13 +44,13 @@
             *ngIf="name.errors?.['required']"
             class="invalid__message ml-auto w-fit"
           >
-            Please enter a username.
+            please enter a username
           </div>
           <div
             *ngIf="name.errors?.['maxlength']"
             class="invalid__message ml-auto w-fit"
           >
-            Username should contains less then 40 symbols.
+            username should contains less then 40 symbols
           </div>
           <div
             *ngIf="name.errors?.['forbiddenUsername']"

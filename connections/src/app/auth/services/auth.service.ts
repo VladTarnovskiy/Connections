@@ -1,10 +1,10 @@
 import { IRespUserData, UserDetails } from './../models/registration';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, of, tap } from 'rxjs';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ProfileService } from 'src/app/profile/services/profile.service';
+import { ToastService } from 'src/app/core/services/toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService,
+    private toastService: ToastService,
     private profileService: ProfileService,
     public router: Router
   ) {}
@@ -33,24 +33,16 @@ export class AuthService {
         );
         return { ...userData, email: userDetails.email };
       }),
-      tap(() =>
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'User login',
-        })
-      ),
       tap(() => {
+        this.toastService.addSuccessToast('User login');
         this.isLoggedIn.next(true);
       }),
       tap(() => {
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 1500);
+        this.router.navigate(['/']);
       }),
       catchError((err) => {
         if (err) {
-          this.handleError(err);
+          this.toastService.handleError(err);
         }
         return of();
       })
@@ -59,21 +51,11 @@ export class AuthService {
 
   register(userDetails: UserDetails) {
     return this.http.post(this.registerURL, userDetails).pipe(
-      tap(() =>
-        this.messageService.add({
-          severity: 'success',
-          summary: 'Success',
-          detail: 'User registered',
-        })
-      ),
-      tap(() =>
-        setTimeout(() => {
-          this.router.navigate(['auth/login']);
-        }, 1000)
-      ),
+      tap(() => this.toastService.addSuccessToast('User registered')),
+      tap(() => this.router.navigate(['auth/login'])),
       catchError((err) => {
         if (err) {
-          this.handleError(err);
+          this.toastService.handleError(err);
         }
         return of();
       })
@@ -89,13 +71,5 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('userDetails');
     this.isLoggedIn.next(false);
-  }
-
-  handleError(err: HttpErrorResponse) {
-    this.messageService.add({
-      severity: 'error',
-      summary: err.error.type,
-      detail: err.error.message,
-    });
   }
 }

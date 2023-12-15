@@ -13,6 +13,16 @@ export const selectPeopleLoading = createSelector(
   (state: PeopleState) => state.isLoading
 );
 
+export const selectPeopleTimer = createSelector(
+  selectPeopleStore,
+  (state: PeopleState) => state.timer
+);
+
+export const selectPeopleIsActive = createSelector(
+  selectPeopleStore,
+  (state: PeopleState) => state.isActive
+);
+
 // export const selectProfileEdit = createSelector(
 //   selectProfileStore,
 //   (state: ProfileState) => state.edit

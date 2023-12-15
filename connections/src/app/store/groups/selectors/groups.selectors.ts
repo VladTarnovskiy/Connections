@@ -13,7 +13,17 @@ export const selectGroupsLoading = createSelector(
   (state: GroupsState) => state.isLoading
 );
 
-// export const selectProfileEdit = createSelector(
-//   selectProfileStore,
-//   (state: ProfileState) => state.edit
-// );
+export const selectGroupsTimer = createSelector(
+  selectGroupsStore,
+  (state: GroupsState) => state.timer
+);
+
+export const selectGroupsIsActive = createSelector(
+  selectGroupsStore,
+  (state: GroupsState) => state.isActive
+);
+
+export const selectGroupsIsModal = createSelector(
+  selectGroupsStore,
+  (state: GroupsState) => state.isModal
+);

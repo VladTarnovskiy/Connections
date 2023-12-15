@@ -5,11 +5,15 @@ import { IPerson } from 'src/app/connections/models/people';
 export interface PeopleState {
   peopleData: IPerson[] | null;
   isLoading: boolean;
+  timer: number;
+  isActive: boolean;
 }
 
 export const initialState: PeopleState = {
   peopleData: null,
   isLoading: false,
+  timer: 0,
+  isActive: true,
 };
 
 export const reducer = createReducer(
@@ -22,6 +26,14 @@ export const reducer = createReducer(
     ...state,
     peopleData,
     isLoading: false,
+  })),
+  on(PeopleActions.ChangeTimerPeople, (state, { timer }) => ({
+    ...state,
+    timer,
+  })),
+  on(PeopleActions.ChangeIsActive, (state, { isActive }) => ({
+    ...state,
+    isActive,
   }))
   // on(ProfileActions.FetchUpdateProfile, (state) => ({
   //   ...state,

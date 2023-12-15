@@ -15,6 +15,16 @@ export const AddPeople = createAction(
   props<{ peopleData: IPerson[] }>()
 );
 
+export const ChangeTimerPeople = createAction(
+  `${actionSource} Change Timer People`,
+  props<{ timer: number }>()
+);
+
+export const ChangeIsActive = createAction(
+  `${actionSource} Change IsActive`,
+  props<{ isActive: boolean }>()
+);
+
 // export const UpdateGroups = createAction(
 //   `${actionSource} Update Groups`,
 //   props<{ name: string }>()

@@ -7,3 +7,6 @@
     <app-people></app-people>
   </div>
 </div>
+<div *ngIf="isModal$ | async">
+  <app-modal [isModal]="true"><app-group-form></app-group-form></app-modal>
+</div>

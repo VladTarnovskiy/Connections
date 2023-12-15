@@ -1,16 +1,21 @@
 import { createReducer, on } from '@ngrx/store';
 import * as GroupsActions from '../actions/groups.action';
-import { IProfile } from 'src/app/profile/models/profile';
 import { IGroup } from 'src/app/connections/models/groups';
 
 export interface GroupsState {
-  groupsData: IGroup[] | null;
+  groupsData: IGroup[];
   isLoading: boolean;
+  timer: number;
+  isActive: boolean;
+  isModal: boolean;
 }
 
 export const initialState: GroupsState = {
-  groupsData: null,
+  groupsData: [],
   isLoading: false,
+  timer: 0,
+  isActive: true,
+  isModal: false,
 };
 
 export const reducer = createReducer(
@@ -23,7 +28,32 @@ export const reducer = createReducer(
     ...state,
     groupsData,
     isLoading: false,
-  }))
+  })),
+  on(GroupsActions.ChangeTimerGroups, (state, { timer }) => ({
+    ...state,
+    timer,
+  })),
+  on(GroupsActions.ChangeIsActive, (state, { isActive }) => ({
+    ...state,
+    isActive,
+  })),
+  on(GroupsActions.ChangeIsModal, (state, { isModal }) => ({
+    ...state,
+    isModal,
+  })),
+  on(GroupsActions.AddGroup, (state, { name }) => {
+    const temporaryGroupData: IGroup = {
+      id: '',
+      name: name,
+      createdAt: '',
+      createdBy: '',
+    };
+
+    return {
+      ...state,
+      groupsData: [...state.groupsData, temporaryGroupData],
+    };
+  })
   // on(ProfileActions.FetchUpdateProfile, (state) => ({
   //   ...state,
   //   isLoading: true,

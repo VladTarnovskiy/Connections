@@ -27,6 +27,21 @@ export class GroupsEffects {
     )
   );
 
+  fetchCreateGroup$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupsActions.FetchCreateGroup),
+      exhaustMap(({ name }) =>
+        this.groupsService.createGroup(name).pipe(
+          map(() => GroupsActions.AddGroup({ name }))
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
+
   // fetchUpdateProfile$ = createEffect(() =>
   //   this.actions$.pipe(
   //     ofType(ProfileActions.FetchUpdateProfile),

@@ -22,10 +22,10 @@
           />
         </label>
         <div *ngIf="name?.errors?.['required']" class="invalid__message">
-          Please enter a username.
+          please enter a username
         </div>
         <div *ngIf="name?.errors?.['maxlength']" class="invalid__message">
-          Username should contains less then 40 symbols.
+          username should contains less then 40 symbols
         </div>
         <div
           *ngIf="name?.errors?.['forbiddenUsername']"
@@ -46,10 +46,10 @@
           />
         </label>
         <div *ngIf="email?.errors?.['required']" class="invalid__message">
-          Please enter a email.
+          please enter a email
         </div>
         <div *ngIf="email?.errors?.['email']" class="invalid__message">
-          The email is invalid.
+          the email is invalid
         </div>
       </div>
       <div class="form__item mb-5">
@@ -70,7 +70,7 @@
           />
         </label>
         <div *ngIf="password?.errors?.['required']" class="invalid__message">
-          Please enter a password.
+          please enter a password
         </div>
         <div
           *ngIf="password?.errors?.['forbiddenPassword']"

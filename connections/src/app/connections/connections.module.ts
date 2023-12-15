@@ -6,16 +6,19 @@ import { GroupsComponent } from './components/groups/groups.component';
 import { PeopleComponent } from './components/people/people.component';
 import { GroupComponent } from './components/group/group.component';
 import { PersonComponent } from './components/person/person.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { GroupFormComponent } from './components/group-form/group-form.component';
+import { ModalComponent } from '../shared/components/modal/modal.component';
 
 const routes: Routes = [
   {
     path: '',
     component: ConnectionsComponent,
   },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent,
-  // },
+  {
+    path: 'group/create',
+    component: ModalComponent,
+  },
   // {
   //   path: 'register',
   //   component: RegisterComponent,
@@ -23,7 +26,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ConnectionsComponent, GroupsComponent, PeopleComponent, GroupComponent, PersonComponent],
-  imports: [SharedModule, RouterModule.forChild(routes)],
+  declarations: [
+    ConnectionsComponent,
+    GroupsComponent,
+    PeopleComponent,
+    GroupComponent,
+    PersonComponent,
+    GroupFormComponent,
+  ],
+  imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })
 export class ConnectionsModule {}

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { IPeopleResp } from '../../models/people';
 import { catchError, map, of } from 'rxjs';
+import { ToastService } from 'src/app/core/services/toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,10 +11,7 @@ import { catchError, map, of } from 'rxjs';
 export class PeopleService {
   private peopleURL = 'https://tasks.app.rs.school/angular/users';
 
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService
-  ) {}
+  constructor(private http: HttpClient, private toastService: ToastService) {}
 
   getPeople() {
     return this.http.get<IPeopleResp>(this.peopleURL).pipe(
@@ -28,7 +26,7 @@ export class PeopleService {
       }),
       catchError((err) => {
         if (err) {
-          this.handleError(err);
+          this.toastService.handleError(err);
         }
         return of();
       })
@@ -53,12 +51,4 @@ export class PeopleService {
   //     })
   //   );
   // }
-
-  handleError(err: HttpErrorResponse) {
-    this.messageService.add({
-      severity: 'error',
-      summary: err.error.type,
-      detail: err.error.message,
-    });
-  }
 }
