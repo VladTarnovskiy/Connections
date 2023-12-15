@@ -20,9 +20,14 @@ export const ChangeIsActive = createAction(
   props<{ isActive: boolean }>()
 );
 
-export const ChangeIsModal = createAction(
-  `${actionSource} Change IsModal`,
-  props<{ isModal: boolean }>()
+export const ChangeIsCreateGroupModal = createAction(
+  `${actionSource} Change Create Group Modal`,
+  props<{ isCreateGroupModal: boolean }>()
+);
+
+export const ChangeIsRemoveGroupModal = createAction(
+  `${actionSource} Change Remove Group Modal`,
+  props<{ isRemoveGroupModal: boolean }>()
 );
 
 export const FetchCreateGroup = createAction(

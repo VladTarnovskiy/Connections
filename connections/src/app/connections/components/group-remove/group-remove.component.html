@@ -1,0 +1,27 @@
+<section
+  class="form flex flex-col justify-center px-6 py-12 lg:px-4 bg-white rounded-lg w-[500px] mt-[-50%]"
+>
+  <h2
+    class="text-center text-2xl font-bold leading-9 tracking-tight text-base_green"
+  >
+    Are you sure that you want to delete group?
+  </h2>
+  <div class="mt-10">
+    <div class="mt-8 flex justify-between">
+      <button
+        type="submit"
+        (click)="removeGroup()"
+        class="mt-2 w-full basis-2/5 rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out opacity-100 hover:cursor-pointer active:scale-[95%]"
+      >
+        Remove
+      </button>
+      <button
+        type="submit"
+        (click)="closeModal()"
+        class="mt-2 w-full basis-2/5 rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out hover:cursor-pointer active:scale-[95%]"
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</section>

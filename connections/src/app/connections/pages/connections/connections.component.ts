@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
 import * as ProfileActions from 'src/app/store/profile/actions/profile.action';
 import * as PeopleActions from 'src/app/store/people/actions/people.action';
-import { selectGroupsIsModal } from 'src/app/store/groups/selectors/groups.selectors';
 
 @Component({
   selector: 'app-connections',
@@ -13,8 +12,6 @@ import { selectGroupsIsModal } from 'src/app/store/groups/selectors/groups.selec
 })
 export class ConnectionsComponent implements OnInit {
   // @ViewChild('modal') modal!: ElementRef;
-  isModal$: Observable<boolean> = this.store.select(selectGroupsIsModal);
-
   subscription!: Subscription;
 
   constructor(private store: Store) {}

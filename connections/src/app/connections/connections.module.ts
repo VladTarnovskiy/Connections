@@ -9,6 +9,7 @@ import { PersonComponent } from './components/person/person.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { GroupFormComponent } from './components/group-form/group-form.component';
 import { ModalComponent } from '../shared/components/modal/modal.component';
+import { GroupRemoveComponent } from './components/group-remove/group-remove.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     GroupComponent,
     PersonComponent,
     GroupFormComponent,
+    GroupRemoveComponent,
   ],
   imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })

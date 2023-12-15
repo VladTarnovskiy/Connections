@@ -19,14 +19,18 @@ export class GroupFormComponent {
   constructor(private store: Store) {}
 
   closeModal() {
-    this.store.dispatch(GroupsActions.ChangeIsModal({ isModal: false }));
+    this.store.dispatch(
+      GroupsActions.ChangeIsCreateGroupModal({ isCreateGroupModal: false })
+    );
   }
 
   createGroup() {
     const name = this.name.getRawValue() as string;
     if (this.name.status === 'VALID') {
       this.store.dispatch(GroupsActions.FetchCreateGroup({ name }));
-      this.store.dispatch(GroupsActions.ChangeIsModal({ isModal: false }));
+      this.store.dispatch(
+        GroupsActions.ChangeIsCreateGroupModal({ isCreateGroupModal: false })
+      );
     }
   }
 }

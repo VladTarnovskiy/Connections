@@ -23,3 +23,9 @@
     ></app-group>
   </div>
 </div>
+<div *ngIf="isCreateGroupModal$ | async">
+  <app-modal><app-group-form></app-group-form></app-modal>
+</div>
+<div *ngIf="isRemoveGroupModal$ | async">
+  <app-modal><app-group-remove></app-group-remove></app-modal>
+</div>

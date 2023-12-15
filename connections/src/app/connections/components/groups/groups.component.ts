@@ -4,8 +4,10 @@ import { Observable, Subscription } from 'rxjs';
 import {
   selectGroupsData,
   selectGroupsIsActive,
+  selectGroupIsCreateModal,
   selectGroupsLoading,
   selectGroupsTimer,
+  selectGroupIsRemoveModal,
 } from 'src/app/store/groups/selectors/groups.selectors';
 import { IGroup } from '../../models/groups';
 import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
@@ -21,9 +23,14 @@ export class GroupsComponent implements OnInit, OnDestroy {
   isActive$: Observable<boolean> = this.store.select(selectGroupsIsActive);
   groupsData$: Observable<IGroup[] | null> =
     this.store.select(selectGroupsData);
+  isCreateGroupModal$: Observable<boolean> = this.store.select(
+    selectGroupIsCreateModal
+  );
+  isRemoveGroupModal$: Observable<boolean> = this.store.select(
+    selectGroupIsRemoveModal
+  );
   isActive = true;
-  timer = 0;
-  // isLoading = false;
+  timer = 0; // isLoading = false;
   subscription!: Subscription;
 
   constructor(private store: Store) {}
@@ -47,7 +54,9 @@ export class GroupsComponent implements OnInit, OnDestroy {
   }
 
   createGroup() {
-    this.store.dispatch(GroupsActions.ChangeIsModal({ isModal: true }));
+    this.store.dispatch(
+      GroupsActions.ChangeIsCreateGroupModal({ isCreateGroupModal: true })
+    );
   }
 
   ngOnInit(): void {

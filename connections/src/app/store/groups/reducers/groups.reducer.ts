@@ -7,7 +7,8 @@ export interface GroupsState {
   isLoading: boolean;
   timer: number;
   isActive: boolean;
-  isModal: boolean;
+  isCreateGroupModal: boolean;
+  isRemoveGroupModal: boolean;
 }
 
 export const initialState: GroupsState = {
@@ -15,7 +16,8 @@ export const initialState: GroupsState = {
   isLoading: false,
   timer: 0,
   isActive: true,
-  isModal: false,
+  isCreateGroupModal: false,
+  isRemoveGroupModal: false,
 };
 
 export const reducer = createReducer(
@@ -37,10 +39,20 @@ export const reducer = createReducer(
     ...state,
     isActive,
   })),
-  on(GroupsActions.ChangeIsModal, (state, { isModal }) => ({
-    ...state,
-    isModal,
-  })),
+  on(
+    GroupsActions.ChangeIsCreateGroupModal,
+    (state, { isCreateGroupModal }) => ({
+      ...state,
+      isCreateGroupModal,
+    })
+  ),
+  on(
+    GroupsActions.ChangeIsRemoveGroupModal,
+    (state, { isRemoveGroupModal }) => ({
+      ...state,
+      isRemoveGroupModal,
+    })
+  ),
   on(GroupsActions.AddGroup, (state, { name }) => {
     const temporaryGroupData: IGroup = {
       id: '',

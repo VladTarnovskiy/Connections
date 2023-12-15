@@ -23,7 +23,12 @@ export const selectGroupsIsActive = createSelector(
   (state: GroupsState) => state.isActive
 );
 
-export const selectGroupsIsModal = createSelector(
+export const selectGroupIsCreateModal = createSelector(
   selectGroupsStore,
-  (state: GroupsState) => state.isModal
+  (state: GroupsState) => state.isCreateGroupModal
+);
+
+export const selectGroupIsRemoveModal = createSelector(
+  selectGroupsStore,
+  (state: GroupsState) => state.isRemoveGroupModal
 );
