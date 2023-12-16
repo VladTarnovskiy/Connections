@@ -1,6 +1,15 @@
-<div
+<button
   class="groups__item rounded bg-gray-200 border-[1px] min-h-4 w-full mb-2 p-1 flex justify-between items-center"
+  (click)="getConversation()"
+  [ngClass]="personData.haveConversationID ? 'bg-base_blue/20' : ''"
 >
   <div class="group__title">{{ personData.name }}</div>
-  <div>In chat<span class="ml-2 text-green-500">●</span></div>
-</div>
+  <div *ngIf="personData.haveConversationID; else haveNotChat">
+    Have chat<span class="ml-2 text-green-500">●</span>
+  </div>
+  <ng-template #haveNotChat
+    ><div>
+      Have not chat<span class="ml-2 text-red-500">●</span>
+    </div></ng-template
+  >
+</button>

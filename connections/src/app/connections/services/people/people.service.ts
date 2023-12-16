@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPeopleResp, IPerson } from '../../models/people';
-import { catchError, map, of, switchMap } from 'rxjs';
+import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
 import { IConversationsResp } from '../../models/conversations';
 
@@ -12,6 +12,8 @@ export class PeopleService {
   private peopleURL = 'https://tasks.app.rs.school/angular/users';
   private conversationURL =
     'https://tasks.app.rs.school/angular/conversations/list';
+  private createConversationURL =
+    'https://tasks.app.rs.school/angular/conversations/create';
 
   constructor(private http: HttpClient, private toastService: ToastService) {}
 
@@ -31,32 +33,26 @@ export class PeopleService {
         // if (state.peopleData) {
         return this.getConversations().pipe(
           map((conversationsData) => {
-            // const peopleData = structuredClone(peopleData);
-            const usersDataWithActiveConv: IPerson[] = peopleData.map(
-              (people: IPerson) => {
-                // for (let i = 0; i < conversationsData.length; i++) {
-                //   if (people.uid === conversationsData[i].companionID) {
-                //     return { ...people, haveConversationID: true };
-                //   } else {
-                //     return { ...people, haveConversationID: false };
-                //   }
-                // }
-                conversationsData.forEach((conversation) => {
-                  if (people.uid === conversation.companionID) {
-                    return { ...people, haveConversationID: true };
-                  } else {
-                    return { ...people, haveConversationID: false };
-                  }
+            const usersDataWithActiveConv: IPerson[] = [];
+            peopleData.forEach((people: IPerson) => {
+              const companionIDs = conversationsData.map(
+                (conversation) => conversation.companionID
+              );
+              if (companionIDs.includes(people.uid)) {
+                usersDataWithActiveConv.push({
+                  ...people,
+                  haveConversationID: true,
                 });
-                return { ...people, haveConversationID: false };
+              } else {
+                usersDataWithActiveConv.push({
+                  ...people,
+                  haveConversationID: false,
+                });
               }
-            );
+            });
             return usersDataWithActiveConv;
-            // console.log(usersDataWithActiveConv);
           })
         );
-
-        // }
       }),
 
       catchError((err) => {
@@ -88,22 +84,28 @@ export class PeopleService {
     );
   }
 
-  // updateProfile(name: string) {
-  //   return this.http.put(this.profilerURL, { name }).pipe(
-  //     map(() => name),
-  //     tap(() =>
-  //       this.messageService.add({
-  //         severity: 'success',
-  //         summary: 'Success',
-  //         detail: 'Username updated',
-  //       })
-  //     ),
-  //     catchError((err) => {
-  //       if (err) {
-  //         this.handleError(err);
-  //       }
-  //       return of();
-  //     })
-  //   );
-  // }
+  createConversation(companion: string) {
+    return this.http.post(this.createConversationURL, { companion }).pipe(
+      // map((userData) => {
+      //   localStorage.setItem(
+      //     'userDetails',
+      //     JSON.stringify({ ...userData, email: userDetails.email })
+      //   );
+      //   return { ...userData, email: userDetails.email };
+      // }),
+      tap(() => {
+        this.toastService.addSuccessToast('User login');
+        // this.isLoggedIn.next(true);
+      }),
+      // tap(() => {
+      //   this.router.navigate(['/']);
+      // }),
+      catchError((err) => {
+        if (err) {
+          this.toastService.handleError(err);
+        }
+        return of();
+      })
+    );
+  }
 }

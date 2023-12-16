@@ -26,6 +26,16 @@ export const ChangeIsActive = createAction(
   props<{ isActive: boolean }>()
 );
 
+export const FetchConversation = createAction(
+  `${actionSource} Fetch Conversation`,
+  props<{ companion: string }>()
+);
+
+export const AddConversation = createAction(
+  `${actionSource} Add Conversation`,
+  props<{ companion: string }>()
+);
+
 // export const FetchConversations = createAction(
 //   `${actionSource} Fetch Conversations`
 // );
