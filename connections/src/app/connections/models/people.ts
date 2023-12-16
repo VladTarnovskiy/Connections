@@ -15,4 +15,5 @@ export interface IPeopleResp {
 export interface IPerson {
   name: string;
   uid: string;
+  haveConversationID?: boolean;
 }

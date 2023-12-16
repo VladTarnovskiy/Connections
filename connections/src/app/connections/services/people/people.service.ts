@@ -1,15 +1,17 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MessageService } from 'primeng/api';
-import { IPeopleResp } from '../../models/people';
-import { catchError, map, of } from 'rxjs';
+import { IPeopleResp, IPerson } from '../../models/people';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
+import { IConversationsResp } from '../../models/conversations';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PeopleService {
   private peopleURL = 'https://tasks.app.rs.school/angular/users';
+  private conversationURL =
+    'https://tasks.app.rs.school/angular/conversations/list';
 
   constructor(private http: HttpClient, private toastService: ToastService) {}
 
@@ -23,6 +25,59 @@ export class PeopleService {
           };
         });
         return peopleData;
+      }),
+
+      switchMap((peopleData) => {
+        // if (state.peopleData) {
+        return this.getConversations().pipe(
+          map((conversationsData) => {
+            // const peopleData = structuredClone(peopleData);
+            const usersDataWithActiveConv: IPerson[] = peopleData.map(
+              (people: IPerson) => {
+                // for (let i = 0; i < conversationsData.length; i++) {
+                //   if (people.uid === conversationsData[i].companionID) {
+                //     return { ...people, haveConversationID: true };
+                //   } else {
+                //     return { ...people, haveConversationID: false };
+                //   }
+                // }
+                conversationsData.forEach((conversation) => {
+                  if (people.uid === conversation.companionID) {
+                    return { ...people, haveConversationID: true };
+                  } else {
+                    return { ...people, haveConversationID: false };
+                  }
+                });
+                return { ...people, haveConversationID: false };
+              }
+            );
+            return usersDataWithActiveConv;
+            // console.log(usersDataWithActiveConv);
+          })
+        );
+
+        // }
+      }),
+
+      catchError((err) => {
+        if (err) {
+          this.toastService.handleError(err);
+        }
+        return of();
+      })
+    );
+  }
+
+  getConversations() {
+    return this.http.get<IConversationsResp>(this.conversationURL).pipe(
+      map((data: IConversationsResp) => {
+        const conversationsData = data.Items.map((conversation) => {
+          return {
+            id: conversation.id.S,
+            companionID: conversation.companionID.S,
+          };
+        });
+        return conversationsData;
       }),
       catchError((err) => {
         if (err) {

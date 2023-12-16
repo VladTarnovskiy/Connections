@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { IConversation } from 'src/app/connections/models/conversations';
 import { IPerson } from 'src/app/connections/models/people';
 
 const actionSource = '[People]';
@@ -25,9 +26,13 @@ export const ChangeIsActive = createAction(
   props<{ isActive: boolean }>()
 );
 
-// export const UpdateGroups = createAction(
-//   `${actionSource} Update Groups`,
-//   props<{ name: string }>()
+// export const FetchConversations = createAction(
+//   `${actionSource} Fetch Conversations`
+// );
+
+// export const AddConversations = createAction(
+//   `${actionSource} Add Conversations`,
+//   props<{ conversationsData: IConversation[] }>()
 // );
 
 // export const ChangeEditGroups = createAction(

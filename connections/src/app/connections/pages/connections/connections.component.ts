@@ -23,6 +23,7 @@ export class ConnectionsComponent implements OnInit {
     this.store.dispatch(ProfileActions.FetchProfile());
     this.store.dispatch(GroupsActions.FetchGroups());
     this.store.dispatch(PeopleActions.FetchPeople());
+    // this.store.dispatch(PeopleActions.FetchConversations());
   }
 
   // ngOnDestroy(): void {
