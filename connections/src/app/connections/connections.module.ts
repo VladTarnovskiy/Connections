@@ -36,6 +36,7 @@ const routes: Routes = [
     PersonComponent,
     GroupFormComponent,
     GroupRemoveComponent,
+    ConversationComponent,
   ],
   imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })

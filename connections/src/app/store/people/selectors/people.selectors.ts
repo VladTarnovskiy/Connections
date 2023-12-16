@@ -22,3 +22,8 @@ export const selectPeopleIsActive = createSelector(
   selectPeopleStore,
   (state: PeopleState) => state.isActive
 );
+
+export const selectConversations = createSelector(
+  selectPeopleStore,
+  (state: PeopleState) => state.conversationsData
+);

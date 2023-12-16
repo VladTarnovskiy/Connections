@@ -17,14 +17,6 @@ export class PeopleEffects {
       switchMap(() =>
         this.peopleService.getPeople().pipe(
           map((peopleData) => PeopleActions.AddPeople({ peopleData }))
-          // switchMap(() =>
-          //   this.peopleService.getConversations().pipe(
-          //     tap((data) => console.log(data)),
-          //     map((conversationsData) =>
-          //       PeopleActions.AddConversations({ conversationsData })
-          //     )
-          //   )
-          // )
           // catchError((error: HttpErrorResponse) => {
           //   const handleError = this.userService.handleError(error);
           //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
@@ -33,4 +25,21 @@ export class PeopleEffects {
       )
     )
   );
+
+  // fetchConversation$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(PeopleActions.FetchConversations),
+  //     switchMap(() =>
+  //       this.peopleService.getConversations().pipe(
+  //         map((conversationsData) =>
+  //           PeopleActions.AddConversations({ conversationsData })
+  //         )
+  //         // catchError((error: HttpErrorResponse) => {
+  //         //   const handleError = this.userService.handleError(error);
+  //         //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+  //         // }),
+  //       )
+  //     )
+  //   )
+  // );
 }

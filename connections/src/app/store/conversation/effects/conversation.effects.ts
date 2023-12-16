@@ -13,11 +13,11 @@ export class ConversationEffects {
 
   fetchConversation$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ConversationActions.FetchConversation),
+      ofType(ConversationActions.FetchCreateConversation),
       switchMap(({ companion }) =>
         this.conversationService.createConversation(companion).pipe(
           map((conversationID) =>
-            ConversationActions.AddConversation(conversationID)
+            ConversationActions.AddConversationID(conversationID)
           )
           // catchError((error: HttpErrorResponse) => {
           //   const handleError = this.userService.handleError(error);

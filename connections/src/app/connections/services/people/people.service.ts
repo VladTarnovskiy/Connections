@@ -4,6 +4,8 @@ import { IPeopleResp, IPerson } from '../../models/people';
 import { catchError, map, of, switchMap, tap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
 import { IConversationsResp } from '../../models/conversations';
+import * as PeopleActions from 'src/app/store/people/actions/people.action';
+import { Store } from '@ngrx/store';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,11 @@ export class PeopleService {
   private conversationURL =
     'https://tasks.app.rs.school/angular/conversations/list';
 
-  constructor(private http: HttpClient, private toastService: ToastService) {}
+  constructor(
+    private http: HttpClient,
+    private toastService: ToastService,
+    private store: Store
+  ) {}
 
   getPeople() {
     return this.http.get<IPeopleResp>(this.peopleURL).pipe(
@@ -71,6 +77,9 @@ export class PeopleService {
             companionID: conversation.companionID.S,
           };
         });
+        this.store.dispatch(
+          PeopleActions.AddConversations({ conversationsData })
+        );
         return conversationsData;
       }),
       catchError((err) => {
