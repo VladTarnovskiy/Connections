@@ -26,28 +26,4 @@ export const ChangeIsActive = createAction(
   props<{ isActive: boolean }>()
 );
 
-export const FetchConversation = createAction(
-  `${actionSource} Fetch Conversation`,
-  props<{ companion: string }>()
-);
-
-export const AddConversation = createAction(
-  `${actionSource} Add Conversation`,
-  props<{ companion: string }>()
-);
-
-// export const FetchConversations = createAction(
-//   `${actionSource} Fetch Conversations`
-// );
-
-// export const AddConversations = createAction(
-//   `${actionSource} Add Conversations`,
-//   props<{ conversationsData: IConversation[] }>()
-// );
-
-// export const ChangeEditGroups = createAction(
-//   `${actionSource} Change Edit Groups`,
-//   props<{ edit: boolean }>()
-// );
-
 export const RemovePeople = createAction(`${actionSource} Remove People`);

@@ -12,8 +12,6 @@ export class PeopleService {
   private peopleURL = 'https://tasks.app.rs.school/angular/users';
   private conversationURL =
     'https://tasks.app.rs.school/angular/conversations/list';
-  private createConversationURL =
-    'https://tasks.app.rs.school/angular/conversations/create';
 
   constructor(private http: HttpClient, private toastService: ToastService) {}
 
@@ -75,31 +73,6 @@ export class PeopleService {
         });
         return conversationsData;
       }),
-      catchError((err) => {
-        if (err) {
-          this.toastService.handleError(err);
-        }
-        return of();
-      })
-    );
-  }
-
-  createConversation(companion: string) {
-    return this.http.post(this.createConversationURL, { companion }).pipe(
-      // map((userData) => {
-      //   localStorage.setItem(
-      //     'userDetails',
-      //     JSON.stringify({ ...userData, email: userDetails.email })
-      //   );
-      //   return { ...userData, email: userDetails.email };
-      // }),
-      tap(() => {
-        this.toastService.addSuccessToast('User login');
-        // this.isLoggedIn.next(true);
-      }),
-      // tap(() => {
-      //   this.router.navigate(['/']);
-      // }),
       catchError((err) => {
         if (err) {
           this.toastService.handleError(err);

@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GroupFormComponent } from './components/group-form/group-form.component';
 import { ModalComponent } from '../shared/components/modal/modal.component';
 import { GroupRemoveComponent } from './components/group-remove/group-remove.component';
+import { ConversationComponent } from './pages/conversation/conversation.component';
 
 const routes: Routes = [
   {
@@ -20,10 +21,10 @@ const routes: Routes = [
     path: 'group/create',
     component: ModalComponent,
   },
-  // {
-  //   path: 'register',
-  //   component: RegisterComponent,
-  // },
+  {
+    path: 'conversation/:conversationID',
+    component: ConversationComponent,
+  },
 ];
 
 @NgModule({

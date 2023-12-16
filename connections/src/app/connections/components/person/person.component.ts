@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { IPerson } from '../../models/people';
 import { Store } from '@ngrx/store';
-import * as PeopleActions from 'src/app/store/people/actions/people.action';
+import * as ConversationActions from 'src/app/store/conversation/actions/conversation.action';
 
 @Component({
   selector: 'app-person',
@@ -15,7 +15,7 @@ export class PersonComponent {
 
   getConversation() {
     this.store.dispatch(
-      PeopleActions.FetchConversation({ companion: this.personData.uid })
+      ConversationActions.FetchConversation({ companion: this.personData.uid })
     );
   }
 }

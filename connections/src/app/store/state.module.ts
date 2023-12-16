@@ -6,11 +6,13 @@ import * as fromProfile from './profile/reducers/profile.reducer';
 import * as fromAuth from './auth/reducers/auth.reducer';
 import * as fromGroups from './groups/reducers/groups.reducer';
 import * as fromPeople from './people/reducers/people.reducer';
+import * as fromConversation from './conversation/reducers/conversation.reducer';
 import { ProfileEffects } from './profile/effects/profile.effects';
 import { SharedModule } from '../shared/shared.module';
 import { AuthEffects } from './auth/effects/auth.effects';
 import { GroupsEffects } from './groups/effects/groups.effects';
 import { PeopleEffects } from './people/effects/people.effects';
+import { ConversationEffects } from './conversation/effects/conversation.effects';
 
 @NgModule({
   declarations: [],
@@ -21,6 +23,7 @@ import { PeopleEffects } from './people/effects/people.effects';
         auth: fromAuth.reducer,
         groups: fromGroups.reducer,
         people: fromPeople.reducer,
+        conversation: fromConversation.reducer,
         // router: routerReducer,
       },
       {}
@@ -30,6 +33,7 @@ import { PeopleEffects } from './people/effects/people.effects';
       AuthEffects,
       GroupsEffects,
       PeopleEffects,
+      ConversationEffects,
     ]),
     // StoreRouterConnectingModule.forRoot(),
     SharedModule,

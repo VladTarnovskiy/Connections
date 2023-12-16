@@ -78,14 +78,9 @@
           <ng-container *ngIf="!isLoading; else loadingCancelBut">
             <button
               type="submit"
-              class="basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+              class="opacity-100 hover:cursor-pointer active:scale-[95%] basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
               (click)="cancelEdit()"
-              *ngIf="edit && isLoading; else editBut"
-              [ngClass]="
-                edit
-                  ? 'opacity-100 hover:cursor-pointer active:scale-[95%]'
-                  : 'opacity-50 hover:cursor-auto active:scale-100'
-              "
+              *ngIf="edit; else editBut"
             >
               Cancel
             </button></ng-container

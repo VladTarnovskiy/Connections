@@ -22,8 +22,3 @@ export const selectPeopleIsActive = createSelector(
   selectPeopleStore,
   (state: PeopleState) => state.isActive
 );
-
-// export const selectProfileEdit = createSelector(
-//   selectProfileStore,
-//   (state: ProfileState) => state.edit
-// );
