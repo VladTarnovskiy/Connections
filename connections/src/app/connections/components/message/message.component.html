@@ -1,18 +1,30 @@
-<div class="message flex flex-row mb-2 self-start">
+<div
+  class="message flex flex-row mb-2 self-start bg-gray-200 rounded-lg p-2 mr-32"
+>
   <img src="assets/profile-conv.svg" alt="profile" class="w-8 h-8 mr-1" />
   <div class="message__des flex-row justify-start w-full">
-    <div class="flex w-full">
-      <div class="message__name text-black">{{ messageData.createdAt }}</div>
+    <div class="flex w-full justify-between">
+      <div class="message__name text-black">{{ getUserName() }}</div>
+      <div class="message__name text-black">
+        {{ messageData.createdAt | date : "short" }}
+      </div>
     </div>
-    <div class="message__text">{{ messageData.message }}</div>
+    <div class="message__text mr-auto">{{ messageData.message }}</div>
   </div>
 </div>
-<!-- <div class="message flex flex-row mb-2 self-end">
+<div
+  class="message flex flex-row mb-2 self-end bg-base_blue/20 rounded-lg p-2 ml-32"
+>
   <div class="message__des flex-row justify-end w-full">
-    <div class="flex w-full">
-      <div class="message__name text-black">commentData.userName</div>
+    <div class="flex w-full justify-between">
+      <div class="message__name text-black">
+        {{ messageData.createdAt | date : "short" }}
+      </div>
+      <div class="message__name text-black">{{ getUserName() }}</div>
     </div>
-    <div class="message__text">commentData.comment</div>
+    <div class="message__text ml-auto w-fit">
+      {{ messageData.message }}
+    </div>
   </div>
   <img src="assets/profile-conv.svg" alt="profile" class="w-8 h-8 ml-1" />
-</div> -->
+</div>

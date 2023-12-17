@@ -7,7 +7,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, of, tap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
-import { IConversationResp } from '../../models/conversation';
+import {
+  IConversationResp,
+  IReqConversationMessage,
+} from '../../models/conversation';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +22,8 @@ export class ConversationService {
     'https://tasks.app.rs.school/angular/conversations/read';
   private sentMessageURL =
     'https://tasks.app.rs.school/angular/conversations/append';
+  private deleteConversationURL =
+    'https://tasks.app.rs.school/angular/conversations/delete?conversationID={:conversationID}';
 
   constructor(
     private http: HttpClient,
@@ -40,7 +45,6 @@ export class ConversationService {
         }),
         tap(() => {
           this.toastService.addSuccessToast('Conversation created');
-          // this.isLoggedIn.next(true);
         }),
         catchError((err: HttpErrorResponse) => {
           if (err) {
@@ -54,9 +58,8 @@ export class ConversationService {
   getConversation(conversationID: string) {
     console.log(conversationID);
     const options = {
-      params: new HttpParams()
-        .set('conversationID', String(conversationID))
-        .set('since', Date.now()),
+      params: new HttpParams().set('conversationID', conversationID),
+      // .set('since', Date.now()),
     };
     return this.http
       .get<{ conversationResp: IConversationResp }>(
@@ -65,6 +68,7 @@ export class ConversationService {
       )
       .pipe(
         map(({ conversationResp }) => {
+          console.log(conversationResp);
           if (conversationResp) {
             const messageData = conversationResp.Items.map((message) => {
               return {
@@ -87,33 +91,14 @@ export class ConversationService {
       );
   }
 
-  sentMessage(conversationID: string) {
-    console.log(conversationID);
-    const options = {
-      params: new HttpParams()
-        .set('conversationID', String(conversationID))
-        .set('since', Date.now()),
-    };
+  sentMessage(regData: IReqConversationMessage) {
+    console.log(regData);
     return this.http
-      .get<{ conversationResp: IConversationResp }>(
-        this.getConversationURL,
-        options
-      )
+      .post(this.sentMessageURL, {
+        conversationID: regData.conversationID,
+        message: regData.message,
+      })
       .pipe(
-        map(({ conversationResp }) => {
-          if (conversationResp) {
-            const messageData = conversationResp.Items.map((message) => {
-              return {
-                authorID: message.authorID.S,
-                message: message.message.S,
-                createdAt: message.createdAt.S,
-              };
-            });
-            return messageData;
-          } else {
-            return [];
-          }
-        }),
         catchError((err) => {
           if (err) {
             this.toastService.handleError(err);
@@ -121,5 +106,26 @@ export class ConversationService {
           return of();
         })
       );
+  }
+
+  deleteConversation(conversationID: string) {
+    const options = {
+      params: new HttpParams().set('conversationID', conversationID),
+      // .set('since', Date.now()),
+    };
+    return this.http.delete(this.deleteConversationURL, options).pipe(
+      tap((conversationID) => {
+        this.router.navigate([`/conversation/${conversationID}`]);
+      }),
+      tap(() => {
+        this.toastService.addSuccessToast('Conversation deleted');
+      }),
+      catchError((err) => {
+        if (err) {
+          this.toastService.handleError(err);
+        }
+        return of();
+      })
+    );
   }
 }

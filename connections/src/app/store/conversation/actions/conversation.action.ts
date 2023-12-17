@@ -1,5 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { IMessage } from 'src/app/connections/models/conversation';
+import {
+  IMessage,
+  IReqConversationMessage,
+} from 'src/app/connections/models/conversation';
 
 const actionSource = '[Conversation]';
 
@@ -31,4 +34,24 @@ export const FetchConversationData = createAction(
 export const AddConversationData = createAction(
   `${actionSource} Add Conversation Data`,
   props<{ conversationData: IMessage[] }>()
+);
+
+export const FetchConversationMessage = createAction(
+  `${actionSource} Fetch Conversation Message`,
+  props<{ messageData: IReqConversationMessage }>()
+);
+
+export const AddConversationMessage = createAction(
+  `${actionSource} Add Conversation Message`,
+  props<{ messageData: IReqConversationMessage }>()
+);
+
+export const FetchConversationDelete = createAction(
+  `${actionSource} Fetch Conversation Delete`,
+  props<{ conversationID: string }>()
+);
+
+export const DeleteConversation = createAction(
+  `${actionSource} Delete Conversation `
+  // props<{ messageData: IReqConversationMessage }>()
 );

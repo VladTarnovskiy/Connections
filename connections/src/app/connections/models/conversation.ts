@@ -20,3 +20,10 @@ export interface IMessage {
   message: string;
   createdAt: string;
 }
+
+export interface IReqConversationMessage {
+  conversationID: string;
+  message: string;
+  authorID: string;
+  createdAt: string;
+}

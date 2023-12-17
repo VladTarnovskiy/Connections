@@ -43,7 +43,23 @@ export const reducer = createReducer(
       ...state,
       conversationData,
     })
-  )
+  ),
+  on(ConversationActions.DeleteConversation, (state) => ({
+    ...state,
+    conversationData: [],
+  })),
+  on(ConversationActions.AddConversationMessage, (state, { messageData }) => {
+    const tempMessageData = {
+      authorID: messageData.authorID,
+      message: messageData.message,
+      createdAt: messageData.createdAt,
+    };
+
+    return {
+      ...state,
+      conversationData: [...state.conversationData, tempMessageData],
+    };
+  })
   // on(PeopleActions.ChangeTimerPeople, (state, { timer }) => ({
   //   ...state,
   //   timer,

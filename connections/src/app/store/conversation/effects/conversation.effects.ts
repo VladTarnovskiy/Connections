@@ -44,4 +44,38 @@ export class ConversationEffects {
       )
     )
   );
+
+  fetchSentConversationMessage$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ConversationActions.FetchConversationMessage),
+      switchMap(({ messageData }) =>
+        this.conversationService.sentMessage(messageData).pipe(
+          map(() => {
+            return ConversationActions.AddConversationMessage({ messageData });
+          })
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
+
+  fetchDeleteConversation$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ConversationActions.FetchConversationDelete),
+      switchMap(({ conversationID }) =>
+        this.conversationService.deleteConversation(conversationID).pipe(
+          map(() => {
+            return ConversationActions.DeleteConversation();
+          })
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
 }
