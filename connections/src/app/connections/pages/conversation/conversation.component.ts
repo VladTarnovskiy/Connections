@@ -1,12 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import * as ConversationActions from 'src/app/store/conversation/actions/conversation.action';
 import {
+  selectConversationData,
   selectConversationIsActive,
   selectConversationLoading,
   selectConversationTimer,
 } from 'src/app/store/conversation/selectors/conversation.selectors';
+import { IMessage } from '../../models/conversation';
 
 @Component({
   selector: 'app-conversation',
@@ -21,11 +24,20 @@ export class ConversationComponent implements OnInit, OnDestroy {
     selectConversationIsActive
   );
   timer$: Observable<number> = this.store.select(selectConversationTimer);
+  conversationData$: Observable<IMessage[]> = this.store.select(
+    selectConversationData
+  );
   subscription!: Subscription;
   isActive = true;
   timer = 0;
+  message = '';
+  conversationID!: string;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, route: ActivatedRoute) {
+    route.params.pipe(map((p) => p['conversationID'])).subscribe((id) => {
+      this.conversationID = id;
+    });
+  }
 
   updateConversation() {
     if (this.isActive) {
@@ -51,7 +63,16 @@ export class ConversationComponent implements OnInit, OnDestroy {
     }
   }
 
+  // getMessages() {
+  //   this.store.dispatch(ConversationActions.FetchConversationData());
+  // }
+
   ngOnInit(): void {
+    this.store.dispatch(
+      ConversationActions.FetchConversationData({
+        conversationID: this.conversationID,
+      })
+    );
     this.subscription = this.timer$.subscribe((value) => {
       this.timer = value;
     });

@@ -27,4 +27,21 @@ export class ConversationEffects {
       )
     )
   );
+
+  fetchConversationData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ConversationActions.FetchConversationData),
+      switchMap(({ conversationID }) =>
+        this.conversationService.getConversation(conversationID).pipe(
+          map((conversationData) =>
+            ConversationActions.AddConversationData({ conversationData })
+          )
+          // catchError((error: HttpErrorResponse) => {
+          //   const handleError = this.userService.handleError(error);
+          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
+          // }),
+        )
+      )
+    )
+  );
 }

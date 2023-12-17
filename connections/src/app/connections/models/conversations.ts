@@ -12,7 +12,7 @@ export interface IConversationsResp {
   ];
 }
 
-export interface IConversation {
+export interface IConversations {
   id: string; // conversation id
   companionID: string; // conversation parter's id
 }

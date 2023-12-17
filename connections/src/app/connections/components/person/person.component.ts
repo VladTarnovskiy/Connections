@@ -3,7 +3,7 @@ import { IPerson } from '../../models/people';
 import { Store } from '@ngrx/store';
 import * as ConversationActions from 'src/app/store/conversation/actions/conversation.action';
 import { Observable, Subscription } from 'rxjs';
-import { IConversation } from '../../models/conversations';
+import { IConversations } from '../../models/conversations';
 import { selectConversations } from 'src/app/store/people/selectors/people.selectors';
 import { Router } from '@angular/router';
 
@@ -14,10 +14,10 @@ import { Router } from '@angular/router';
 })
 export class PersonComponent implements OnInit, OnDestroy {
   @Input() personData!: IPerson;
-  conversationsData$: Observable<IConversation[] | null> =
+  conversationsData$: Observable<IConversations[] | null> =
     this.store.select(selectConversations);
   subscription!: Subscription;
-  conversationsData!: IConversation[] | null;
+  conversationsData!: IConversations[] | null;
 
   constructor(private store: Store, private router: Router) {}
 

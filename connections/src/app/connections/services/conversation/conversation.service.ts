@@ -1,8 +1,13 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpParams,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, map, of, tap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
+import { IConversationResp } from '../../models/conversation';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +16,9 @@ export class ConversationService {
   private createConversationURL =
     'https://tasks.app.rs.school/angular/conversations/create';
   private getConversationURL =
-    'https://tasks.app.rs.school/angular/conversations/read?conversationID=46f6aq96dzs&since=1699833375896';
+    'https://tasks.app.rs.school/angular/conversations/read';
+  private sentMessageURL =
+    'https://tasks.app.rs.school/angular/conversations/append';
 
   constructor(
     private http: HttpClient,
@@ -32,7 +39,7 @@ export class ConversationService {
           this.router.navigate([`/conversation/${conversationID}`]);
         }),
         tap(() => {
-          this.toastService.addSuccessToast('Chat created');
+          this.toastService.addSuccessToast('Conversation created');
           // this.isLoggedIn.next(true);
         }),
         catchError((err: HttpErrorResponse) => {
@@ -44,21 +51,69 @@ export class ConversationService {
       );
   }
 
-  getConversation(companion: string) {
+  getConversation(conversationID: string) {
+    console.log(conversationID);
+    const options = {
+      params: new HttpParams()
+        .set('conversationID', String(conversationID))
+        .set('since', Date.now()),
+    };
     return this.http
-      .post<{ conversationID: string }>(this.createConversationURL, {
-        companion,
-      })
+      .get<{ conversationResp: IConversationResp }>(
+        this.getConversationURL,
+        options
+      )
       .pipe(
-        map((conversationID) => {
-          return conversationID;
+        map(({ conversationResp }) => {
+          if (conversationResp) {
+            const messageData = conversationResp.Items.map((message) => {
+              return {
+                authorID: message.authorID.S,
+                message: message.message.S,
+                createdAt: message.createdAt.S,
+              };
+            });
+            return messageData;
+          } else {
+            return [];
+          }
         }),
-        // tap(() => {
-        //   this.toastService.addSuccessToast('Chat created');
-        // }),
-        // tap(() => {
-        //   this.router.navigate(['/']);
-        // }),
+        catchError((err) => {
+          if (err) {
+            this.toastService.handleError(err);
+          }
+          return of();
+        })
+      );
+  }
+
+  sentMessage(conversationID: string) {
+    console.log(conversationID);
+    const options = {
+      params: new HttpParams()
+        .set('conversationID', String(conversationID))
+        .set('since', Date.now()),
+    };
+    return this.http
+      .get<{ conversationResp: IConversationResp }>(
+        this.getConversationURL,
+        options
+      )
+      .pipe(
+        map(({ conversationResp }) => {
+          if (conversationResp) {
+            const messageData = conversationResp.Items.map((message) => {
+              return {
+                authorID: message.authorID.S,
+                message: message.message.S,
+                createdAt: message.createdAt.S,
+              };
+            });
+            return messageData;
+          } else {
+            return [];
+          }
+        }),
         catchError((err) => {
           if (err) {
             this.toastService.handleError(err);

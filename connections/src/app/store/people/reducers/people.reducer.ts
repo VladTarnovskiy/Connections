@@ -1,11 +1,11 @@
 import { createReducer, on } from '@ngrx/store';
 import * as PeopleActions from '../actions/people.action';
 import { IPerson } from 'src/app/connections/models/people';
-import { IConversation } from 'src/app/connections/models/conversations';
+import { IConversations } from 'src/app/connections/models/conversations';
 
 export interface PeopleState {
   peopleData: IPerson[] | null;
-  conversationsData: IConversation[] | null;
+  conversationsData: IConversations[] | null;
   isLoading: boolean;
   timer: number;
   isActive: boolean;

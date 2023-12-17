@@ -1,6 +1,17 @@
 <div [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'">
   <div class="connections_title flex justify-between items-center mb-4">
     <div class="flex justify-start items-center">
+      <a
+        routerLink=""
+        class="hover:cursor-pointer active:scale-[95%] mr-1"
+        (click)="updateConversation()"
+      >
+        <img
+          src="assets/arrow-sm-left.svg"
+          alt="Go to main page"
+          class="w-10 h-10"
+        />
+      </a>
       <div class="connections__name text-3xl mr-2">Conversation</div>
       <button
         class="connections__update mr-2 hover:cursor-pointer"
@@ -16,5 +27,21 @@
       <app-button>Delete</app-button>
     </button>
   </div>
-  <div class="conversation__deascription"></div>
+  <div class="conversation flex flex-col">
+    <app-message
+      *ngFor="let message of conversationData$ | async"
+      [messageData]="message"
+    ></app-message>
+  </div>
+  <div class="message__add flex mb-4">
+    <input
+      type="text"
+      placeholder="Enter message"
+      [(ngModel)]="message"
+      class="border border-gray-300 flex-grow placeholder:text-gray-500 p-1 rounded-lg"
+    />
+    <button>
+      <img src="assets/sent.svg" alt="arrow" class="w-10 h-10" />
+    </button>
+  </div>
 </div>

@@ -1,11 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
 import * as ConversationActions from '../actions/conversation.action';
+import { IMessage } from 'src/app/connections/models/conversation';
 
 export interface ConversationState {
   conversationID: string | null;
   isLoading: boolean;
   timer: number;
   isActive: boolean;
+  conversationData: IMessage[];
 }
 
 export const initialState: ConversationState = {
@@ -13,6 +15,7 @@ export const initialState: ConversationState = {
   isLoading: false,
   timer: 0,
   isActive: true,
+  conversationData: [],
 };
 
 export const reducer = createReducer(
@@ -33,7 +36,14 @@ export const reducer = createReducer(
   on(ConversationActions.ChangeTimerConversation, (state, { timer }) => ({
     ...state,
     timer,
-  }))
+  })),
+  on(
+    ConversationActions.AddConversationData,
+    (state, { conversationData }) => ({
+      ...state,
+      conversationData,
+    })
+  )
   // on(PeopleActions.ChangeTimerPeople, (state, { timer }) => ({
   //   ...state,
   //   timer,

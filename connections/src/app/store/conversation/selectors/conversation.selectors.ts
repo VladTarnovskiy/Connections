@@ -9,6 +9,11 @@ export const selectConversationID = createSelector(
   (state: ConversationState) => state.conversationID
 );
 
+export const selectConversationData = createSelector(
+  selectConversationStore,
+  (state: ConversationState) => state.conversationData
+);
+
 export const selectConversationLoading = createSelector(
   selectConversationStore,
   (state: ConversationState) => state.isLoading
@@ -23,8 +28,3 @@ export const selectConversationIsActive = createSelector(
   selectConversationStore,
   (state: ConversationState) => state.isActive
 );
-
-// export const selectProfileEdit = createSelector(
-//   selectProfileStore,
-//   (state: ProfileState) => state.edit
-// );

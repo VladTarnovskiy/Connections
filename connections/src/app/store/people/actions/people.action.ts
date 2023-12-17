@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { IConversation } from 'src/app/connections/models/conversations';
+import { IConversations } from 'src/app/connections/models/conversations';
 import { IPerson } from 'src/app/connections/models/people';
 
 const actionSource = '[People]';
@@ -32,7 +32,7 @@ export const ChangeIsActive = createAction(
 
 export const AddConversations = createAction(
   `${actionSource} Add Conversations`,
-  props<{ conversationsData: IConversation[] }>()
+  props<{ conversationsData: IConversations[] }>()
 );
 
 export const RemovePeople = createAction(`${actionSource} Remove People`);
