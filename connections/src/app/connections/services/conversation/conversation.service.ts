@@ -62,12 +62,9 @@ export class ConversationService {
       // .set('since', Date.now()),
     };
     return this.http
-      .get<{ conversationResp: IConversationResp }>(
-        this.getConversationURL,
-        options
-      )
+      .get<IConversationResp>(this.getConversationURL, options)
       .pipe(
-        map(({ conversationResp }) => {
+        map((conversationResp) => {
           console.log(conversationResp);
           if (conversationResp) {
             const messageData = conversationResp.Items.map((message) => {

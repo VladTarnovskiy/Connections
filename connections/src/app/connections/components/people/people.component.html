@@ -1,5 +1,5 @@
 <div [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'">
-  <div class="connections_title flex justify-start items-center mb-4">
+  <div class="connections_title flex justify-start items-center mb-4 h-[40px]">
     <div class="connections__name text-3xl mr-2">Peoples</div>
     <button
       class="connections__update mr-2 hover:cursor-pointer"
@@ -11,7 +11,7 @@
       00:{{ timer < 10 ? "0" : "" }}{{ timer }}
     </div>
   </div>
-  <div class="groups__container">
+  <div class="groups__container max-h-[82vh] overflow-y-scroll">
     <app-person
       *ngFor="let personData of peopleData$ | async"
       [personData]="personData"

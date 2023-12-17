@@ -1,4 +1,4 @@
-<div [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'">
+<div>
   <div class="connections_title flex justify-between items-center mb-4">
     <div class="flex justify-start items-center">
       <a
@@ -27,18 +27,30 @@
       <app-button>Delete</app-button>
     </button>
   </div>
-  <div class="conversation flex flex-col pb-16">
+  <div
+    class="conversation flex flex-col pb-16"
+    [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
+  >
+    <div
+      *ngIf="(conversationData$ | async)?.length === 0"
+      class="m-auto mt-[250px]"
+    >
+      No messages.
+    </div>
     <app-message
       *ngFor="let message of conversationData$ | async"
       [messageData]="message"
     ></app-message>
   </div>
-  <div class="message__add flex p-2 fixed bottom-0 left-0 w-full bg-white">
+  <div
+    class="message__add flex py-2 px-6 fixed bottom-0 left-0 w-full bg-white"
+  >
     <input
       type="text"
       placeholder="Enter message"
       [(ngModel)]="message"
-      class="border border-base_blue flex-grow placeholder:text-gray-500 p-1 rounded-lg outline-none"
+      (keyup.enter)="sentMessage()"
+      class="border-2 border-base_blue flex-grow placeholder:text-gray-500 p-1 rounded-lg outline-none"
     />
     <button (click)="sentMessage()">
       <img src="assets/sent.svg" alt="arrow" class="w-10 h-10" />

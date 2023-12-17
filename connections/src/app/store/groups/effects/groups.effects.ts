@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap, tap } from 'rxjs';
+import { map, exhaustMap } from 'rxjs';
 // import { HttpErrorResponse } from '@angular/common/http';
 import * as GroupsActions from '../actions/groups.action';
 import { GroupsService } from 'src/app/connections/services/groups/groups.service';

@@ -39,11 +39,16 @@ export const reducer = createReducer(
     ...state,
     timer,
   })),
+  on(ConversationActions.FetchConversationData, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(
     ConversationActions.AddConversationData,
     (state, { conversationData }) => ({
       ...state,
       conversationData,
+      isLoading: false,
     })
   ),
   on(ConversationActions.DeleteConversation, (state) => ({
@@ -71,12 +76,4 @@ export const reducer = createReducer(
       isRemoveConversationModal,
     })
   )
-  // on(PeopleActions.ChangeTimerPeople, (state, { timer }) => ({
-  //   ...state,
-  //   timer,
-  // })),
-  // on(PeopleActions.ChangeIsActive, (state, { isActive }) => ({
-  //   ...state,
-  //   isActive,
-  // }))
 );
