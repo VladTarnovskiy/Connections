@@ -6,6 +6,7 @@ import * as ConversationActions from 'src/app/store/conversation/actions/convers
 import {
   selectConversationData,
   selectConversationIsActive,
+  selectConversationIsRemoveModal,
   selectConversationLoading,
   selectConversationTimer,
 } from 'src/app/store/conversation/selectors/conversation.selectors';
@@ -24,6 +25,9 @@ export class ConversationComponent implements OnInit, OnDestroy {
   );
   isActive$: Observable<boolean> = this.store.select(
     selectConversationIsActive
+  );
+  isRemoveModal$: Observable<boolean> = this.store.select(
+    selectConversationIsRemoveModal
   );
   timer$: Observable<number> = this.store.select(selectConversationTimer);
   conversationData$: Observable<IMessage[]> = this.store.select(
@@ -74,8 +78,8 @@ export class ConversationComponent implements OnInit, OnDestroy {
 
   deleteConversation() {
     this.store.dispatch(
-      ConversationActions.FetchConversationDelete({
-        conversationID: this.conversationID,
+      ConversationActions.ChangeIsRemoveConversationModal({
+        isRemoveConversationModal: true,
       })
     );
   }

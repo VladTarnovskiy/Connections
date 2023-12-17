@@ -21,7 +21,7 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   getUserName() {
     if (this.peopleData) {
-      const matchedPerson = this.peopleData?.find(
+      const matchedPerson = this.peopleData.find(
         (person) => person.uid === this.messageData.authorID
       );
       return matchedPerson?.name || 'Unknown user';

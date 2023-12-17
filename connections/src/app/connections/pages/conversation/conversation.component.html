@@ -23,7 +23,7 @@
         00:{{ timer < 10 ? "0" : "" }}{{ timer }}
       </div>
     </div>
-    <button>
+    <button (click)="deleteConversation()">
       <app-button>Delete</app-button>
     </button>
   </div>
@@ -44,4 +44,11 @@
       <img src="assets/sent.svg" alt="arrow" class="w-10 h-10" />
     </button>
   </div>
+</div>
+<div *ngIf="isRemoveModal$ | async">
+  <app-modal
+    ><app-conversation-remove
+      [conversationID]="conversationID"
+    ></app-conversation-remove
+  ></app-modal>
 </div>

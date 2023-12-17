@@ -28,3 +28,8 @@ export const selectConversationIsActive = createSelector(
   selectConversationStore,
   (state: ConversationState) => state.isActive
 );
+
+export const selectConversationIsRemoveModal = createSelector(
+  selectConversationStore,
+  (state: ConversationState) => state.isRemoveConversationModal
+);

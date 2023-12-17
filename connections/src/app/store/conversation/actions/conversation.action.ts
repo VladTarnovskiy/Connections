@@ -55,3 +55,8 @@ export const DeleteConversation = createAction(
   `${actionSource} Delete Conversation `
   // props<{ messageData: IReqConversationMessage }>()
 );
+
+export const ChangeIsRemoveConversationModal = createAction(
+  `${actionSource} Change Remove Conversation Modal`,
+  props<{ isRemoveConversationModal: boolean }>()
+);

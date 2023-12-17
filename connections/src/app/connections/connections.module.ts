@@ -12,6 +12,7 @@ import { ModalComponent } from '../shared/components/modal/modal.component';
 import { GroupRemoveComponent } from './components/group-remove/group-remove.component';
 import { ConversationComponent } from './pages/conversation/conversation.component';
 import { MessageComponent } from './components/message/message.component';
+import { ConversationRemoveComponent } from './components/conversation-remove/conversation-remove.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     GroupRemoveComponent,
     ConversationComponent,
     MessageComponent,
+    ConversationRemoveComponent,
   ],
   imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })

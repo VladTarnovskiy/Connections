@@ -23,7 +23,7 @@ export class ConversationService {
   private sentMessageURL =
     'https://tasks.app.rs.school/angular/conversations/append';
   private deleteConversationURL =
-    'https://tasks.app.rs.school/angular/conversations/delete?conversationID={:conversationID}';
+    'https://tasks.app.rs.school/angular/conversations/delete';
 
   constructor(
     private http: HttpClient,
@@ -109,13 +109,14 @@ export class ConversationService {
   }
 
   deleteConversation(conversationID: string) {
+    console.log(conversationID);
     const options = {
       params: new HttpParams().set('conversationID', conversationID),
       // .set('since', Date.now()),
     };
     return this.http.delete(this.deleteConversationURL, options).pipe(
-      tap((conversationID) => {
-        this.router.navigate([`/conversation/${conversationID}`]);
+      tap(() => {
+        this.router.navigate(['']);
       }),
       tap(() => {
         this.toastService.addSuccessToast('Conversation deleted');

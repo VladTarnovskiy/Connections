@@ -8,6 +8,7 @@ export interface ConversationState {
   timer: number;
   isActive: boolean;
   conversationData: IMessage[];
+  isRemoveConversationModal: boolean;
 }
 
 export const initialState: ConversationState = {
@@ -15,6 +16,7 @@ export const initialState: ConversationState = {
   isLoading: false,
   timer: 0,
   isActive: true,
+  isRemoveConversationModal: false,
   conversationData: [],
 };
 
@@ -47,6 +49,8 @@ export const reducer = createReducer(
   on(ConversationActions.DeleteConversation, (state) => ({
     ...state,
     conversationData: [],
+    conversationID: null,
+    isRemoveConversationModal: false,
   })),
   on(ConversationActions.AddConversationMessage, (state, { messageData }) => {
     const tempMessageData = {
@@ -59,7 +63,14 @@ export const reducer = createReducer(
       ...state,
       conversationData: [...state.conversationData, tempMessageData],
     };
-  })
+  }),
+  on(
+    ConversationActions.ChangeIsRemoveConversationModal,
+    (state, { isRemoveConversationModal }) => ({
+      ...state,
+      isRemoveConversationModal,
+    })
+  )
   // on(PeopleActions.ChangeTimerPeople, (state, { timer }) => ({
   //   ...state,
   //   timer,
