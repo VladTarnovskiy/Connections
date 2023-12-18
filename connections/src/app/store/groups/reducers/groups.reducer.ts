@@ -74,27 +74,4 @@ export const reducer = createReducer(
       groupsData: groupData,
     };
   })
-  // on(ProfileActions.FetchUpdateProfile, (state) => ({
-  //   ...state,
-  //   isLoading: true,
-  // })),
-  // on(ProfileActions.ChangeEditProfile, (state, { edit }) => ({
-  //   ...state,
-  //   edit,
-  // })),
-  // on(ProfileActions.UpdateProfile, (state, { name }) => {
-  //   if (state.profileData) {
-  //     return {
-  //       edit: false,
-  //       profileData: { ...state.profileData, name },
-  //       isLoading: false,
-  //     };
-  //   } else {
-  //     return { ...state };
-  //   }
-  // }),
-  // on(ProfileActions.RemoveProfile, (state) => ({
-  //   ...state,
-  //   profileData: null,
-  // }))
 );

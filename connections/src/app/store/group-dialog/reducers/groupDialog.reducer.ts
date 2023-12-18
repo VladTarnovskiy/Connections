@@ -61,7 +61,7 @@ export const reducer = createReducer(
 
     return {
       ...state,
-      conversationData: [...state.groupData, tempMessageData],
+      groupData: [...state.groupData, tempMessageData],
     };
   })
   // on(

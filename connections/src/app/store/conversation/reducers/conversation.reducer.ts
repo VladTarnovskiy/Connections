@@ -67,6 +67,7 @@ export const reducer = createReducer(
     return {
       ...state,
       conversationData: [...state.conversationData, tempMessageData],
+      isLoading: false,
     };
   }),
   on(

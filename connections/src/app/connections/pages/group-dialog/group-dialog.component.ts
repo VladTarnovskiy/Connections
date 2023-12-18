@@ -47,6 +47,7 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   }
 
   updateGroupDialog() {
+    console.log('timer');
     if (this.isActive) {
       this.store.dispatch(
         GroupDialogActions.FetchGroupDialogData({
