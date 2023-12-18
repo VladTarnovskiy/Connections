@@ -1,4 +1,4 @@
-<div [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'">
+<div>
   <div
     class="connections_title flex justify-between items-center mb-4 h-[40px]"
   >
@@ -18,7 +18,10 @@
       <app-button>Create</app-button>
     </button>
   </div>
-  <div class="groups__container max-h-[82vh] overflow-y-scroll">
+  <div
+    class="groups__container max-h-[82vh] overflow-y-scroll"
+    [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
+  >
     <app-group
       *ngFor="let groupData of groupsData$ | async"
       [groupData]="groupData"

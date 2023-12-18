@@ -44,11 +44,14 @@
     <input
       type="text"
       placeholder="Enter message"
-      [(ngModel)]="message"
+      [formControl]="message"
       (keyup.enter)="sentMessage()"
       class="border-2 border-base_blue flex-grow placeholder:text-gray-500 p-1 rounded-lg outline-none"
     />
-    <button (click)="sentMessage()">
+    <button
+      (click)="sentMessage()"
+      [ngClass]="message.errors?.['required'] ? 'opacity-50':'opacity-100'"
+    >
       <img src="assets/sent.svg" alt="arrow" class="w-10 h-10" />
     </button>
   </div>

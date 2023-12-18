@@ -3,12 +3,12 @@
   (click)="getConversation()"
   [ngClass]="personData.haveConversationID ? 'bg-base_blue/20' : 'bg-gray-200'"
 >
-  <div class="group__title">{{ personData.name }}</div>
-  <div *ngIf="personData.haveConversationID; else haveNotChat">
+  <div class="group__title overflow-hidden">{{ personData.name }}</div>
+  <div class="ml-2" *ngIf="personData.haveConversationID; else haveNotChat">
     Have chat<span class="ml-2 text-green-500">●</span>
   </div>
   <ng-template #haveNotChat
-    ><div>
+    ><div class="min-w-max ml-2">
       Have not chat<span class="ml-2 text-gray-400">●</span>
     </div></ng-template
   >

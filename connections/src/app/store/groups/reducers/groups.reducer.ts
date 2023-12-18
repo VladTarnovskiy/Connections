@@ -61,7 +61,7 @@ export const reducer = createReducer(
 
     return {
       ...state,
-      groupsData: [...state.groupsData, temporaryGroupData],
+      groupsData: [temporaryGroupData, ...state.groupsData],
     };
   }),
   on(GroupsActions.DeleteGroup, (state, { groupID }) => {

@@ -15,6 +15,7 @@ import {
 } from 'src/app/store/group-dialog/selectors/groupDialog.selectors';
 import { selectGroupIsRemoveModal } from 'src/app/store/groups/selectors/groups.selectors';
 import { IRemoveGroupData } from 'src/app/store/groups/models/group';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-group-dialog',
@@ -24,7 +25,7 @@ import { IRemoveGroupData } from 'src/app/store/groups/models/group';
 export class GroupDialogComponent implements OnInit, OnDestroy {
   isLoading$: Observable<boolean> = this.store.select(selectGroupDialogLoading);
   isActive$: Observable<boolean> = this.store.select(selectGroupDialogIsActive);
-  removeGroupData$: Observable<IRemoveGroupData | null> = this.store.select(
+  isRemoveGroupModal$: Observable<IRemoveGroupData | null> = this.store.select(
     selectGroupIsRemoveModal
   );
   timer$: Observable<number> = this.store.select(selectGroupDialogTimer);
@@ -36,9 +37,9 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   isActive = true;
   timer = 0;
-  message = '';
   groupID!: string;
   authData!: IUserDataStorage | null;
+  message = new FormControl('', [Validators.required]);
 
   constructor(private store: Store, route: ActivatedRoute) {
     route.params.pipe(map((p) => p['groupID'])).subscribe((id) => {
@@ -87,10 +88,11 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   }
 
   sentMessage() {
-    if (this.authData) {
+    if (this.authData && this.message.valid) {
+      const message = this.message.getRawValue() as string;
       const messageData = {
         groupID: this.groupID,
-        message: this.message,
+        message: message,
         authorID: this.authData.uid,
         createdAt: String(Date.now()),
       };
@@ -100,6 +102,7 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
           messageData: messageData,
         })
       );
+      this.message.setValue('');
     }
   }
 

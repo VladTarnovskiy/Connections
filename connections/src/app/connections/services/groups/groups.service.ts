@@ -25,6 +25,12 @@ export class GroupsService {
             createdBy: group.createdBy.S,
           };
         });
+        groupsData
+          .sort(
+            (groupA, groupB) =>
+              Number(groupA.createdAt) - Number(groupB.createdAt)
+          )
+          .reverse();
         return groupsData;
       }),
       catchError((err) => {

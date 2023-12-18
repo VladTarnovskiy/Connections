@@ -1,4 +1,4 @@
-<div [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'">
+<div>
   <div class="people_title flex justify-start items-center mb-4 h-[40px]">
     <div class="people__name text-3xl mr-2">Peoples</div>
     <button
@@ -9,7 +9,10 @@
     </button>
     <div class="people__timer">00:{{ timer < 10 ? "0" : "" }}{{ timer }}</div>
   </div>
-  <div class="people__container max-h-[82vh] overflow-y-scroll">
+  <div
+    class="people__container max-h-[82vh] overflow-y-scroll"
+    [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
+  >
     <app-person
       *ngFor="let personData of peopleData$ | async"
       [personData]="personData"

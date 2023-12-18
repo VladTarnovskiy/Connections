@@ -13,6 +13,7 @@ import {
 import { IMessage } from '../../models/conversation';
 import { IUserDataStorage } from 'src/app/auth/models/registration';
 import { selectAuthData } from 'src/app/store/auth/selectors/auth.selectors';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-conversation',
@@ -38,7 +39,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
   subscription!: Subscription;
   isActive = true;
   timer = 0;
-  message = '';
+  message = new FormControl('', [Validators.required]);
   conversationID!: string;
   authData!: IUserDataStorage | null;
 
@@ -85,10 +86,11 @@ export class ConversationComponent implements OnInit, OnDestroy {
   }
 
   sentMessage() {
-    if (this.authData) {
+    if (this.authData && this.message.valid) {
+      const message = this.message.getRawValue() as string;
       const messageData = {
         conversationID: this.conversationID,
-        message: this.message,
+        message: message,
         authorID: this.authData.uid,
         createdAt: String(Date.now()),
       };
@@ -98,6 +100,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
           messageData: messageData,
         })
       );
+      this.message.setValue('');
     }
   }
 

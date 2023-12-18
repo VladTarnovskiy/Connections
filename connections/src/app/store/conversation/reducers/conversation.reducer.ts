@@ -57,6 +57,10 @@ export const reducer = createReducer(
     conversationID: null,
     isRemoveConversationModal: false,
   })),
+  on(ConversationActions.FetchConversationMessage, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(ConversationActions.AddConversationMessage, (state, { messageData }) => {
     const tempMessageData = {
       authorID: messageData.authorID,

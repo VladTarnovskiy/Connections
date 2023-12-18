@@ -74,6 +74,10 @@ export class ConversationService {
                 createdAt: message.createdAt.S,
               };
             });
+            messageData.sort(
+              (messageA, messageB) =>
+                Number(messageA.createdAt) - Number(messageB.createdAt)
+            );
             return messageData;
           } else {
             return [];

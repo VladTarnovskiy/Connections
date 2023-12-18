@@ -1,3 +1,4 @@
+import { FetchGroupDialogMessage } from './../actions/groupDialog.action';
 import { createReducer, on } from '@ngrx/store';
 import * as GroupDialogActions from '../actions/groupDialog.action';
 import { IMessage } from 'src/app/connections/models/conversation';
@@ -52,6 +53,10 @@ export const reducer = createReducer(
   //   conversationID: null,
   //   isRemoveConversationModal: false,
   // })),
+  on(GroupDialogActions.FetchGroupDialogMessage, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(GroupDialogActions.AddGroupDialogMessage, (state, { messageData }) => {
     const tempMessageData = {
       authorID: messageData.authorID,
@@ -62,6 +67,7 @@ export const reducer = createReducer(
     return {
       ...state,
       groupData: [...state.groupData, tempMessageData],
+      isLoading: false,
     };
   })
   // on(

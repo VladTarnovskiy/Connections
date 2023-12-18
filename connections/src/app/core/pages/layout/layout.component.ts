@@ -20,12 +20,16 @@ export class LayoutComponent implements OnInit {
 
     if (userDetails) {
       this.authService.checkLogin();
-      const authData = JSON.parse(userDetails) as IUserDataStorage;
-      this.store.dispatch(AuthActions.AddUserData({ authData }));
-      this.store.dispatch(ProfileActions.FetchProfile());
-      this.store.dispatch(PeopleActions.FetchPeople());
-      this.store.dispatch(ProfileActions.FetchProfile());
-      this.store.dispatch(GroupsActions.FetchGroups());
+      this.authService.isLoggedIn$.subscribe((loginData) => {
+        if (loginData === true) {
+          const authData = JSON.parse(userDetails) as IUserDataStorage;
+          this.store.dispatch(AuthActions.AddUserData({ authData }));
+          this.store.dispatch(ProfileActions.FetchProfile());
+          this.store.dispatch(PeopleActions.FetchPeople());
+          this.store.dispatch(ProfileActions.FetchProfile());
+          this.store.dispatch(GroupsActions.FetchGroups());
+        }
+      });
     }
   }
 }

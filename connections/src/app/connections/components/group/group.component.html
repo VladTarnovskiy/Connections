@@ -1,11 +1,17 @@
 <button
   (click)="getGroupDialog()"
-  class="groups__item rounded bg-gray-200 min-h-4 w-full mb-2 p-1 flex justify-between items-center"
+  class="groups__item rounded min-h-4 w-full mb-2 p-1 flex justify-between items-center"
+  [ngClass]="
+    authData && authData.uid === groupData.createdBy
+      ? 'bg-base_blue/20'
+      : 'bg-gray-200'
+  "
 >
-  <div class="group__title">{{ groupData.name }}</div>
+  <div class="group__title overflow-hidden">{{ groupData.name }}</div>
   <button
     *ngIf="authData && authData.uid === groupData.createdBy"
     (click)="addRemoveGroupModal()"
+    class="ml-2"
   >
     ✖
   </button>

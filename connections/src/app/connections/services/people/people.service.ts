@@ -80,6 +80,7 @@ export class PeopleService {
         this.store.dispatch(
           PeopleActions.AddConversations({ conversationsData })
         );
+
         return conversationsData;
       }),
       catchError((err) => {
