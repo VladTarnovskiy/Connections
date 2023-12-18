@@ -33,13 +33,6 @@ export const reducer = createReducer(
     ...state,
     isLoadingRegister: false,
   })),
-  // on(AuthActions.UpdateAuth, (state, { name }) => {
-  //   if (state.AuthData) {
-  //     return { AuthData: { ...state.AuthData, name }, isLoading: false };
-  //   } else {
-  //     return { ...state };
-  //   }
-  // }),
   on(AuthActions.RemoveAuthData, (state) => ({
     ...state,
     authData: null,

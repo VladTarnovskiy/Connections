@@ -1,4 +1,3 @@
-import { FetchGroupDialogMessage } from './../actions/groupDialog.action';
 import { createReducer, on } from '@ngrx/store';
 import * as GroupDialogActions from '../actions/groupDialog.action';
 import { IMessage } from 'src/app/connections/models/conversation';
@@ -8,28 +7,17 @@ export interface GroupDialogState {
   timer: number;
   isActive: boolean;
   groupData: IMessage[];
-  // isRemoveGroupDialogModal: boolean;
 }
 
 export const initialState: GroupDialogState = {
   isLoading: false,
   timer: 0,
   isActive: true,
-  // isRemoveGroupDialogModal: false,
   groupData: [],
 };
 
 export const reducer = createReducer(
   initialState,
-  // on(GroupDialogActions.FetchCreateGroupDialog, (state) => ({
-  //   ...state,
-  //   isLoading: true,
-  // })),
-  // on(GroupDialogActions.AddGroupDialogID, (state, { groupID }) => ({
-  //   ...state,
-  //   groupID,
-  //   isLoading: false,
-  // })),
   on(GroupDialogActions.ChangeIsActive, (state, { isActive }) => ({
     ...state,
     isActive,
@@ -47,12 +35,6 @@ export const reducer = createReducer(
     groupData,
     isLoading: false,
   })),
-  // on(GroupDialogActions.DeleteGroupDialog, (state) => ({
-  //   ...state,
-  //   conversationData: [],
-  //   conversationID: null,
-  //   isRemoveConversationModal: false,
-  // })),
   on(GroupDialogActions.FetchGroupDialogMessage, (state) => ({
     ...state,
     isLoading: true,
@@ -63,18 +45,10 @@ export const reducer = createReducer(
       message: messageData.message,
       createdAt: messageData.createdAt,
     };
-
     return {
       ...state,
       groupData: [...state.groupData, tempMessageData],
       isLoading: false,
     };
   })
-  // on(
-  //   GroupDialogActions.ChangeIsRemoveGroupDialogModal,
-  //   (state, { isRemoveGroupDialogModal }) => ({
-  //     ...state,
-  //     isRemoveGroupDialogModal,
-  //   })
-  // )
 );

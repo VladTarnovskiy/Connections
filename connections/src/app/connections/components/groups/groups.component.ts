@@ -75,12 +75,4 @@ export class GroupsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
-  // get email() {
-  //   return this.loginForm.get('email');
-  // }
-
-  // get password() {
-  //   return this.loginForm.get('password');
-  // }
 }

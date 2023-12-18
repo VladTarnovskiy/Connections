@@ -1,21 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import {
-  IMessage,
-  IReqConversationMessage,
-} from 'src/app/connections/models/conversation';
+import { IMessage } from 'src/app/connections/models/conversation';
 import { IReqGroupDialogMessage } from 'src/app/connections/models/groups';
 
 const actionSource = '[Group Dialog]';
-
-// export const FetchCreateGroupDialog = createAction(
-//   `${actionSource} Fetch Group Dialog`,
-//   props<{ name: string }>()
-// );
-
-// export const AddGroupDialogID = createAction(
-//   `${actionSource} Add Group Dialog ID`,
-//   props<{ groupID: string }>()
-// );
 
 export const ChangeIsActive = createAction(
   `${actionSource} Change IsActive`,
@@ -46,18 +33,3 @@ export const AddGroupDialogMessage = createAction(
   `${actionSource} Add Group Dialog Message`,
   props<{ messageData: IReqGroupDialogMessage }>()
 );
-
-// export const FetchGroupDialogDelete = createAction(
-//   `${actionSource} Fetch Group Dialog Delete`,
-//   props<{ groupID: string }>()
-// );
-
-// export const DeleteGroupDialog = createAction(
-//   `${actionSource} Delete Group Dialog `
-//   // props<{ messageData: IReqConversationMessage }>()
-// );
-
-// export const ChangeIsRemoveGroupDialogModal = createAction(
-//   `${actionSource} Change Remove Group Dialog Modal`,
-//   props<{ isRemoveGroupDialogModal: boolean }>()
-// );

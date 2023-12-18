@@ -6,11 +6,6 @@ const actionSource = '[People]';
 
 export const FetchPeople = createAction(`${actionSource} Fetch People`);
 
-// export const FetchUpdateGroups = createAction(
-//   `${actionSource} Fetch Update Groups`,
-//   props<{ name: string }>()
-// );
-
 export const AddPeople = createAction(
   `${actionSource} Add People`,
   props<{ peopleData: IPerson[] }>()
@@ -25,10 +20,6 @@ export const ChangeIsActive = createAction(
   `${actionSource} Change IsActive`,
   props<{ isActive: boolean }>()
 );
-
-// export const FetchConversations = createAction(
-//   `${actionSource} Fetch Conversations`
-// );
 
 export const AddConversations = createAction(
   `${actionSource} Add Conversations`,

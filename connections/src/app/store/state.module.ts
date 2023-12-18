@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-// import { StoreRouterConnectingModule, routerReducer } from '@ngrx/router-store';
 import * as fromProfile from './profile/reducers/profile.reducer';
 import * as fromAuth from './auth/reducers/auth.reducer';
 import * as fromGroups from './groups/reducers/groups.reducer';
@@ -27,7 +26,6 @@ import { GroupDialogEffects } from './group-dialog/effects/groupDialog.effects';
         people: fromPeople.reducer,
         conversation: fromConversation.reducer,
         groupDialog: fromGroupDialog.reducer,
-        // router: routerReducer,
       },
       {}
     ),
@@ -39,7 +37,6 @@ import { GroupDialogEffects } from './group-dialog/effects/groupDialog.effects';
       ConversationEffects,
       GroupDialogEffects,
     ]),
-    // StoreRouterConnectingModule.forRoot(),
     SharedModule,
   ],
 })

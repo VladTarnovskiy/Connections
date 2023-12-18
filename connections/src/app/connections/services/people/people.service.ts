@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IPeopleResp, IPerson } from '../../models/people';
-import { catchError, map, of, switchMap, tap } from 'rxjs';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
 import { IConversationsResp } from '../../models/conversations';
 import * as PeopleActions from 'src/app/store/people/actions/people.action';
@@ -34,7 +34,6 @@ export class PeopleService {
       }),
 
       switchMap((peopleData) => {
-        // if (state.peopleData) {
         return this.getConversations().pipe(
           map((conversationsData) => {
             const usersDataWithActiveConv: IPerson[] = [];

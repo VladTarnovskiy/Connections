@@ -36,19 +36,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   editName() {
     this.store.dispatch(ProfileActions.ChangeEditProfile({ edit: true }));
-    // this.edit = true;
   }
 
   cancelEdit() {
     this.store.dispatch(ProfileActions.ChangeEditProfile({ edit: false }));
-
-    // this.edit = false;
   }
 
   saveName(name: string) {
     if (this.name.status === 'VALID') {
       this.store.dispatch(ProfileActions.FetchUpdateProfile({ name }));
-      // this.edit = false;
     }
   }
 

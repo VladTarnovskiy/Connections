@@ -18,18 +18,6 @@ export interface IGroupsResp {
   ];
 }
 
-// export interface IGroups {
-//   Count: number;
-//   Items: [
-//     {
-//       id: string;
-//       name: string;
-//       createdAt: string;
-//       createdBy: string;
-//     }
-//   ];
-// }
-
 export interface IGroup {
   id: string;
   name: string;

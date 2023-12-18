@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, exhaustMap } from 'rxjs';
-// import { HttpErrorResponse } from '@angular/common/http';
 import * as GroupsActions from '../actions/groups.action';
 import { GroupsService } from 'src/app/connections/services/groups/groups.service';
 
@@ -16,13 +15,9 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(GroupsActions.FetchGroups),
       exhaustMap(() =>
-        this.groupsService.getGroups().pipe(
-          map((groupsData) => GroupsActions.AddGroups({ groupsData }))
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
-        )
+        this.groupsService
+          .getGroups()
+          .pipe(map((groupsData) => GroupsActions.AddGroups({ groupsData })))
       )
     )
   );
@@ -31,13 +26,9 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(GroupsActions.FetchCreateGroup),
       exhaustMap(({ name }) =>
-        this.groupsService.createGroup(name).pipe(
-          map(() => GroupsActions.AddGroup({ name }))
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
-        )
+        this.groupsService
+          .createGroup(name)
+          .pipe(map(() => GroupsActions.AddGroup({ name })))
       )
     )
   );
@@ -46,29 +37,10 @@ export class GroupsEffects {
     this.actions$.pipe(
       ofType(GroupsActions.FetchDeleteGroup),
       exhaustMap(({ groupID }) =>
-        this.groupsService.deleteGroup(groupID).pipe(
-          map(() => GroupsActions.DeleteGroup({ groupID }))
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
-        )
+        this.groupsService
+          .deleteGroup(groupID)
+          .pipe(map(() => GroupsActions.DeleteGroup({ groupID })))
       )
     )
   );
-
-  // fetchUpdateProfile$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(ProfileActions.FetchUpdateProfile),
-  //     exhaustMap(({ name }) =>
-  //       this.profileService.updateProfile(name).pipe(
-  //         map((name) => ProfileActions.UpdateProfile({ name }))
-  //         // catchError((error: HttpErrorResponse) => {
-  //         //   const handleError = this.userService.handleError(error);
-  //         //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-  //         // }),
-  //       )
-  //     )
-  //   )
-  // );
 }

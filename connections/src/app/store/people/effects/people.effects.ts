@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map, exhaustMap, tap, switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 import * as PeopleActions from '../actions/people.action';
 import { PeopleService } from 'src/app/connections/services/people/people.service';
 
@@ -15,31 +15,10 @@ export class PeopleEffects {
     this.actions$.pipe(
       ofType(PeopleActions.FetchPeople),
       switchMap(() =>
-        this.peopleService.getPeople().pipe(
-          map((peopleData) => PeopleActions.AddPeople({ peopleData }))
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
-        )
+        this.peopleService
+          .getPeople()
+          .pipe(map((peopleData) => PeopleActions.AddPeople({ peopleData })))
       )
     )
   );
-
-  // fetchConversation$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(PeopleActions.FetchConversations),
-  //     switchMap(() =>
-  //       this.peopleService.getConversations().pipe(
-  //         map((conversationsData) =>
-  //           PeopleActions.AddConversations({ conversationsData })
-  //         )
-  //         // catchError((error: HttpErrorResponse) => {
-  //         //   const handleError = this.userService.handleError(error);
-  //         //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-  //         // }),
-  //       )
-  //     )
-  //   )
-  // );
 }

@@ -15,15 +15,13 @@ export class ConversationEffects {
     this.actions$.pipe(
       ofType(ConversationActions.FetchCreateConversation),
       switchMap(({ companion }) =>
-        this.conversationService.createConversation(companion).pipe(
-          map((conversationID) =>
-            ConversationActions.AddConversationID(conversationID)
+        this.conversationService
+          .createConversation(companion)
+          .pipe(
+            map((conversationID) =>
+              ConversationActions.AddConversationID(conversationID)
+            )
           )
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
-        )
       )
     )
   );
@@ -32,15 +30,13 @@ export class ConversationEffects {
     this.actions$.pipe(
       ofType(ConversationActions.FetchConversationData),
       switchMap(({ conversationID }) =>
-        this.conversationService.getConversation(conversationID).pipe(
-          map((conversationData) =>
-            ConversationActions.AddConversationData({ conversationData })
+        this.conversationService
+          .getConversation(conversationID)
+          .pipe(
+            map((conversationData) =>
+              ConversationActions.AddConversationData({ conversationData })
+            )
           )
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
-        )
       )
     )
   );
@@ -53,10 +49,6 @@ export class ConversationEffects {
           map(() => {
             return ConversationActions.AddConversationMessage({ messageData });
           })
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
         )
       )
     )
@@ -70,10 +62,6 @@ export class ConversationEffects {
           map(() => {
             return ConversationActions.DeleteConversation();
           })
-          // catchError((error: HttpErrorResponse) => {
-          //   const handleError = this.userService.handleError(error);
-          //   return of(CardsActions.FetchCardsFailed({ error: handleError }));
-          // }),
         )
       )
     )

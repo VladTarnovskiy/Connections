@@ -19,10 +19,6 @@ export class GroupComponent implements OnInit, OnDestroy {
     this.store.select(selectAuthData);
   authData!: IUserDataStorage | null;
 
-  // groupsData$: Observable<IConversations[] | null> =
-  //   this.store.select(selectGroupDialogData);
-  // groupsData!: IConversations[] | null;
-
   constructor(private store: Store, private router: Router) {}
 
   addRemoveGroupModal() {
@@ -37,30 +33,13 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   getGroupDialog() {
-    // if (this.personData.haveConversationID && this.conversationsData) {
-    //   this.conversationsData.forEach((conversation) => {
-    //     if (conversation.companionID === this.personData.uid) {
     this.router.navigate([`/group/${this.groupData.id}`]);
-    //     }
-    //   });
-    // } else {
-    //   this.store.dispatch(
-    //     ConversationActions.FetchCreateConversation({
-    //       companion: this.personData.uid,
-    //     })
-    //   );
-    // }
   }
 
   ngOnInit(): void {
     this.subscription = this.authData$.subscribe((value) => {
       this.authData = value;
     });
-    // const childSubs = this.groupsData$.subscribe((groupsData) => {
-    //   this.groupsData = groupsData;
-    // });
-
-    // this.subscription.add(childSubs);
   }
 
   ngOnDestroy(): void {

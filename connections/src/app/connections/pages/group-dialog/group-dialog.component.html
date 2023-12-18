@@ -19,7 +19,7 @@
         00:{{ timer < 10 ? "0" : "" }}{{ timer }}
       </div>
     </div>
-    <button (click)="deleteGroupDialog()">
+    <button *ngIf="isDeleteButActive()" (click)="deleteGroupDialog()">
       <app-button>Delete</app-button>
     </button>
   </div>

@@ -13,9 +13,13 @@ import {
   selectGroupDialogLoading,
   selectGroupDialogTimer,
 } from 'src/app/store/group-dialog/selectors/groupDialog.selectors';
-import { selectGroupIsRemoveModal } from 'src/app/store/groups/selectors/groups.selectors';
+import {
+  selectGroupIsRemoveModal,
+  selectGroupsData,
+} from 'src/app/store/groups/selectors/groups.selectors';
 import { IRemoveGroupData } from 'src/app/store/groups/models/group';
 import { FormControl, Validators } from '@angular/forms';
+import { IGroup } from '../../models/groups';
 
 @Component({
   selector: 'app-group-dialog',
@@ -34,6 +38,9 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   );
   authData$: Observable<IUserDataStorage | null> =
     this.store.select(selectAuthData);
+  groupsData$: Observable<IGroup[] | null> =
+    this.store.select(selectGroupsData);
+  groupsData!: IGroup[] | null;
   subscription!: Subscription;
   isActive = true;
   timer = 0;
@@ -48,7 +55,6 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   }
 
   updateGroupDialog() {
-    console.log('timer');
     if (this.isActive) {
       this.store.dispatch(
         GroupDialogActions.FetchGroupDialogData({
@@ -106,6 +112,16 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  isDeleteButActive() {
+    if (this.authData && this.groupsData) {
+      const groupX = this.groupsData.find((group) => group.id === this.groupID);
+      if (groupX) {
+        return groupX.createdBy === this.authData.uid;
+      }
+    }
+    return false;
+  }
+
   ngOnInit(): void {
     this.store.dispatch(
       GroupDialogActions.FetchGroupDialogData({
@@ -120,12 +136,16 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
       this.isActive = value;
     });
 
-    const twoChildSubscription = this.authData$.subscribe((authData) => {
+    const secondChildSubscription = this.authData$.subscribe((authData) => {
       this.authData = authData;
+    });
+    const thirdChildSubscription = this.groupsData$.subscribe((groupsData) => {
+      this.groupsData = groupsData;
     });
 
     this.subscription.add(childSubscription);
-    this.subscription.add(twoChildSubscription);
+    this.subscription.add(secondChildSubscription);
+    this.subscription.add(thirdChildSubscription);
   }
 
   ngOnDestroy(): void {

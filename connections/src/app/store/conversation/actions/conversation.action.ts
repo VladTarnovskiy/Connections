@@ -53,7 +53,6 @@ export const FetchConversationDelete = createAction(
 
 export const DeleteConversation = createAction(
   `${actionSource} Delete Conversation `
-  // props<{ messageData: IReqConversationMessage }>()
 );
 
 export const ChangeIsRemoveConversationModal = createAction(

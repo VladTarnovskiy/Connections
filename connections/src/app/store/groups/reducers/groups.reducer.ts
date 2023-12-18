@@ -58,7 +58,6 @@ export const reducer = createReducer(
       createdAt: '',
       createdBy: '',
     };
-
     return {
       ...state,
       groupsData: [temporaryGroupData, ...state.groupsData],
@@ -68,7 +67,6 @@ export const reducer = createReducer(
     const groupData: IGroup[] = state.groupsData.filter(
       (group) => group.id !== groupID
     );
-
     return {
       ...state,
       groupsData: groupData,

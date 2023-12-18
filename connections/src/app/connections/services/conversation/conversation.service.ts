@@ -56,7 +56,6 @@ export class ConversationService {
   }
 
   getConversation(conversationID: string) {
-    console.log(conversationID);
     const options = {
       params: new HttpParams().set('conversationID', conversationID),
       // .set('since', Date.now()),
@@ -65,7 +64,6 @@ export class ConversationService {
       .get<IConversationResp>(this.getConversationURL, options)
       .pipe(
         map((conversationResp) => {
-          console.log(conversationResp);
           if (conversationResp) {
             const messageData = conversationResp.Items.map((message) => {
               return {
@@ -93,7 +91,6 @@ export class ConversationService {
   }
 
   sentMessage(regData: IReqConversationMessage) {
-    console.log(regData);
     return this.http
       .post(this.sentMessageURL, {
         conversationID: regData.conversationID,
@@ -110,10 +107,8 @@ export class ConversationService {
   }
 
   deleteConversation(conversationID: string) {
-    console.log(conversationID);
     const options = {
       params: new HttpParams().set('conversationID', conversationID),
-      // .set('since', Date.now()),
     };
     return this.http.delete(this.deleteConversationURL, options).pipe(
       tap(() => {
