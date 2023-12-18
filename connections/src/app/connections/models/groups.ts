@@ -36,3 +36,10 @@ export interface IGroup {
   createdAt: string;
   createdBy: string;
 }
+
+export interface IReqGroupDialogMessage {
+  groupID: string;
+  message: string;
+  authorID: string;
+  createdAt: string;
+}

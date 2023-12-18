@@ -13,6 +13,7 @@ import { GroupRemoveComponent } from './components/group-remove/group-remove.com
 import { ConversationComponent } from './pages/conversation/conversation.component';
 import { MessageComponent } from './components/message/message.component';
 import { ConversationRemoveComponent } from './components/conversation-remove/conversation-remove.component';
+import { GroupDialogComponent } from './pages/group-dialog/group-dialog.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'conversation/:conversationID',
     component: ConversationComponent,
+  },
+  {
+    path: 'group/:groupID',
+    component: GroupDialogComponent,
   },
 ];
 
@@ -41,6 +46,7 @@ const routes: Routes = [
     ConversationComponent,
     MessageComponent,
     ConversationRemoveComponent,
+    GroupDialogComponent,
   ],
   imports: [SharedModule, ReactiveFormsModule, RouterModule.forChild(routes)],
 })

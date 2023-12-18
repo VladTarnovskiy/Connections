@@ -11,13 +11,14 @@ import {
   IConversationResp,
   IReqConversationMessage,
 } from '../../models/conversation';
+import { IReqGroupDialogMessage } from '../../models/groups';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GroupDialogService {
-  private createGroupDialogURL =
-    'https://tasks.app.rs.school/angular/groups/create';
+  // private createGroupDialogURL =
+  //   'https://tasks.app.rs.school/angular/groups/create';
   private getGroupDialogURL = 'https://tasks.app.rs.school/angular/groups/read';
   private sentMessageURL = 'https://tasks.app.rs.school/angular/groups/append';
   private deleteGroupDialogURL =
@@ -53,21 +54,21 @@ export class GroupDialogService {
   //     );
   // }
 
-  createGroup(name: string) {
-    return this.http
-      .post<{ groupID: string }>(this.createGroupDialogURL, { name })
-      .pipe(
-        tap(() => {
-          this.toastService.addSuccessToast('Group created');
-        }),
-        catchError((err) => {
-          if (err) {
-            this.toastService.handleError(err);
-          }
-          return of();
-        })
-      );
-  }
+  // createGroup(name: string) {
+  //   return this.http
+  //     .post<{ groupID: string }>(this.createGroupDialogURL, { name })
+  //     .pipe(
+  //       tap(() => {
+  //         this.toastService.addSuccessToast('Group created');
+  //       }),
+  //       catchError((err) => {
+  //         if (err) {
+  //           this.toastService.handleError(err);
+  //         }
+  //         return of();
+  //       })
+  //     );
+  // }
 
   deleteGroup(groupID: string) {
     const options = {
@@ -89,7 +90,7 @@ export class GroupDialogService {
   getGroup(groupID: string) {
     console.log(groupID);
     const options = {
-      params: new HttpParams().set('conversationID', groupID),
+      params: new HttpParams().set('groupID', groupID),
       // .set('since', Date.now()),
     };
     return this.http
@@ -119,11 +120,11 @@ export class GroupDialogService {
       );
   }
 
-  sentMessage(regData: IReqConversationMessage) {
+  sentMessage(regData: IReqGroupDialogMessage) {
     console.log(regData);
     return this.http
       .post(this.sentMessageURL, {
-        groupID: regData.conversationID,
+        groupID: regData.groupID,
         message: regData.message,
       })
       .pipe(

@@ -4,10 +4,10 @@ import { GroupDialogState } from '../reducers/groupDialog.reducer';
 export const selectConversationStore =
   createFeatureSelector<GroupDialogState>('groupDialog');
 
-export const selectGroupDialogID = createSelector(
-  selectConversationStore,
-  (state: GroupDialogState) => state.groupID
-);
+// export const selectGroupDialogID = createSelector(
+//   selectConversationStore,
+//   (state: GroupDialogState) => state.groupID
+// );
 
 export const selectGroupDialogData = createSelector(
   selectConversationStore,
@@ -29,7 +29,7 @@ export const selectGroupDialogIsActive = createSelector(
   (state: GroupDialogState) => state.isActive
 );
 
-export const selectGroupDialogIsRemoveModal = createSelector(
-  selectConversationStore,
-  (state: GroupDialogState) => state.isRemoveGroupDialogModal
-);
+// export const selectGroupDialogIsRemoveModal = createSelector(
+//   selectConversationStore,
+//   (state: GroupDialogState) => state.isRemoveGroupDialogModal
+// );

@@ -3,34 +3,32 @@ import * as GroupDialogActions from '../actions/groupDialog.action';
 import { IMessage } from 'src/app/connections/models/conversation';
 
 export interface GroupDialogState {
-  groupID: string | null;
   isLoading: boolean;
   timer: number;
   isActive: boolean;
   groupData: IMessage[];
-  isRemoveGroupDialogModal: boolean;
+  // isRemoveGroupDialogModal: boolean;
 }
 
 export const initialState: GroupDialogState = {
-  groupID: null,
   isLoading: false,
   timer: 0,
   isActive: true,
-  isRemoveGroupDialogModal: false,
+  // isRemoveGroupDialogModal: false,
   groupData: [],
 };
 
 export const reducer = createReducer(
   initialState,
-  on(GroupDialogActions.FetchCreateGroupDialog, (state) => ({
-    ...state,
-    isLoading: true,
-  })),
-  on(GroupDialogActions.AddGroupDialogID, (state, { groupID }) => ({
-    ...state,
-    groupID,
-    isLoading: false,
-  })),
+  // on(GroupDialogActions.FetchCreateGroupDialog, (state) => ({
+  //   ...state,
+  //   isLoading: true,
+  // })),
+  // on(GroupDialogActions.AddGroupDialogID, (state, { groupID }) => ({
+  //   ...state,
+  //   groupID,
+  //   isLoading: false,
+  // })),
   on(GroupDialogActions.ChangeIsActive, (state, { isActive }) => ({
     ...state,
     isActive,
@@ -48,12 +46,12 @@ export const reducer = createReducer(
     groupData,
     isLoading: false,
   })),
-  on(GroupDialogActions.DeleteGroupDialog, (state) => ({
-    ...state,
-    conversationData: [],
-    conversationID: null,
-    isRemoveConversationModal: false,
-  })),
+  // on(GroupDialogActions.DeleteGroupDialog, (state) => ({
+  //   ...state,
+  //   conversationData: [],
+  //   conversationID: null,
+  //   isRemoveConversationModal: false,
+  // })),
   on(GroupDialogActions.AddGroupDialogMessage, (state, { messageData }) => {
     const tempMessageData = {
       authorID: messageData.authorID,
@@ -65,12 +63,12 @@ export const reducer = createReducer(
       ...state,
       conversationData: [...state.groupData, tempMessageData],
     };
-  }),
-  on(
-    GroupDialogActions.ChangeIsRemoveGroupDialogModal,
-    (state, { isRemoveGroupDialogModal }) => ({
-      ...state,
-      isRemoveGroupDialogModal,
-    })
-  )
+  })
+  // on(
+  //   GroupDialogActions.ChangeIsRemoveGroupDialogModal,
+  //   (state, { isRemoveGroupDialogModal }) => ({
+  //     ...state,
+  //     isRemoveGroupDialogModal,
+  //   })
+  // )
 );
