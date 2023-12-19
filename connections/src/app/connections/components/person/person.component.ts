@@ -22,6 +22,10 @@ export class PersonComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private router: Router) {}
 
   getConversation() {
+    localStorage.setItem(
+      'conversationName',
+      JSON.stringify(this.personData.name)
+    );
     if (this.personData.haveConversationID && this.conversationsData) {
       this.conversationsData.forEach((conversation) => {
         if (conversation.companionID === this.personData.uid) {

@@ -48,6 +48,7 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   groupID!: string;
   authData!: IUserDataStorage | null;
   message = new FormControl('', [Validators.required]);
+  groupName = 'Group Dialog';
 
   constructor(private store: Store, route: ActivatedRoute) {
     route.params.pipe(map((p) => p['groupID'])).subscribe((id) => {
@@ -123,6 +124,16 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
       }
     }
     return false;
+  }
+
+  getGroupName() {
+    if (this.groupsData) {
+      const group = this.groupsData?.find((group) => group.id === this.groupID);
+      if (group) {
+        this.groupName = group.name;
+      }
+    }
+    return this.groupName;
   }
 
   ngOnInit(): void {

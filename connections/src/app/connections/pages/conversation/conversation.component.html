@@ -8,7 +8,9 @@
           class="w-10 h-10"
         />
       </a>
-      <div class="connections__name text-3xl mr-2">Conversation</div>
+      <div class="connections__name text-3xl mr-2">
+        {{ getConversationName() }}
+      </div>
       <button
         class="connections__update mr-2 hover:cursor-pointer"
         (click)="updateConversation()"

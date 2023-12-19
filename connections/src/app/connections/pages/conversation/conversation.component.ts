@@ -44,6 +44,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
   message = new FormControl('', [Validators.required]);
   conversationID!: string;
   authData!: IUserDataStorage | null;
+  conversationName = 'Conversation';
 
   constructor(private store: Store, route: ActivatedRoute) {
     route.params.pipe(map((p) => p['conversationID'])).subscribe((id) => {
@@ -106,6 +107,16 @@ export class ConversationComponent implements OnInit, OnDestroy {
       );
       this.message.setValue('');
     }
+  }
+
+  getConversationName() {
+    const conversationNameStorage = localStorage.getItem('conversationName');
+    if (conversationNameStorage) {
+      const conversationName = JSON.parse(conversationNameStorage);
+      this.conversationName = conversationName;
+    }
+    console.log(this.conversationName);
+    return this.conversationName;
   }
 
   ngOnInit(): void {
