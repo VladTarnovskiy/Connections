@@ -26,6 +26,21 @@ export class ConversationEffects {
     )
   );
 
+  fetchUpdateConversationData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(ConversationActions.FetchUpdateConversationData),
+      switchMap(({ conversationID, science }) => {
+        return this.conversationService
+          .getConversation(conversationID, science)
+          .pipe(
+            map((conversationData) =>
+              ConversationActions.UpdateConversationData({ conversationData })
+            )
+          );
+      })
+    )
+  );
+
   fetchConversationData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(ConversationActions.FetchConversationData),

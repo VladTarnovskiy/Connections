@@ -24,6 +24,16 @@ export const AddGroupDialogData = createAction(
   props<{ groupData: IMessage[] }>()
 );
 
+export const FetchUpdateGroupDialogData = createAction(
+  `${actionSource} Fetch Update Group Dialog Data`,
+  props<{ groupID: string; science: string }>()
+);
+
+export const UpdateGroupDialogData = createAction(
+  `${actionSource} Update Group Dialog Data`,
+  props<{ groupData: IMessage[] }>()
+);
+
 export const FetchGroupDialogMessage = createAction(
   `${actionSource} Fetch Group Dialog Message`,
   props<{ messageData: IReqGroupDialogMessage }>()

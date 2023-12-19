@@ -33,11 +33,18 @@ export class GroupDialogService {
     );
   }
 
-  getGroup(groupID: string) {
-    const options = {
-      params: new HttpParams().set('groupID', groupID),
-      // .set('since', Date.now()),
-    };
+  getGroup(groupID: string, science?: string) {
+    let options: { params: HttpParams };
+    if (science) {
+      options = {
+        params: new HttpParams().set('groupID', groupID).set('since', science),
+      };
+    } else {
+      options = {
+        params: new HttpParams().set('groupID', groupID),
+      };
+    }
+
     return this.http
       .get<IConversationResp>(this.getGroupDialogURL, options)
       .pipe(

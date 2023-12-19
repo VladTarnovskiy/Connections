@@ -8,19 +8,32 @@ import { GroupDialogService } from 'src/app/connections/services/group-dialog/gr
 export class GroupDialogEffects {
   constructor(
     private actions$: Actions,
-    private conversationService: GroupDialogService
+    private groupDialogService: GroupDialogService
   ) {}
 
   fetchGroupDialogData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GroupDialog.FetchGroupDialogData),
-      switchMap(({ groupID }) =>
-        this.conversationService
+      switchMap(({ groupID }) => {
+        return this.groupDialogService
           .getGroup(groupID)
           .pipe(
             map((groupData) => GroupDialog.AddGroupDialogData({ groupData }))
-          )
-      )
+          );
+      })
+    )
+  );
+
+  fetchUpdateGroupDialogData$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(GroupDialog.FetchUpdateGroupDialogData),
+      switchMap(({ groupID, science }) => {
+        return this.groupDialogService
+          .getGroup(groupID, science)
+          .pipe(
+            map((groupData) => GroupDialog.UpdateGroupDialogData({ groupData }))
+          );
+      })
     )
   );
 
@@ -28,7 +41,7 @@ export class GroupDialogEffects {
     this.actions$.pipe(
       ofType(GroupDialog.FetchGroupDialogMessage),
       switchMap(({ messageData }) =>
-        this.conversationService.sentMessage(messageData).pipe(
+        this.groupDialogService.sentMessage(messageData).pipe(
           map(() => {
             return GroupDialog.AddGroupDialogMessage({ messageData });
           })

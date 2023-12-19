@@ -35,6 +35,17 @@ export const reducer = createReducer(
     groupData,
     isLoading: false,
   })),
+  on(GroupDialogActions.FetchUpdateGroupDialogData, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(GroupDialogActions.UpdateGroupDialogData, (state, { groupData }) => {
+    return {
+      ...state,
+      groupData: [...state.groupData].concat(groupData),
+      isLoading: false,
+    };
+  }),
   on(GroupDialogActions.FetchGroupDialogMessage, (state) => ({
     ...state,
     isLoading: true,

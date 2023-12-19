@@ -36,6 +36,16 @@ export const AddConversationData = createAction(
   props<{ conversationData: IMessage[] }>()
 );
 
+export const FetchUpdateConversationData = createAction(
+  `${actionSource} Fetch Update Conversation Data`,
+  props<{ conversationID: string; science: string }>()
+);
+
+export const UpdateConversationData = createAction(
+  `${actionSource} Update Conversation Data`,
+  props<{ conversationData: IMessage[] }>()
+);
+
 export const FetchConversationMessage = createAction(
   `${actionSource} Fetch Conversation Message`,
   props<{ messageData: IReqConversationMessage }>()

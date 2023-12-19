@@ -36,6 +36,7 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   groupDialogData$: Observable<IMessage[]> = this.store.select(
     selectGroupDialogData
   );
+  groupDialogData!: IMessage[];
   authData$: Observable<IUserDataStorage | null> =
     this.store.select(selectAuthData);
   groupsData$: Observable<IGroup[] | null> =
@@ -57,8 +58,10 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
   updateGroupDialog() {
     if (this.isActive) {
       this.store.dispatch(
-        GroupDialogActions.FetchGroupDialogData({
+        GroupDialogActions.FetchUpdateGroupDialogData({
           groupID: this.groupID,
+          science:
+            this.groupDialogData[this.groupDialogData.length - 1].createdAt,
         })
       );
       this.store.dispatch(
@@ -143,9 +146,16 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
       this.groupsData = groupsData;
     });
 
+    const forthChildSubscription = this.groupDialogData$.subscribe(
+      (groupDialogData) => {
+        this.groupDialogData = groupDialogData;
+      }
+    );
+
     this.subscription.add(childSubscription);
     this.subscription.add(secondChildSubscription);
     this.subscription.add(thirdChildSubscription);
+    this.subscription.add(forthChildSubscription);
   }
 
   ngOnDestroy(): void {

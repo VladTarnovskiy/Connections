@@ -34,6 +34,8 @@ export class ConversationComponent implements OnInit, OnDestroy {
   conversationData$: Observable<IMessage[]> = this.store.select(
     selectConversationData
   );
+  conversationData!: IMessage[];
+
   authData$: Observable<IUserDataStorage | null> =
     this.store.select(selectAuthData);
   subscription!: Subscription;
@@ -52,8 +54,10 @@ export class ConversationComponent implements OnInit, OnDestroy {
   updateConversation() {
     if (this.isActive) {
       this.store.dispatch(
-        ConversationActions.FetchConversationData({
+        ConversationActions.FetchUpdateConversationData({
           conversationID: this.conversationID,
+          science:
+            this.conversationData[this.conversationData.length - 1].createdAt,
         })
       );
       this.store.dispatch(
@@ -122,8 +126,15 @@ export class ConversationComponent implements OnInit, OnDestroy {
       this.authData = authData;
     });
 
+    const thirdChildSubscription = this.conversationData$.subscribe(
+      (conversationData) => {
+        this.conversationData = conversationData;
+      }
+    );
+
     this.subscription.add(childSubscription);
     this.subscription.add(twoChildSubscription);
+    this.subscription.add(thirdChildSubscription);
   }
 
   ngOnDestroy(): void {

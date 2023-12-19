@@ -55,11 +55,19 @@ export class ConversationService {
       );
   }
 
-  getConversation(conversationID: string) {
-    const options = {
-      params: new HttpParams().set('conversationID', conversationID),
-      // .set('since', Date.now()),
-    };
+  getConversation(conversationID: string, science?: string) {
+    let options: { params: HttpParams };
+    if (science) {
+      options = {
+        params: new HttpParams()
+          .set('conversationID', conversationID)
+          .set('since', science),
+      };
+    } else {
+      options = {
+        params: new HttpParams().set('conversationID', conversationID),
+      };
+    }
     return this.http
       .get<IConversationResp>(this.getConversationURL, options)
       .pipe(

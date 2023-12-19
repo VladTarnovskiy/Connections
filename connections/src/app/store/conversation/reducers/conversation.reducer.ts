@@ -51,6 +51,20 @@ export const reducer = createReducer(
       isLoading: false,
     })
   ),
+  on(ConversationActions.FetchUpdateConversationData, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
+  on(
+    ConversationActions.UpdateConversationData,
+    (state, { conversationData }) => {
+      return {
+        ...state,
+        groupData: [...state.conversationData].concat(conversationData),
+        isLoading: false,
+      };
+    }
+  ),
   on(ConversationActions.DeleteConversation, (state) => ({
     ...state,
     conversationData: [],
