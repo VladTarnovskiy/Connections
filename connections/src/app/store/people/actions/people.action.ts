@@ -26,4 +26,14 @@ export const AddConversations = createAction(
   props<{ conversationsData: IConversations[] }>()
 );
 
+export const AddConversation = createAction(
+  `${actionSource} Add Conversation`,
+  props<{ companionID: string; id: string }>()
+);
+
+export const UpdatePeople = createAction(
+  `${actionSource} Update People`,
+  props<{ personID: string }>()
+);
+
 export const RemovePeople = createAction(`${actionSource} Remove People`);

@@ -15,9 +15,8 @@ import { selectAuthData } from 'src/app/store/auth/selectors/auth.selectors';
 export class MessageComponent implements OnInit, OnDestroy {
   @Input() messageData!: IMessage;
   subscription!: Subscription;
-  peopleData$: Observable<IPerson[] | null> =
-    this.store.select(selectPeopleData);
-  peopleData!: IPerson[] | null;
+  peopleData$: Observable<IPerson[]> = this.store.select(selectPeopleData);
+  peopleData!: IPerson[];
   authData$: Observable<IUserDataStorage | null> =
     this.store.select(selectAuthData);
   authData!: IUserDataStorage | null;

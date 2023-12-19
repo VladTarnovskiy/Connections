@@ -20,11 +20,10 @@ export class PeopleComponent implements OnInit, OnDestroy {
   timer$: Observable<number> = this.store.select(selectPeopleTimer);
   isActive$: Observable<boolean> = this.store.select(selectPeopleIsActive);
   isLoading$: Observable<boolean> = this.store.select(selectPeopleLoading);
-  peopleData$: Observable<IPerson[] | null> =
-    this.store.select(selectPeopleData);
+  peopleData$: Observable<IPerson[]> = this.store.select(selectPeopleData);
   subscription!: Subscription;
   searchValue = new FormControl('');
-  peopleData!: IPerson[] | null;
+  peopleData!: IPerson[];
   filteredPeopleData!: IPerson[] | null;
   isActive = true;
   timer = 0;

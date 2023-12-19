@@ -4,16 +4,16 @@ import { IPerson } from 'src/app/connections/models/people';
 import { IConversations } from 'src/app/connections/models/conversations';
 
 export interface PeopleState {
-  peopleData: IPerson[] | null;
-  conversationsData: IConversations[] | null;
+  peopleData: IPerson[];
+  conversationsData: IConversations[];
   isLoading: boolean;
   timer: number;
   isActive: boolean;
 }
 
 export const initialState: PeopleState = {
-  peopleData: null,
-  conversationsData: null,
+  peopleData: [],
+  conversationsData: [],
   isLoading: false,
   timer: 0,
   isActive: true,
@@ -30,6 +30,17 @@ export const reducer = createReducer(
     peopleData,
     isLoading: false,
   })),
+  on(PeopleActions.UpdatePeople, (state, { personID }) => {
+    const updatedPeopleData = state.peopleData.map((person) =>
+      person.uid === personID ? { ...person, haveConversationID: true } : person
+    );
+
+    return {
+      ...state,
+      peopleData: updatedPeopleData,
+      isLoading: false,
+    };
+  }),
   on(PeopleActions.ChangeTimerPeople, (state, { timer }) => ({
     ...state,
     timer,
@@ -41,5 +52,10 @@ export const reducer = createReducer(
   on(PeopleActions.AddConversations, (state, { conversationsData }) => ({
     ...state,
     conversationsData,
+  })),
+
+  on(PeopleActions.AddConversation, (state, { companionID, id }) => ({
+    ...state,
+    conversationsData: [...state.conversationsData, { id, companionID }],
   }))
 );

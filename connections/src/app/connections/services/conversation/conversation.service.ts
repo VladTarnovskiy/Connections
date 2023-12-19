@@ -11,6 +11,8 @@ import {
   IConversationResp,
   IReqConversationMessage,
 } from '../../models/conversation';
+import { Store } from '@ngrx/store';
+import * as PeopleActions from 'src/app/store/people/actions/people.action';
 
 @Injectable({
   providedIn: 'root',
@@ -28,7 +30,8 @@ export class ConversationService {
   constructor(
     private http: HttpClient,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {}
 
   createConversation(companion: string) {
@@ -39,6 +42,19 @@ export class ConversationService {
       .pipe(
         map((conversationID) => {
           return conversationID;
+        }),
+        tap(({ conversationID }) => {
+          this.store.dispatch(
+            PeopleActions.UpdatePeople({
+              personID: companion,
+            })
+          );
+          this.store.dispatch(
+            PeopleActions.AddConversation({
+              companionID: companion,
+              id: conversationID,
+            })
+          );
         }),
         tap(({ conversationID }) => {
           this.router.navigate([`/conversation/${conversationID}`]);
