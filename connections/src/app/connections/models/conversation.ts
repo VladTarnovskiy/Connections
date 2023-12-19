@@ -27,3 +27,9 @@ export interface IReqConversationMessage {
   authorID: string;
   createdAt: string;
 }
+
+export interface IConversationMessageToStore {
+  conversationID: string;
+  message: string;
+  authorID: string;
+}

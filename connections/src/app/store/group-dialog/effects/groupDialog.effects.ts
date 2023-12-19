@@ -42,8 +42,10 @@ export class GroupDialogEffects {
       ofType(GroupDialog.FetchGroupDialogMessage),
       switchMap(({ messageData }) =>
         this.groupDialogService.sentMessage(messageData).pipe(
-          map(() => {
-            return GroupDialog.AddGroupDialogMessage({ messageData });
+          map((respMessageData) => {
+            return GroupDialog.AddGroupDialogMessage({
+              messageData: respMessageData,
+            });
           })
         )
       )

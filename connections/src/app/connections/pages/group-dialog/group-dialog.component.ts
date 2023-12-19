@@ -58,13 +58,22 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
 
   updateGroupDialog() {
     if (this.isActive) {
-      this.store.dispatch(
-        GroupDialogActions.FetchUpdateGroupDialogData({
-          groupID: this.groupID,
-          science:
-            this.groupDialogData[this.groupDialogData.length - 1].createdAt,
-        })
-      );
+      if (this.groupDialogData.length) {
+        this.store.dispatch(
+          GroupDialogActions.FetchUpdateGroupDialogData({
+            groupID: this.groupID,
+            science:
+              this.groupDialogData[this.groupDialogData.length - 1].createdAt,
+          })
+        );
+      } else {
+        this.store.dispatch(
+          GroupDialogActions.FetchGroupDialogData({
+            groupID: this.groupID,
+          })
+        );
+      }
+
       this.store.dispatch(
         GroupDialogActions.ChangeIsActive({ isActive: false })
       );
@@ -104,7 +113,6 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
         groupID: this.groupID,
         message: message,
         authorID: this.authData.uid,
-        createdAt: String(Date.now()),
       };
 
       this.store.dispatch(

@@ -61,8 +61,10 @@ export class ConversationEffects {
       ofType(ConversationActions.FetchConversationMessage),
       switchMap(({ messageData }) =>
         this.conversationService.sentMessage(messageData).pipe(
-          map(() => {
-            return ConversationActions.AddConversationMessage({ messageData });
+          map((respMessageData) => {
+            return ConversationActions.AddConversationMessage({
+              messageData: respMessageData,
+            });
           })
         )
       )

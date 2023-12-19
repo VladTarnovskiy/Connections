@@ -54,13 +54,22 @@ export class ConversationComponent implements OnInit, OnDestroy {
 
   updateConversation() {
     if (this.isActive) {
-      this.store.dispatch(
-        ConversationActions.FetchUpdateConversationData({
-          conversationID: this.conversationID,
-          science:
-            this.conversationData[this.conversationData.length - 1].createdAt,
-        })
-      );
+      if (this.conversationData.length) {
+        this.store.dispatch(
+          ConversationActions.FetchUpdateConversationData({
+            conversationID: this.conversationID,
+            science:
+              this.conversationData[this.conversationData.length - 1].createdAt,
+          })
+        );
+      } else {
+        this.store.dispatch(
+          ConversationActions.FetchConversationData({
+            conversationID: this.conversationID,
+          })
+        );
+      }
+
       this.store.dispatch(
         ConversationActions.ChangeIsActive({ isActive: false })
       );
@@ -97,7 +106,6 @@ export class ConversationComponent implements OnInit, OnDestroy {
         conversationID: this.conversationID,
         message: message,
         authorID: this.authData.uid,
-        createdAt: String(Date.now()),
       };
 
       this.store.dispatch(
@@ -138,7 +146,9 @@ export class ConversationComponent implements OnInit, OnDestroy {
 
     const thirdChildSubscription = this.conversationData$.subscribe(
       (conversationData) => {
-        this.conversationData = conversationData;
+        if (conversationData) {
+          this.conversationData = conversationData;
+        }
       }
     );
 

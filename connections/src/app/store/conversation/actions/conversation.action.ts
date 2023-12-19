@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import {
+  IConversationMessageToStore,
   IMessage,
   IReqConversationMessage,
 } from 'src/app/connections/models/conversation';
@@ -48,7 +49,7 @@ export const UpdateConversationData = createAction(
 
 export const FetchConversationMessage = createAction(
   `${actionSource} Fetch Conversation Message`,
-  props<{ messageData: IReqConversationMessage }>()
+  props<{ messageData: IConversationMessageToStore }>()
 );
 
 export const AddConversationMessage = createAction(

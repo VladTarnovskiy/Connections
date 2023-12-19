@@ -82,6 +82,15 @@ export class GroupDialogService {
         message: regData.message,
       })
       .pipe(
+        map(() => {
+          const messageData = {
+            groupID: regData.groupID,
+            message: regData.message,
+            authorID: regData.authorID,
+            createdAt: String(Date.now()),
+          };
+          return messageData;
+        }),
         catchError((err) => {
           if (err) {
             this.toastService.handleError(err);

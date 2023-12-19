@@ -1,6 +1,9 @@
 import { createAction, props } from '@ngrx/store';
 import { IMessage } from 'src/app/connections/models/conversation';
-import { IReqGroupDialogMessage } from 'src/app/connections/models/groups';
+import {
+  IGroupDialogMessageToStore,
+  IReqGroupDialogMessage,
+} from 'src/app/connections/models/groups';
 
 const actionSource = '[Group Dialog]';
 
@@ -41,5 +44,5 @@ export const FetchGroupDialogMessage = createAction(
 
 export const AddGroupDialogMessage = createAction(
   `${actionSource} Add Group Dialog Message`,
-  props<{ messageData: IReqGroupDialogMessage }>()
+  props<{ messageData: IGroupDialogMessageToStore }>()
 );

@@ -29,5 +29,11 @@ export interface IReqGroupDialogMessage {
   groupID: string;
   message: string;
   authorID: string;
+}
+
+export interface IGroupDialogMessageToStore {
+  groupID: string;
+  message: string;
+  authorID: string;
   createdAt: string;
 }

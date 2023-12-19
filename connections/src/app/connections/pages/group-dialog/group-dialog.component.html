@@ -1,23 +1,26 @@
 <div>
-  <div class="connections_title flex justify-between items-center mb-4">
+  <div class="groups_title flex justify-between items-center mb-4">
     <div class="flex justify-start items-center">
-      <a routerLink="" class="hover:cursor-pointer active:scale-[95%] mr-1">
+      <a routerLink="" class="hover:cursor-pointer active:scale-[95%] mr-2">
         <img
           src="assets/arrow-sm-left.svg"
           alt="Go to main page"
           class="w-10 h-10"
         />
       </a>
-      <div class="connections__name text-3xl mr-2">{{ getGroupName() }}</div>
+      <img
+        src="assets/group.svg"
+        alt="Go to main page"
+        class="w-12 h-12 mr-1"
+      />
+      <div class="groups__name text-3xl mr-4">{{ getGroupName() }}</div>
       <button
-        class="connections__update mr-2 hover:cursor-pointer"
+        class="groups__update mr-2 hover:cursor-pointer"
         (click)="updateGroupDialog()"
       >
         <app-refresh-but [active]="isActive"></app-refresh-but>
       </button>
-      <div class="connections__timer">
-        00:{{ timer < 10 ? "0" : "" }}{{ timer }}
-      </div>
+      <div class="groups__timer">00:{{ timer < 10 ? "0" : "" }}{{ timer }}</div>
     </div>
     <button *ngIf="isDeleteButActive()" (click)="deleteGroupDialog()">
       <app-button>Delete</app-button>

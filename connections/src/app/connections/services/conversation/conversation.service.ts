@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { catchError, map, of, tap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
 import {
+  IConversationMessageToStore,
   IConversationResp,
-  IReqConversationMessage,
 } from '../../models/conversation';
 import { Store } from '@ngrx/store';
 import * as PeopleActions from 'src/app/store/people/actions/people.action';
@@ -114,13 +114,22 @@ export class ConversationService {
       );
   }
 
-  sentMessage(regData: IReqConversationMessage) {
+  sentMessage(regData: IConversationMessageToStore) {
     return this.http
       .post(this.sentMessageURL, {
         conversationID: regData.conversationID,
         message: regData.message,
       })
       .pipe(
+        map(() => {
+          const messageData = {
+            conversationID: regData.conversationID,
+            message: regData.message,
+            authorID: regData.authorID,
+            createdAt: String(Date.now()),
+          };
+          return messageData;
+        }),
         catchError((err) => {
           if (err) {
             this.toastService.handleError(err);
