@@ -45,7 +45,7 @@ export class GroupsComponent implements OnInit, OnDestroy {
       this.searchValue.setValue('');
       this.store.dispatch(GroupsActions.FetchGroups());
       this.store.dispatch(GroupsActions.ChangeIsActive({ isActive: false }));
-      this.store.dispatch(GroupsActions.ChangeTimerGroups({ timer: 10 }));
+      this.store.dispatch(GroupsActions.ChangeTimerGroups({ timer: 59 }));
       const interval = setInterval(() => {
         this.timer -= 1;
         this.store.dispatch(

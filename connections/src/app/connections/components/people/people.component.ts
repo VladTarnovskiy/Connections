@@ -35,7 +35,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
       this.searchValue.setValue('');
       this.store.dispatch(PeopleActions.FetchPeople());
       this.store.dispatch(PeopleActions.ChangeIsActive({ isActive: false }));
-      this.store.dispatch(PeopleActions.ChangeTimerPeople({ timer: 10 }));
+      this.store.dispatch(PeopleActions.ChangeTimerPeople({ timer: 59 }));
       const interval = setInterval(() => {
         this.timer -= 1;
         this.store.dispatch(

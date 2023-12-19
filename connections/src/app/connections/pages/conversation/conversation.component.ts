@@ -74,7 +74,7 @@ export class ConversationComponent implements OnInit, OnDestroy {
         ConversationActions.ChangeIsActive({ isActive: false })
       );
       this.store.dispatch(
-        ConversationActions.ChangeTimerConversation({ timer: 10 })
+        ConversationActions.ChangeTimerConversation({ timer: 59 })
       );
       const interval = setInterval(() => {
         this.timer -= 1;

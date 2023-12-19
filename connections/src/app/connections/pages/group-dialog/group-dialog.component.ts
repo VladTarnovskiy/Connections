@@ -78,7 +78,7 @@ export class GroupDialogComponent implements OnInit, OnDestroy {
         GroupDialogActions.ChangeIsActive({ isActive: false })
       );
       this.store.dispatch(
-        GroupDialogActions.ChangeTimerGroupDialog({ timer: 10 })
+        GroupDialogActions.ChangeTimerGroupDialog({ timer: 59 })
       );
       const interval = setInterval(() => {
         this.timer -= 1;
