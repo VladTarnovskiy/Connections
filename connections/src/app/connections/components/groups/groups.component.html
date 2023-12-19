@@ -1,8 +1,8 @@
 <div>
   <div
-    class="connections_title flex justify-between items-center mb-4 h-[40px]"
+    class="connections_title flex justify-between items-center mb-4 min-h-[40px]"
   >
-    <div class="flex justify-start items-center">
+    <div class="flex justify-start items-center flex-wrap">
       <div class="connections__name text-3xl mr-2">Groups</div>
       <button
         class="connections__update mr-2 hover:cursor-pointer"
@@ -10,8 +10,17 @@
       >
         <app-refresh-but [active]="isActive"></app-refresh-but>
       </button>
-      <div class="connections__timer">
+      <div class="connections__timer mr-4">
         00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+      </div>
+      <div class="py-1 mr-2">
+        <input
+          [formControl]="searchValue"
+          type="search"
+          (input)="findGroups()"
+          placeholder="Search group"
+          class="text-md block min-w-[120px] max-w-[250px] w-full rounded-md border-0 bg-base_white p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 outline-none"
+        />
       </div>
     </div>
     <button (click)="createGroup()">
@@ -23,7 +32,7 @@
     [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
   >
     <app-group
-      *ngFor="let groupData of groupsData$ | async"
+      *ngFor="let groupData of filteredGroupData"
       [groupData]="groupData"
     ></app-group>
   </div>

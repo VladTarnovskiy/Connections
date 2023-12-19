@@ -1,5 +1,7 @@
 <div>
-  <div class="people_title flex justify-start items-center mb-4 h-[40px]">
+  <div
+    class="people_title flex justify-start items-center mb-4 min-h-[40px] flex-wrap"
+  >
     <div class="people__name text-3xl mr-2">Peoples</div>
     <button
       class="people__update mr-2 hover:cursor-pointer"
@@ -7,14 +9,25 @@
     >
       <app-refresh-but [active]="isActive"></app-refresh-but>
     </button>
-    <div class="people__timer">00:{{ timer < 10 ? "0" : "" }}{{ timer }}</div>
+    <div class="people__timer mr-4">
+      00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+    </div>
+    <div class="py-1 mr-2">
+      <input
+        [formControl]="searchValue"
+        type="search"
+        (input)="findPeople()"
+        placeholder="Search group"
+        class="text-md block min-w-[120px] max-w-[250px] w-full rounded-md border-0 bg-base_white p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 outline-none"
+      />
+    </div>
   </div>
   <div
     class="people__container max-h-[82vh] overflow-y-scroll"
     [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
   >
     <app-person
-      *ngFor="let personData of peopleData$ | async"
+      *ngFor="let personData of filteredPeopleData"
       [personData]="personData"
     ></app-person>
   </div>

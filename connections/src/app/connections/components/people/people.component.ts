@@ -9,6 +9,7 @@ import {
 } from 'src/app/store/people/selectors/people.selectors';
 import { IPerson } from '../../models/people';
 import * as PeopleActions from 'src/app/store/people/actions/people.action';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-people',
@@ -22,6 +23,9 @@ export class PeopleComponent implements OnInit, OnDestroy {
   peopleData$: Observable<IPerson[] | null> =
     this.store.select(selectPeopleData);
   subscription!: Subscription;
+  searchValue = new FormControl('');
+  peopleData!: IPerson[] | null;
+  filteredPeopleData!: IPerson[] | null;
   isActive = true;
   timer = 0;
 
@@ -29,6 +33,7 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
   updatePeople() {
     if (this.isActive) {
+      this.searchValue.setValue('');
       this.store.dispatch(PeopleActions.FetchPeople());
       this.store.dispatch(PeopleActions.ChangeIsActive({ isActive: false }));
       this.store.dispatch(PeopleActions.ChangeTimerPeople({ timer: 10 }));
@@ -45,16 +50,32 @@ export class PeopleComponent implements OnInit, OnDestroy {
     }
   }
 
+  findPeople() {
+    const searchValue = this.searchValue.getRawValue() as string;
+    if (this.peopleData) {
+      const filteredGroupData = this.peopleData.filter((person) =>
+        person.name.includes(searchValue)
+      );
+      this.filteredPeopleData = filteredGroupData;
+    }
+  }
+
   ngOnInit(): void {
     this.subscription = this.timer$.subscribe((value) => {
       this.timer = value;
     });
 
-    const childSubscription = this.isActive$.subscribe((value) => {
+    const secondSubscription = this.isActive$.subscribe((value) => {
       this.isActive = value;
     });
 
-    this.subscription.add(childSubscription);
+    const thirdSubscription = this.peopleData$.subscribe((peopleData) => {
+      this.peopleData = peopleData;
+      this.filteredPeopleData = peopleData;
+    });
+
+    this.subscription.add(secondSubscription);
+    this.subscription.add(thirdSubscription);
   }
 
   ngOnDestroy(): void {
