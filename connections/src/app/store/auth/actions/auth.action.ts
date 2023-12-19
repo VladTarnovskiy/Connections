@@ -21,6 +21,16 @@ export const AddUserData = createAction(
   props<{ authData: IUserDataStorage }>()
 );
 
+export const ChangeAuthRegisterIsLoading = createAction(
+  `${actionSource} Change Auth Register IsLoading`,
+  props<{ isLoadingRegister: boolean }>()
+);
+
+export const ChangeAuthLoginIsLoading = createAction(
+  `${actionSource} Change Auth Login IsLoading`,
+  props<{ isLoadingLogin: boolean }>()
+);
+
 export const AddRegisterLoading = createAction(
   `${actionSource} Add RegisterLoading`
 );

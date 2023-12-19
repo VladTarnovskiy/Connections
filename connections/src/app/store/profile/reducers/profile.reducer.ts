@@ -33,6 +33,10 @@ export const reducer = createReducer(
     ...state,
     edit,
   })),
+  on(ProfileActions.ChangeIsLoadingProfile, (state, { isLoading }) => ({
+    ...state,
+    isLoading,
+  })),
   on(ProfileActions.UpdateProfile, (state, { name }) => {
     if (state.profileData) {
       return {

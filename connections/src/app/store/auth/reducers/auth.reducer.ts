@@ -36,5 +36,16 @@ export const reducer = createReducer(
   on(AuthActions.RemoveAuthData, (state) => ({
     ...state,
     authData: null,
+  })),
+  on(
+    AuthActions.ChangeAuthRegisterIsLoading,
+    (state, { isLoadingRegister }) => ({
+      ...state,
+      isLoadingRegister,
+    })
+  ),
+  on(AuthActions.ChangeAuthLoginIsLoading, (state, { isLoadingLogin }) => ({
+    ...state,
+    isLoadingLogin,
   }))
 );

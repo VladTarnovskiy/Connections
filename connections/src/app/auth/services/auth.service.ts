@@ -13,6 +13,7 @@ import * as AuthActions from 'src/app/store/auth/actions/auth.action';
 import * as ProfileActions from 'src/app/store/profile/actions/profile.action';
 import * as PeopleActions from 'src/app/store/people/actions/people.action';
 import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
+import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 
 @Injectable({
@@ -21,8 +22,9 @@ import { Store } from '@ngrx/store';
 export class AuthService {
   private registerURL = 'https://tasks.app.rs.school/angular/registration';
   private loginURL = 'https://tasks.app.rs.school/angular/login';
+  private logoutURL = 'https://tasks.app.rs.school/angular/logout';
 
-  isLoggedIn = new BehaviorSubject<boolean>(false);
+  private isLoggedIn = new BehaviorSubject<boolean>(false);
 
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
@@ -31,6 +33,7 @@ export class AuthService {
     private toastService: ToastService,
     private profileService: ProfileService,
     public router: Router,
+    private location: Location,
     private store: Store
   ) {}
 
@@ -53,6 +56,11 @@ export class AuthService {
       }),
       catchError((err) => {
         if (err) {
+          this.store.dispatch(
+            AuthActions.ChangeAuthLoginIsLoading({
+              isLoadingLogin: false,
+            })
+          );
           this.toastService.handleError(err);
         }
         return of();
@@ -66,6 +74,11 @@ export class AuthService {
       tap(() => this.router.navigate(['auth/login'])),
       catchError((err) => {
         if (err) {
+          this.store.dispatch(
+            AuthActions.ChangeAuthRegisterIsLoading({
+              isLoadingRegister: false,
+            })
+          );
           this.toastService.handleError(err);
         }
         return of();
@@ -76,6 +89,8 @@ export class AuthService {
   checkLogin() {
     this.profileService.getProfile().subscribe(() => {
       this.isLoggedIn.next(true);
+      this.getInitialData();
+      this.location.back();
     });
   }
 
@@ -83,7 +98,6 @@ export class AuthService {
     const userDetails = localStorage.getItem('userDetails');
 
     if (userDetails) {
-      this.checkLogin();
       this.isLoggedIn$.subscribe((loginData) => {
         if (loginData === true) {
           const authData = JSON.parse(userDetails) as IUserDataStorage;
@@ -97,8 +111,19 @@ export class AuthService {
     }
   }
 
-  logout(): void {
-    localStorage.removeItem('userDetails');
-    this.isLoggedIn.next(false);
+  logout() {
+    return this.http.delete(this.logoutURL).pipe(
+      tap(() => {
+        localStorage.removeItem('userDetails');
+        this.isLoggedIn.next(false);
+        this.toastService.addSuccessToast('User logout');
+      }),
+      catchError((err) => {
+        if (err) {
+          this.toastService.handleError(err);
+        }
+        return of();
+      })
+    );
   }
 }

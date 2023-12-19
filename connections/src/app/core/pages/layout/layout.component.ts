@@ -11,6 +11,7 @@ export class LayoutComponent implements OnInit {
   constructor(private authService: AuthService, private store: Store) {}
 
   ngOnInit() {
-    this.authService.getInitialData();
+    this.authService.checkLogin();
+    // this.authService.getInitialData();
   }
 }

@@ -6,9 +6,11 @@ export const authGuard = () => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  if (authService.isLoggedIn.getValue()) {
-    return true;
-  }
+  authService.isLoggedIn$.subscribe((isAuth) => {
+    if (isAuth) {
+      return true;
+    }
 
-  return router.navigate(['auth/login']);
+    return router.navigate(['auth/login']);
+  });
 };

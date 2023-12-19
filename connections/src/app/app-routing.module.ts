@@ -11,7 +11,7 @@ const routes: Routes = [
       import('./connections/connections.module').then(
         (m) => m.ConnectionsModule
       ),
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'auth',
@@ -22,7 +22,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./profile/profile.module').then((m) => m.ProfileModule),
     component: ProfileComponent,
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: '**',

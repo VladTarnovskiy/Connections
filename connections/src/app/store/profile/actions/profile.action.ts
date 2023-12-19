@@ -25,4 +25,9 @@ export const ChangeEditProfile = createAction(
   props<{ edit: boolean }>()
 );
 
+export const ChangeIsLoadingProfile = createAction(
+  `${actionSource} Change IsLoading Profile`,
+  props<{ isLoading: boolean }>()
+);
+
 export const RemoveProfile = createAction(`${actionSource} Remove Profile`);
