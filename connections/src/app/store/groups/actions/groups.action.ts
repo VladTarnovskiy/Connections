@@ -33,12 +33,12 @@ export const ChangeIsRemoveGroupModal = createAction(
 
 export const FetchCreateGroup = createAction(
   `${actionSource} Fetch Create Group`,
-  props<{ name: string }>()
+  props<{ name: string; userID: string }>()
 );
 
 export const AddGroup = createAction(
   `${actionSource} Add Group`,
-  props<{ name: string }>()
+  props<{ name: string; userID: string; groupID: string }>()
 );
 
 export const FetchDeleteGroup = createAction(

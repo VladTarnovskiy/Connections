@@ -51,12 +51,12 @@ export const reducer = createReducer(
     ...state,
     removeGroupData,
   })),
-  on(GroupsActions.AddGroup, (state, { name }) => {
+  on(GroupsActions.AddGroup, (state, { name, userID, groupID }) => {
     const temporaryGroupData: IGroup = {
-      id: '',
+      id: groupID,
       name: name,
       createdAt: '',
-      createdBy: '',
+      createdBy: userID,
     };
     return {
       ...state,

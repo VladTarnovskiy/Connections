@@ -25,10 +25,12 @@ export class GroupsEffects {
   fetchCreateGroup$ = createEffect(() =>
     this.actions$.pipe(
       ofType(GroupsActions.FetchCreateGroup),
-      exhaustMap(({ name }) =>
+      exhaustMap(({ name, userID }) =>
         this.groupsService
           .createGroup(name)
-          .pipe(map(() => GroupsActions.AddGroup({ name })))
+          .pipe(
+            map((groupID) => GroupsActions.AddGroup({ name, userID, groupID }))
+          )
       )
     )
   );

@@ -17,7 +17,7 @@
             id="name"
             type="text"
             formControlName="name"
-            class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-base_blue"
+            class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400"
             required
           />
         </label>
@@ -42,7 +42,7 @@
             formControlName="email"
             required
             type="email"
-            class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-base_blue"
+            class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400"
           />
         </label>
         <div *ngIf="email?.errors?.['required']" class="invalid__message">
@@ -66,7 +66,7 @@
             type="password"
             required
             autoComplete="on"
-            class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset focus:ring-base_blue"
+            class="text-md block w-full rounded-md border-0 bg-base_white p-2 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400"
           />
         </label>
         <div *ngIf="password?.errors?.['required']" class="invalid__message">

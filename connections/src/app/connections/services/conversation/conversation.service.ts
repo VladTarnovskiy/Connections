@@ -40,7 +40,7 @@ export class ConversationService {
         map((conversationID) => {
           return conversationID;
         }),
-        tap((conversationID) => {
+        tap(({ conversationID }) => {
           this.router.navigate([`/conversation/${conversationID}`]);
         }),
         tap(() => {

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IGroupsResp } from '../../models/groups';
 import { catchError, map, of, tap } from 'rxjs';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,11 @@ export class GroupsService {
   private createGroupURL = 'https://tasks.app.rs.school/angular/groups/create';
   private deleteGroupURL = 'https://tasks.app.rs.school/angular/groups/delete';
 
-  constructor(private http: HttpClient, private toastService: ToastService) {}
+  constructor(
+    private http: HttpClient,
+    private toastService: ToastService,
+    private router: Router
+  ) {}
 
   getGroups() {
     return this.http.get<IGroupsResp>(this.groupsURL).pipe(
@@ -43,17 +48,20 @@ export class GroupsService {
   }
 
   createGroup(name: string) {
-    return this.http.post(this.createGroupURL, { name }).pipe(
-      tap(() => {
-        this.toastService.addSuccessToast('Group created');
-      }),
-      catchError((err) => {
-        if (err) {
-          this.toastService.handleError(err);
-        }
-        return of();
-      })
-    );
+    return this.http
+      .post<{ groupID: string }>(this.createGroupURL, { name })
+      .pipe(
+        map(({ groupID }) => groupID),
+        tap(() => {
+          this.toastService.addSuccessToast('Group created');
+        }),
+        catchError((err) => {
+          if (err) {
+            this.toastService.handleError(err);
+          }
+          return of();
+        })
+      );
   }
 
   deleteGroup(groupID: string) {
@@ -63,6 +71,7 @@ export class GroupsService {
     return this.http.delete(this.deleteGroupURL, options).pipe(
       tap(() => {
         this.toastService.addSuccessToast('Group deleted');
+        this.router.navigate(['']);
       }),
       catchError((err) => {
         if (err) {

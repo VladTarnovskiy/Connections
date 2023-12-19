@@ -18,10 +18,15 @@ export class GroupComponent implements OnInit, OnDestroy {
   authData$: Observable<IUserDataStorage | null> =
     this.store.select(selectAuthData);
   authData!: IUserDataStorage | null;
+  removeButFlag = false;
 
   constructor(private store: Store, private router: Router) {}
 
   addRemoveGroupModal() {
+    this.removeButFlag = true;
+    setTimeout(() => {
+      this.removeButFlag = false;
+    });
     this.store.dispatch(
       GroupsActions.ChangeIsRemoveGroupModal({
         removeGroupData: {
@@ -33,7 +38,9 @@ export class GroupComponent implements OnInit, OnDestroy {
   }
 
   getGroupDialog() {
-    this.router.navigate([`/group/${this.groupData.id}`]);
+    if (!this.removeButFlag) {
+      this.router.navigate([`/group/${this.groupData.id}`]);
+    }
   }
 
   ngOnInit(): void {
