@@ -118,7 +118,9 @@ export class ConversationComponent implements OnInit, OnDestroy {
   }
 
   getConversationName() {
-    const conversationNameStorage = localStorage.getItem('conversationName');
+    const conversationNameStorage = localStorage.getItem(
+      'conversationNameConnections'
+    );
     if (conversationNameStorage) {
       const conversationName = JSON.parse(conversationNameStorage);
       this.conversationName = conversationName;

@@ -23,7 +23,7 @@ export class PersonComponent implements OnInit, OnDestroy {
 
   getConversation() {
     localStorage.setItem(
-      'conversationName',
+      'conversationNameConnections',
       JSON.stringify(this.personData.name)
     );
     if (this.personData.haveConversationID && this.conversationsData) {

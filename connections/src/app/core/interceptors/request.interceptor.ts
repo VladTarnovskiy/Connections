@@ -14,7 +14,7 @@ export class RequestInterceptor implements HttpInterceptor {
     req: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    const userDetailsStorage = localStorage.getItem('userDetails');
+    const userDetailsStorage = localStorage.getItem('userDetailsConnections');
     if (userDetailsStorage) {
       const userDetails = JSON.parse(userDetailsStorage) as IUserDataStorage;
       const authReq = req.clone({

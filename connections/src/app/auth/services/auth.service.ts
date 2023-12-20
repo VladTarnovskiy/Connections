@@ -27,6 +27,7 @@ export class AuthService {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
 
   isLoggedIn$ = this.isLoggedIn.asObservable();
+  isNotFoundPage = false;
 
   constructor(
     private http: HttpClient,
@@ -41,7 +42,7 @@ export class AuthService {
     return this.http.post<IRespUserData>(this.loginURL, userDetails).pipe(
       map((userData) => {
         localStorage.setItem(
-          'userDetails',
+          'userDetailsConnections',
           JSON.stringify({ ...userData, email: userDetails.email })
         );
         return { ...userData, email: userDetails.email };
@@ -90,12 +91,19 @@ export class AuthService {
     this.profileService.getProfile().subscribe(() => {
       this.isLoggedIn.next(true);
       this.getInitialData();
-      this.location.back();
+      console.log(this.isNotFoundPage);
+      if (!this.isNotFoundPage) {
+        this.location.back();
+      }
     });
   }
 
+  checkNotFoundPage(isNotFoundPage: boolean) {
+    this.isNotFoundPage = isNotFoundPage;
+  }
+
   getInitialData() {
-    const userDetails = localStorage.getItem('userDetails');
+    const userDetails = localStorage.getItem('userDetailsConnections');
 
     if (userDetails) {
       this.isLoggedIn$.subscribe((loginData) => {
@@ -114,7 +122,8 @@ export class AuthService {
   logout() {
     return this.http.delete(this.logoutURL).pipe(
       tap(() => {
-        localStorage.removeItem('userDetails');
+        localStorage.removeItem('userDetailsConnections');
+        localStorage.removeItem('conversationNameConnections');
         this.isLoggedIn.next(false);
         this.toastService.addSuccessToast('User logout');
       }),
