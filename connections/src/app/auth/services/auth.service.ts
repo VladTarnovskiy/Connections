@@ -91,7 +91,6 @@ export class AuthService {
     this.profileService.getProfile().subscribe(() => {
       this.isLoggedIn.next(true);
       this.getInitialData();
-      console.log(this.isNotFoundPage);
       if (!this.isNotFoundPage) {
         this.location.back();
       }
