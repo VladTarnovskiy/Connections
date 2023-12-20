@@ -1,29 +1,31 @@
 <header class="header mb-2">
   <div class="header__content flex justify-between items-center">
-    <div class="header__logo">
+    <div class="header__logo flex justify-center items-center">
       <a routerLink="" class="mr-4 flex items-center relative">
         <img src="assets/Logo-2.svg" alt="youtube" class="w-16 h-20" />
       </a>
+      <h1 class="text-3xl font-semibold mt-1 ml-[-10px] font-sans">
+        Connections
+      </h1>
     </div>
-    <ng-container *ngIf="logIn">
-      <div class="header__profile flex justify-center items-center">
-        <div class="flex justify-center items-center">
-          <div
-            class="mr-1 font-semibold"
-            *ngIf="profileData$ | async as profileData"
-          >
-            {{ profileData.name }}
-          </div>
-          <a routerLink="/profile" class="h-10">
-            <button
-              class="rounded-md text-white text-md text-center hover:shadow-lg"
-            >
-              <img src="assets/Profile.svg" alt="profile" class="w-11 h-11" />
-            </button>
-          </a>
+    <div class="header__profile flex justify-center items-center">
+      <ng-container *ngIf="logIn">
+        <div
+          class="mr-1 font-semibold"
+          *ngIf="profileData$ | async as profileData"
+        >
+          {{ profileData.name }}
         </div>
-      </div>
-    </ng-container>
+        <a routerLink="/profile" class="mr-2">
+          <img
+            src="assets/Profile.svg"
+            alt="profile rounded-md text-white text-md text-center hover:shadow-lg"
+            class="w-11 h-11"
+          />
+        </a>
+      </ng-container>
+      <div class="h-[24px]"><app-theme-switcher></app-theme-switcher></div>
+    </div>
   </div>
 </header>
 <p-toast position="bottom-right"></p-toast>

@@ -6,12 +6,14 @@ export interface ProfileState {
   profileData: IProfile | null;
   isLoading: boolean;
   edit: boolean;
+  theme: string;
 }
 
 export const initialState: ProfileState = {
   profileData: null,
   isLoading: false,
   edit: false,
+  theme: 'dark',
 };
 
 export const reducer = createReducer(
@@ -40,6 +42,7 @@ export const reducer = createReducer(
   on(ProfileActions.UpdateProfile, (state, { name }) => {
     if (state.profileData) {
       return {
+        ...state,
         edit: false,
         profileData: { ...state.profileData, name },
         isLoading: false,
@@ -48,6 +51,10 @@ export const reducer = createReducer(
       return { ...state };
     }
   }),
+  on(ProfileActions.ChangeTheme, (state, { theme }) => ({
+    ...state,
+    theme,
+  })),
   on(ProfileActions.RemoveProfile, (state) => ({
     ...state,
     profileData: null,

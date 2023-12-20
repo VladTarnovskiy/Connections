@@ -18,3 +18,8 @@ export const selectProfileEdit = createSelector(
   selectProfileStore,
   (state: ProfileState) => state.edit
 );
+
+export const selectProfileTheme = createSelector(
+  selectProfileStore,
+  (state: ProfileState) => state.theme
+);

@@ -1,0 +1,22 @@
+<button
+  class="switcher__container shadow-inner shadow-base_blue w-12 relative rounded-full transition-all ease-in-out delay-150 dark:bg-gray-200"
+  (click)="changeTheme()"
+>
+  <div
+    class="switch h-7 w-7 mt-[-4px] rounded-full bg-base_blue shadow-md shadow-base_blue flex justify-center items-center transition-all ease-in-out delay-150"
+    [ngClass]="theme === 'white' ? 'mr-6' : 'ml-6'"
+  >
+    <img
+      *ngIf="theme === 'white'"
+      src="assets/sun.svg"
+      alt="sun"
+      class="h-6 w-6"
+    />
+    <img
+      *ngIf="theme !== 'white'"
+      src="assets/moon.svg"
+      alt="moon"
+      class="h-7 w-7"
+    />
+  </div>
+</button>

@@ -30,4 +30,9 @@ export const ChangeIsLoadingProfile = createAction(
   props<{ isLoading: boolean }>()
 );
 
+export const ChangeTheme = createAction(
+  `${actionSource} Change Theme`,
+  props<{ theme: string }>()
+);
+
 export const RemoveProfile = createAction(`${actionSource} Remove Profile`);
