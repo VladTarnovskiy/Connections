@@ -2,17 +2,22 @@
   <div
     class="connections_title flex justify-between items-center mb-4 min-h-[40px]"
   >
-    <div class="flex justify-start items-center flex-wrap">
-      <div class="connections__name text-3xl mr-2">Groups</div>
-      <button
-        class="connections__update mr-2 hover:cursor-pointer"
-        (click)="updateGroups()"
-      >
-        <app-refresh-but [active]="isActive"></app-refresh-but>
-      </button>
-      <div class="connections__timer mr-4">
-        00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+    <div class="justify-start items-center flex-row lg:flex">
+      <div class="justify-start items-center flex-row sm:flex">
+        <div class="connections__name text-3xl mr-2">Groups</div>
+        <div class="flex">
+          <button
+            class="connections__update mr-2 hover:cursor-pointer"
+            (click)="updateGroups()"
+          >
+            <app-refresh-but [active]="isActive"></app-refresh-but>
+          </button>
+          <div class="connections__timer mr-4">
+            00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+          </div>
+        </div>
       </div>
+
       <div class="py-1 mr-2">
         <input
           [formControl]="searchValue"
@@ -23,7 +28,7 @@
         />
       </div>
     </div>
-    <button (click)="createGroup()">
+    <button (click)="createGroup()" class="ml-2 self-start">
       <app-button>Create</app-button>
     </button>
   </div>

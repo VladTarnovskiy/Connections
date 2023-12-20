@@ -37,19 +37,22 @@ export class PeopleService {
         return this.getConversations().pipe(
           map((conversationsData) => {
             const usersDataWithActiveConv: IPerson[] = [];
-            peopleData.forEach((people: IPerson) => {
-              const companionIDs = conversationsData.map(
-                (conversation) => conversation.companionID
+            // const companionIDs = conversationsData.map(
+            //   (conversation) => conversation.companionID
+            // );
+            peopleData.forEach((person: IPerson) => {
+              const haveConversation = conversationsData.find(
+                (conversation) => conversation.companionID === person.uid
               );
-              if (companionIDs.includes(people.uid)) {
+              if (haveConversation) {
                 usersDataWithActiveConv.push({
-                  ...people,
-                  haveConversationID: true,
+                  ...person,
+                  conversationID: haveConversation.id,
                 });
               } else {
                 usersDataWithActiveConv.push({
-                  ...people,
-                  haveConversationID: false,
+                  ...person,
+                  conversationID: null,
                 });
               }
             });

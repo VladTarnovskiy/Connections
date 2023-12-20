@@ -47,6 +47,7 @@ export class ConversationService {
           this.store.dispatch(
             PeopleActions.UpdatePeople({
               personID: companion,
+              conversationID,
             })
           );
           this.store.dispatch(

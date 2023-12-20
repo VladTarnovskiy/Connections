@@ -31,9 +31,14 @@ export const AddConversation = createAction(
   props<{ companionID: string; id: string }>()
 );
 
+export const DeleteConversation = createAction(
+  `${actionSource} Delete Conversation`,
+  props<{ conversationID: string }>()
+);
+
 export const UpdatePeople = createAction(
   `${actionSource} Update People`,
-  props<{ personID: string }>()
+  props<{ personID: string; conversationID: string | null }>()
 );
 
 export const RemovePeople = createAction(`${actionSource} Remove People`);

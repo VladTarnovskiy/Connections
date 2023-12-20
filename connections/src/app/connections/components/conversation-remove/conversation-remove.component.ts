@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as ConversationActions from 'src/app/store/conversation/actions/conversation.action';
+import * as PeopleActions from 'src/app/store/people/actions/people.action';
 import { Store } from '@ngrx/store';
 
 @Component({
@@ -15,6 +16,11 @@ export class ConversationRemoveComponent {
   removeConversation() {
     this.store.dispatch(
       ConversationActions.FetchConversationDelete({
+        conversationID: this.conversationID,
+      })
+    );
+    this.store.dispatch(
+      PeopleActions.DeleteConversation({
         conversationID: this.conversationID,
       })
     );

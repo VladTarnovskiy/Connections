@@ -12,6 +12,5 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit() {
     this.authService.checkLogin();
-    // this.authService.getInitialData();
   }
 }

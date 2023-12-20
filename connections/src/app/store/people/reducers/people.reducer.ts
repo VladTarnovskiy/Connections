@@ -30,9 +30,9 @@ export const reducer = createReducer(
     peopleData,
     isLoading: false,
   })),
-  on(PeopleActions.UpdatePeople, (state, { personID }) => {
+  on(PeopleActions.UpdatePeople, (state, { personID, conversationID }) => {
     const updatedPeopleData = state.peopleData.map((person) =>
-      person.uid === personID ? { ...person, haveConversationID: true } : person
+      person.uid === personID ? { ...person, conversationID } : person
     );
 
     return {
@@ -53,7 +53,23 @@ export const reducer = createReducer(
     ...state,
     conversationsData,
   })),
-
+  on(PeopleActions.DeleteConversation, (state, { conversationID }) => {
+    const filteredPeople = state.peopleData.map((person) => {
+      if (person.conversationID === conversationID) {
+        return { ...person, conversationID: null };
+      } else {
+        return person;
+      }
+    });
+    const filteredConversations = state.conversationsData.filter(
+      (conversation) => conversation.id !== conversationID
+    );
+    return {
+      ...state,
+      peopleData: filteredPeople,
+      conversationsData: filteredConversations,
+    };
+  }),
   on(PeopleActions.AddConversation, (state, { companionID, id }) => ({
     ...state,
     conversationsData: [...state.conversationsData, { id, companionID }],

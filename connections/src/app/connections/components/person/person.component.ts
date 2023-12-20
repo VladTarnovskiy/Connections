@@ -26,7 +26,7 @@ export class PersonComponent implements OnInit, OnDestroy {
       'conversationNameConnections',
       JSON.stringify(this.personData.name)
     );
-    if (this.personData.haveConversationID && this.conversationsData) {
+    if (this.personData.conversationID && this.conversationsData) {
       this.conversationsData.forEach((conversation) => {
         if (conversation.companionID === this.personData.uid) {
           this.router.navigate([`/conversation/${conversation.id}`]);
