@@ -13,7 +13,7 @@
   </div>
   <section
     class="form relative flex flex-1 flex-col justify-center px-3 py-12 lg:px-4 text-base_green"
-    *ngIf="profileData$ | async as profileData"
+    *ngIf="profileData"
   >
     <div class="sm:mx-auto sm:w-full sm:max-w-sm">
       <h2
@@ -38,7 +38,6 @@
             [formControl]="name"
             type="text"
             class="text-md block w-full rounded-md border-0 bg-base_white p-1 text-gray-900 shadow-sm ring-1 ring-inset outline-none ring-gray-300 placeholder:text-gray-400"
-            [defaultValue]="profileData.name"
             *ngIf="edit; else nameValue"
           />
           <ng-container *ngIf="edit"
@@ -106,7 +105,7 @@
           >
           <button
             type="submit"
-            *ngIf="!isLoading; else loadingSaveBut"
+            *ngIf="!isLoading && edit; else loadingSaveBut"
             (click)="saveName(name.getRawValue()!)"
             class="basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
             [ngClass]="
