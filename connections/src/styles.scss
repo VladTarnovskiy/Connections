@@ -11,9 +11,16 @@ body {
   margin-left: 20px;
   margin-right: 20px;
 }
+
 body {
   margin: 0;
 }
+
+.themeDark {
+  background-color: #bfdbfe;
+}
+
+//Scrollbar
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -38,6 +45,22 @@ body {
   background: rgba(0, 0, 0, 0);
 }
 
-.themeDark {
-  background-color: #bfdbfe;
+//Form validation
+
+.ng-invalid:not(form) {
+  border-left: 2px solid #ef4444;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+  border-left: 2px solid #42a948;
+}
+
+.invalid__message {
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  transform: translateY(85%);
+  color: rgb(239 68 68);
+  font-size: 14px;
 }

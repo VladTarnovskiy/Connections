@@ -19,7 +19,7 @@
     <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
       <div>
         <div
-          class="mb-3 flex justify-between items-center"
+          class="mb-4 flex justify-between items-center relative"
           [ngClass]="edit ? 'mb-1' : 'mb-3'"
         >
           <div class="mr-2">Username:</div>
@@ -35,37 +35,36 @@
             [defaultValue]="profileData.name"
             *ngIf="edit; else nameValue"
           />
+          <ng-container *ngIf="edit"
+            ><div
+              *ngIf="name.errors?.['required']"
+              class="invalid__message ml-auto w-fit"
+            >
+              please enter a username
+            </div>
+            <div
+              *ngIf="name.errors?.['maxlength']"
+              class="invalid__message ml-auto w-fit"
+            >
+              username should contains less then 40 symbols
+            </div>
+            <div
+              *ngIf="name.errors?.['forbiddenUsername']"
+              class="invalid__message ml-auto w-fit"
+            >
+              {{name.errors?.['forbiddenUsername'].value}}
+            </div></ng-container
+          >
         </div>
-        <ng-container *ngIf="edit"
-          ><div
-            *ngIf="name.errors?.['required']"
-            class="invalid__message ml-auto w-fit"
-          >
-            please enter a username
-          </div>
-          <div
-            *ngIf="name.errors?.['maxlength']"
-            class="invalid__message ml-auto w-fit"
-          >
-            username should contains less then 40 symbols
-          </div>
-          <div
-            *ngIf="name.errors?.['forbiddenUsername']"
-            class="invalid__message ml-auto w-fit"
-          >
-            {{name.errors?.['forbiddenUsername'].value}}
-          </div></ng-container
-        >
-
-        <div class="mb-3 flex justify-between">
+        <div class="mb-4 flex justify-between">
           <div class="mr-2">Email:</div>
           <div class="font-semibold">{{ profileData.email }}</div>
         </div>
-        <div class="mb-3 flex justify-between">
+        <div class="mb-4 flex justify-between">
           <div class="mr-2">User id:</div>
           <div class="font-semibold">{{ profileData.uid }}</div>
         </div>
-        <div class="mb-3 flex justify-between">
+        <div class="mb-4 flex justify-between">
           <div class="mr-2">Creation at:</div>
           <div class="font-semibold">
             {{ profileData.createdAt | date : "medium" }}

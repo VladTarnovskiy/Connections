@@ -10,7 +10,7 @@
   </div>
   <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-      <div class="form__item mb-3">
+      <div class="form__item mb-4 relative">
         <label htmlFor="name" class="block text-sm font-medium text-gray-900">
           <p class="block text-sm text-gray-900 dark:text-base_white">Name:</p>
           <input
@@ -34,7 +34,7 @@
           {{name?.errors?.['forbiddenUsername'].value}}
         </div>
       </div>
-      <div class="form__item mb-3">
+      <div class="form__item mb-4 relative">
         <label htmlFor="email" class="block text-sm font-medium text-gray-900">
           <p class="block text-sm text-gray-900 dark:text-base_white">Email:</p>
           <input
@@ -52,7 +52,7 @@
           the email is invalid
         </div>
       </div>
-      <div class="form__item mb-5">
+      <div class="form__item mb-7 relative">
         <label
           htmlFor="password"
           class="block text-sm font-medium text-gray-900"
