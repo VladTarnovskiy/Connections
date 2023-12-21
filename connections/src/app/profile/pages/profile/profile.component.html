@@ -1,8 +1,14 @@
 <div>
   <div class="ml-auto w-fit">
-    <a routerLink="/auth/login" class="ml-4" (click)="logout()"
-      ><app-button>Logout</app-button>
-    </a>
+    <button
+      class="ml-4"
+      (click)="logout()"
+      [ngClass]="
+        isLoading ? 'opacity-50 hover:cursor-auto active:scale-100' : ''
+      "
+    >
+      <app-button>Logout</app-button>
+    </button>
     <a routerLink="/" class="ml-4"><app-button>Go Back</app-button> </a>
   </div>
   <section

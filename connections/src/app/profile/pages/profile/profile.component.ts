@@ -49,10 +49,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout().subscribe(() => {
-      this.store.dispatch(ProfileActions.RemoveProfile());
-      this.store.dispatch(AuthActions.RemoveAuthData());
-    });
+    if (this.isLoading === false) {
+      this.store.dispatch(ProfileActions.FetchRemoveProfile());
+    }
   }
 
   ngOnInit(): void {

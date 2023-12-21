@@ -35,4 +35,8 @@ export const ChangeTheme = createAction(
   props<{ theme: string }>()
 );
 
+export const FetchRemoveProfile = createAction(
+  `${actionSource} Fetch Remove Profile`
+);
+
 export const RemoveProfile = createAction(`${actionSource} Remove Profile`);

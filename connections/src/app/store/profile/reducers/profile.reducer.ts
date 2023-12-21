@@ -55,8 +55,13 @@ export const reducer = createReducer(
     ...state,
     theme,
   })),
+  on(ProfileActions.FetchRemoveProfile, (state) => ({
+    ...state,
+    isLoading: true,
+  })),
   on(ProfileActions.RemoveProfile, (state) => ({
     ...state,
     profileData: null,
+    isLoading: false,
   }))
 );

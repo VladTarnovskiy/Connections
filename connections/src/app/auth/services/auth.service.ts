@@ -126,7 +126,11 @@ export class AuthService {
         this.isLoggedIn.next(false);
         this.toastService.addSuccessToast('User logout');
       }),
+      tap(() => this.router.navigate(['auth/login'])),
       catchError((err) => {
+        this.store.dispatch(
+          ProfileActions.ChangeIsLoadingProfile({ isLoading: false })
+        );
         if (err) {
           this.toastService.handleError(err);
         }
