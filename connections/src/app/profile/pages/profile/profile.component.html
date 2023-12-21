@@ -105,7 +105,7 @@
           >
           <button
             type="submit"
-            *ngIf="!isLoading && edit; else loadingSaveBut"
+            *ngIf="!isLoading && edit"
             (click)="saveName(name.getRawValue()!)"
             class="basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
             [ngClass]="
@@ -116,14 +116,13 @@
           >
             Save
           </button>
-          <ng-template #loadingSaveBut
-            ><button
-              type="submit"
-              class="opacity-50 hover:cursor-auto active:scale-100 basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
-            >
-              Save
-            </button></ng-template
+          <button
+            type="submit"
+            *ngIf="isLoading && edit"
+            class="opacity-50 hover:cursor-auto active:scale-100 basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
           >
+            Save
+          </button>
         </div>
       </div>
     </div>
