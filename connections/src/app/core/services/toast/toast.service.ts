@@ -17,10 +17,19 @@ export class ToastService {
   }
 
   handleError(err: HttpErrorResponse) {
-    this.messageService.add({
-      severity: 'error',
-      summary: err.error.type,
-      detail: err.error.message,
-    });
+    console.log(err);
+    if (err.status === 500) {
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Internal Server Error',
+        detail: 'Something went wrong',
+      });
+    } else {
+      this.messageService.add({
+        severity: 'error',
+        summary: err.error.type,
+        detail: err.error.message,
+      });
+    }
   }
 }
