@@ -10,7 +10,7 @@
           >
             <app-refresh-but [active]="isActive"></app-refresh-but>
           </button>
-          <div class="people__timer mr-4">
+          <div *ngIf="!isActive" class="people__timer mr-4">
             00:{{ timer < 10 ? "0" : "" }}{{ timer }}
           </div>
         </div>

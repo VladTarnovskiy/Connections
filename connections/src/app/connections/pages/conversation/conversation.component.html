@@ -22,7 +22,7 @@
       >
         <app-refresh-but [active]="isActive"></app-refresh-but>
       </button>
-      <div class="connections__timer">
+      <div *ngIf="!isActive" class="connections__timer">
         00:{{ timer < 10 ? "0" : "" }}{{ timer }}
       </div>
     </div>

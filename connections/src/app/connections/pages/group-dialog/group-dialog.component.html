@@ -20,7 +20,9 @@
       >
         <app-refresh-but [active]="isActive"></app-refresh-but>
       </button>
-      <div class="groups__timer">00:{{ timer < 10 ? "0" : "" }}{{ timer }}</div>
+      <div *ngIf="!isActive" class="groups__timer">
+        00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+      </div>
     </div>
     <button *ngIf="isDeleteButActive()" (click)="deleteGroupDialog()">
       <app-button>Delete</app-button>
