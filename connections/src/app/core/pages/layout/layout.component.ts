@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/auth/services/auth.service';
 
 @Component({
@@ -8,7 +7,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private authService: AuthService, private store: Store) {}
+  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authService.checkLogin();
