@@ -7,13 +7,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, of, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ProfileService } from 'src/app/profile/services/profile.service';
 import { ToastService } from 'src/app/core/services/toast/toast.service';
 import * as AuthActions from 'src/app/store/auth/actions/auth.action';
 import * as ProfileActions from 'src/app/store/profile/actions/profile.action';
 import * as PeopleActions from 'src/app/store/people/actions/people.action';
 import * as GroupsActions from 'src/app/store/groups/actions/groups.action';
-import { Location } from '@angular/common';
 import { Store } from '@ngrx/store';
 
 @Injectable({
@@ -23,18 +21,16 @@ export class AuthService {
   private registerURL = 'https://tasks.app.rs.school/angular/registration';
   private loginURL = 'https://tasks.app.rs.school/angular/login';
   private logoutURL = 'https://tasks.app.rs.school/angular/logout';
+  private checkAuthURL = 'https://tasks.app.rs.school/angular/profile';
 
-  private isLoggedIn = new BehaviorSubject<boolean>(false);
+  private isLoggedIn = new BehaviorSubject<boolean>(true);
 
   isLoggedIn$ = this.isLoggedIn.asObservable();
-  isNotFoundPage = false;
 
   constructor(
     private http: HttpClient,
     private toastService: ToastService,
-    private profileService: ProfileService,
     public router: Router,
-    private location: Location,
     private store: Store
   ) {}
 
@@ -88,17 +84,16 @@ export class AuthService {
   }
 
   checkLogin() {
-    this.profileService.getProfile().subscribe(() => {
-      this.isLoggedIn.next(true);
-      this.getInitialData();
-      if (!this.isNotFoundPage) {
-        this.location.back();
-      }
+    this.http.get(this.checkAuthURL).subscribe({
+      next: () => {
+        this.getInitialData();
+        this.isLoggedIn.next(true);
+        return of();
+      },
+      error: () => {
+        this.isLoggedIn.next(false);
+      },
     });
-  }
-
-  checkNotFoundPage(isNotFoundPage: boolean) {
-    this.isNotFoundPage = isNotFoundPage;
   }
 
   getInitialData() {
