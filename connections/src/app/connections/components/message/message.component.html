@@ -1,0 +1,43 @@
+<div
+  *ngIf="authData?.uid !== messageData.authorID; else myMessage"
+  class="relative message flex flex-row mb-3 self-start bg-gray-200 rounded-lg p-2 mr-32"
+>
+  <img src="assets/profile-conv.svg" alt="profile" class="w-8 h-8 mr-1" />
+  <div class="message__des flex-row justify-start w-full">
+    <div class="flex w-full justify-between">
+      <div class="message__name text-black">{{ getUserName() }}</div>
+      <div class="message__name text-black">
+        {{ messageData.createdAt | date : "short" }}
+      </div>
+    </div>
+    <div class="message__text mr-auto">{{ messageData.message }}</div>
+    <div
+      class="dialog absolute -left-[15px] bottom-2 border-[5px] border-transparent border-r-[10px] border-r-gray-200"
+    ></div>
+  </div>
+</div>
+
+<ng-template #myMessage
+  ><div
+    class="message relative flex flex-row mb-3 self-end bg-base_blue/20 rounded-lg p-2 ml-32"
+  >
+    <div class="message__des flex-row justify-end w-full">
+      <div class="flex w-full justify-between">
+        <div class="message__name text-black">
+          {{ messageData.createdAt | date : "short" }}
+        </div>
+        <div class="message__name text-black">{{ getUserName() }}</div>
+      </div>
+      <div class="message__text ml-auto w-fit">
+        {{ messageData.message }}
+      </div>
+      <div
+        class="dialog absolute -right-[15px] bottom-2 border-[5px] border-transparent border-l-[10px] border-l-base_blue/20"
+      ></div>
+    </div>
+    <img
+      src="assets/profile-conv.svg"
+      alt="profile"
+      class="w-8 h-8 ml-1"
+    /></div
+></ng-template>

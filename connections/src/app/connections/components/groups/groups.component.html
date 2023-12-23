@@ -1,0 +1,50 @@
+<div>
+  <div
+    class="connections_title flex justify-between items-center mb-4 min-h-[40px]"
+  >
+    <div class="justify-start items-center flex-row md:flex">
+      <div class="justify-start items-center flex">
+        <div class="connections__name text-2xl mr-2">Groups</div>
+        <button
+          class="connections__update mr-2 hover:cursor-pointer"
+          (click)="updateGroups()"
+        >
+          <app-refresh-but [active]="isActive"></app-refresh-but>
+        </button>
+        <div *ngIf="!isActive" class="connections__timer mr-4">
+          00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+        </div>
+      </div>
+
+      <div class="py-1 mr-2">
+        <input
+          [formControl]="searchValue"
+          type="search"
+          (input)="findGroups()"
+          placeholder="Search group"
+          class="text-md block min-w-[120px] max-w-[250px] w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-transparent placeholder:text-gray-400 outline-none"
+        />
+      </div>
+    </div>
+    <button (click)="createGroup()" class="ml-2 self-start">
+      <app-button>Create</app-button>
+    </button>
+  </div>
+  <div
+    class="groups__container max-h-[82vh] overflow-y-scroll"
+    [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
+  >
+    <app-group
+      *ngFor="let groupData of filteredGroupData"
+      [groupData]="groupData"
+    ></app-group>
+  </div>
+</div>
+<div *ngIf="isCreateGroupModal$ | async">
+  <app-modal><app-group-form></app-group-form></app-modal>
+</div>
+<div *ngIf="removeGroupData$ | async as removeGroupData">
+  <app-modal
+    ><app-group-remove [groupID]="removeGroupData.groupID"></app-group-remove
+  ></app-modal>
+</div>

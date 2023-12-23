@@ -1,0 +1,37 @@
+<div>
+  <div class="people_title flex justify-between items-center mb-4 min-h-[40px]">
+    <div class="justify-start items-center flex-row md:flex">
+      <div class="justify-start items-center flex">
+        <div class="people__name text-2xl mr-2">People</div>
+        <button
+          class="people__update mr-2 hover:cursor-pointer"
+          (click)="updatePeople()"
+        >
+          <app-refresh-but [active]="isActive"></app-refresh-but>
+        </button>
+        <div *ngIf="!isActive" class="people__timer mr-4">
+          00:{{ timer < 10 ? "0" : "" }}{{ timer }}
+        </div>
+      </div>
+
+      <div class="py-1 mr-2">
+        <input
+          [formControl]="searchValue"
+          type="search"
+          (input)="findPeople()"
+          placeholder="Search person"
+          class="text-md block min-w-[120px] max-w-[250px] w-full rounded-md border-0 p-1 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-transparent placeholder:text-gray-400 outline-none"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="people__container max-h-[82vh] overflow-y-scroll"
+    [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
+  >
+    <app-person
+      *ngFor="let personData of filteredPeopleData"
+      [personData]="personData"
+    ></app-person>
+  </div>
+</div>

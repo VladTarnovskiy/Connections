@@ -1,0 +1,130 @@
+<div>
+  <div class="ml-auto w-fit">
+    <button
+      class="ml-4"
+      (click)="logout()"
+      [ngClass]="
+        isLoading ? 'opacity-50 hover:cursor-auto active:scale-100' : ''
+      "
+    >
+      <app-button>Logout</app-button>
+    </button>
+    <a routerLink="/" class="ml-4"><app-button>Go Back</app-button> </a>
+  </div>
+  <section
+    class="form relative flex flex-1 flex-col justify-center px-3 py-12 lg:px-4 text-base_green"
+    *ngIf="profileData"
+  >
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+      <h2
+        class="mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-base_green"
+      >
+        Profile
+      </h2>
+    </div>
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div>
+        <div
+          class="mb-4 flex justify-between items-center relative"
+          [ngClass]="edit ? 'mb-1' : 'mb-3'"
+        >
+          <div class="mr-2">Username:</div>
+          <ng-template #nameValue
+            ><div class="font-semibold">
+              {{ profileData.name }}
+            </div></ng-template
+          >
+          <input
+            [formControl]="name"
+            type="text"
+            class="text-md block w-full text-right bg-transparent font-semibold p-1 rounded-md border-[1px] border-black bg-base_white outline-none"
+            *ngIf="edit; else nameValue"
+          />
+          <ng-container *ngIf="edit"
+            ><div
+              *ngIf="name.errors?.['required']"
+              class="invalid__message ml-auto w-fit"
+            >
+              please enter a username
+            </div>
+            <div
+              *ngIf="name.errors?.['maxlength']"
+              class="invalid__message ml-auto w-fit"
+            >
+              username should contains less then 40 symbols
+            </div>
+            <div
+              *ngIf="name.errors?.['forbiddenUsername']"
+              class="invalid__message ml-auto w-fit"
+            >
+              {{name.errors?.['forbiddenUsername'].value}}
+            </div></ng-container
+          >
+        </div>
+        <div class="mb-4 flex justify-between">
+          <div class="mr-2">Email:</div>
+          <div class="font-semibold">{{ profileData.email }}</div>
+        </div>
+        <div class="mb-4 flex justify-between">
+          <div class="mr-2">User id:</div>
+          <div class="font-semibold">{{ profileData.uid }}</div>
+        </div>
+        <div class="mb-4 flex justify-between">
+          <div class="mr-2">Creation at:</div>
+          <div class="font-semibold">
+            {{ profileData.createdAt | date : "medium" }}
+          </div>
+        </div>
+        <div class="mt-8 flex justify-between">
+          <ng-container *ngIf="!isLoading; else loadingCancelBut">
+            <button
+              type="submit"
+              class="opacity-100 hover:cursor-pointer active:scale-[95%] basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+              (click)="cancelEdit()"
+              *ngIf="edit; else editBut"
+            >
+              Cancel
+            </button></ng-container
+          >
+          <ng-template #loadingCancelBut
+            ><button
+              type="submit"
+              class="opacity-50 hover:cursor-auto active:scale-100 basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+            >
+              Cancel
+            </button></ng-template
+          >
+          <ng-template #editBut
+            ><button
+              type="submit"
+              class="basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+              (click)="editName()"
+            >
+              Edit
+            </button></ng-template
+          >
+          <button
+            type="submit"
+            *ngIf="!isLoading && edit"
+            (click)="saveName(name.getRawValue()!)"
+            class="basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+            [ngClass]="
+              name.status === 'VALID'
+                ? 'opacity-100 hover:cursor-pointer active:scale-[95%]'
+                : 'opacity-50 hover:cursor-auto active:scale-100'
+            "
+          >
+            Save
+          </button>
+          <button
+            type="submit"
+            *ngIf="isLoading && edit"
+            class="opacity-50 hover:cursor-auto active:scale-100 basis-2/5 mt-2 flex w-full justify-center rounded-md bg-base_blue p-2 px-3 text-sm font-semibold leading-6 text-white shadow-sm transition delay-75 ease-in-out"
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
