@@ -1,7 +1,6 @@
 # Connections project with real backend
 
-This project is intended for individual performance using the real one-for-all server.
-You and your friends or colleagues can communicate using this application in groups or dialogues.
+App where you and your friends or colleagues can communicate in groups or dialogues.
 
 - Deploy: https://vladtarnovskiy.github.io/Connections/
 
