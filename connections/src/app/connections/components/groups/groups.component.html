@@ -30,7 +30,7 @@
       <app-button>Create</app-button>
     </button>
   </div>
-  <div class="groups__container max-h-[82vh] overflow-y-scroll">
+  <div class="groups__container max-h-[82vh] overflow-y-auto">
     <div
       *ngIf="isLoading$ | async; else content"
       class="m-auto mt-[30%] h-24 w-24 flex justify-center items-center"
