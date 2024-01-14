@@ -1,0 +1,15 @@
+<button
+  class="groups__item rounded min-h-4 w-full mb-2 p-1 flex justify-between items-center hover:bg-base_blue/20"
+  (click)="getConversation()"
+  [ngClass]="personData.conversationID ? 'bg-base_blue/20' : 'bg-gray-200'"
+>
+  <div class="group__title overflow-hidden">{{ personData.name }}</div>
+  <div class="ml-2" *ngIf="personData.conversationID; else haveNotChat">
+    In chat<span class="ml-2 text-green-500">●</span>
+  </div>
+  <ng-template #haveNotChat
+    ><div class="min-w-max ml-2">
+      No chat<span class="ml-2 text-gray-400">●</span>
+    </div></ng-template
+  >
+</button>
