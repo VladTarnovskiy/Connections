@@ -75,7 +75,6 @@ export class PeopleComponent implements OnInit, OnDestroy {
 
     this.subscription.add(secondSubscription);
     this.subscription.add(thirdSubscription);
-    console.log('hello');
   }
 
   ngOnDestroy(): void {
