@@ -1,6 +1,6 @@
 <button
   (click)="getGroupDialog()"
-  class="groups__item rounded min-h-4 w-full mb-2 p-1 flex justify-between items-center"
+  class="groups__item rounded min-h-4 w-full mb-2 p-1 flex justify-between items-center hover:bg-base_blue/20"
   [ngClass]="
     authData && authData.uid === groupData.createdBy
       ? 'bg-base_blue/20'

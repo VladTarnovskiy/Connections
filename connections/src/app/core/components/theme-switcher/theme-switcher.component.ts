@@ -17,7 +17,6 @@ export class ThemeSwitcherComponent implements OnInit {
   changeTheme() {
     const bodyElement = document.body;
     if (this.theme === 'white') {
-      // this.theme = false;
       this.store.dispatch(ProfileActions.ChangeTheme({ theme: 'dark' }));
       localStorage.setItem('theme', JSON.stringify('dark'));
       bodyElement.classList.add('themeDark');
