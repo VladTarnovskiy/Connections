@@ -25,13 +25,21 @@
       </div>
     </div>
   </div>
-  <div
-    class="people__container max-h-[82vh] overflow-y-scroll"
-    [ngClass]="(isLoading$ | async) ? 'opacity-50' : 'opacity-100'"
-  >
-    <app-person
-      *ngFor="let personData of filteredPeopleData"
-      [personData]="personData"
-    ></app-person>
+  <div class="people__container max-h-[82vh] overflow-y-auto">
+    <div
+      *ngIf="isLoading$ | async; else content"
+      class="m-auto mt-[30%] h-24 w-24 flex justify-center items-center"
+    >
+      <p-progressSpinner
+        styleClass="h-16 w-16"
+        strokeWidth="3"
+      ></p-progressSpinner>
+    </div>
+    <ng-template #content>
+      <app-person
+        *ngFor="let personData of filteredPeopleData"
+        [personData]="personData"
+      ></app-person
+    ></ng-template>
   </div>
 </div>

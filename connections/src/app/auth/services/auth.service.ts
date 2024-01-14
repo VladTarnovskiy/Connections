@@ -106,7 +106,6 @@ export class AuthService {
           this.store.dispatch(AuthActions.AddUserData({ authData }));
           this.store.dispatch(ProfileActions.FetchProfile());
           this.store.dispatch(PeopleActions.FetchPeople());
-          this.store.dispatch(ProfileActions.FetchProfile());
           this.store.dispatch(GroupsActions.FetchGroups());
         }
       });
